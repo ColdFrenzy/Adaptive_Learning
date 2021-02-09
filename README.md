@@ -16,9 +16,10 @@ The code contained in this directory is not fully compatible with the current ra
     ` git clone https://github.com/coldfrenzy/ray.git `
 
   *  If you already have a ray version installed, replace Python files in the installed package with your local editable copy using the following code:
-
-    ``` cd ray 
-    python python/ray/setup-dev.py ```
+```
+    cd ray 
+    python python/ray/setup-dev.py 
+```
 
 
 
