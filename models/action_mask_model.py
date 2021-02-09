@@ -15,32 +15,37 @@ tf1, tf, tfv = try_import_tf()
 
 class Connect4ActionMaskModel(TFModelV2):
     """Parametric action model that handles the dot product and masking.
-    This assumes the outputs are logits for a single Categorical action dist.
-    Getting this to work with a more complex output (e.g., if the action space
-    is a tuple of several distributions) is also possible but left as an
-    exercise to the reader.
     """     
     
     def __init__(self, obs_space, action_space, num_outputs,
         model_config, name, true_obs_shape=(7,6),
         action_embed_size=7,show_model=False, *args, **kwargs):  
+
         super(Connect4ActionMaskModel, self).__init__(obs_space,
-            action_space, num_outputs, model_config, name, 
+            action_space, num_outputs, model_config, name,
             *args, **kwargs)
         
-        # print(obs_space.shape)
-        # Obs_space has size (49,) but it should be (42,)
+
+        """ Obs_space has size (49,) but it should be (42,), this happens 
+        because the gym space dict is automatically flattened from the preprocessor
+        
+        """
+        # get real obs space, discarding action mask
+        original_obs = obs_space.original_space.spaces['state']
+        print("The restored obs_space is: " + str(original_obs))
+        
         # The observation space has already been flattered
         # self.inputs = tf.keras.layers.Input(shape=obs_space.shape[0]*obs_space.shape[1], name="observations")
-        self.inputs = tf.keras.layers.Input(shape = (42,), name="observations")
-        hidden_layer = tf.keras.layers.Dense(256, name="layer1", activation=tf.nn.relu)(self.inputs)
+        inputs = tf.keras.layers.Input(shape = (42,), name="observations")
+        hidden_layer = tf.keras.layers.Dense(256, name="layer1", activation=tf.nn.relu)(inputs) #tf.nn.relu
         out_layer = tf.keras.layers.Dense(num_outputs, name="out", activation=None)(hidden_layer)
         value_layer = tf.keras.layers.Dense(1, name="value", activation=None)(hidden_layer)
-        self.base_model = tf.keras.Model(self.inputs, [out_layer, value_layer],name ="action_mask" )
-       
+        self.base_model = tf.keras.Model(inputs, [out_layer, value_layer],name ="action_mask" )
+        
+        
         if show_model == True:
             self.base_model.summary()
-        self.register_variables(self.base_model.variables)
+
         
     def forward(self, input_dict, state, seq_lens):
         """
@@ -87,5 +92,7 @@ class Connect4ActionMaskModel(TFModelV2):
         return new_action_logits, state
     
     def value_function(self):
-        return self.base_model.value_function()
+        # return self.base_model.value_function()
+        return self.value_layer_out()
+
     
