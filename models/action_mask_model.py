@@ -5,13 +5,14 @@ Created on Wed Jan 20 17:53:15 2021
 @author: Francesco
 """
 # from ray.rllib.models import ModelCatalog
+from functools import reduce
+
 from ray.rllib.models.tf import TFModelV2
 # from ray.rllib.models.tf.fcnet import FullyConnectedNetwork
 # from ray.rllib.models.tf.visionnet import VisionNetwork
 from ray.rllib.utils.framework import try_import_tf
 
-tf1, tf, tfv = try_import_tf()
-
+import tensorflow as tf
 
 class Connect4ActionMaskModel(TFModelV2):
     """Parametric action model that handles the dot product and masking."""
@@ -44,18 +45,16 @@ class Connect4ActionMaskModel(TFModelV2):
 
         # The observation space has already been flattered
         # self.inputs = tf.keras.layers.Input(shape=obs_space.shape[0]*obs_space.shape[1], name="observations")
-        inputs = tf.keras.layers.Input(shape=(42,), name="observations")
+        obs_dim= reduce(lambda x, y: x * y, original_obs.shape)
+        inputs = tf.keras.layers.Input(shape=(obs_dim,), name="observations")
         hidden_layer = tf.keras.layers.Dense(256, name="layer1", activation=tf.nn.relu)(
             inputs
         )  # tf.nn.relu
         out_layer = tf.keras.layers.Dense(num_outputs, name="out", activation=None)(
             hidden_layer
         )
-        value_layer = tf.keras.layers.Dense(1, name="value", activation=None)(
-            hidden_layer
-        )
         self.base_model = tf.keras.Model(
-            inputs, [out_layer, value_layer], name="action_mask"
+            inputs, out_layer, name="action_mask"
         )
 
         if show_model == True:
@@ -96,7 +95,7 @@ class Connect4ActionMaskModel(TFModelV2):
                 shape=(obs_state.shape[0], obs_state.shape[1] * obs_state.shape[2]),
             )
 
-        action_logits, _ = self.base_model(obs_state)
+        action_logits = self.base_model(obs_state)
 
         # inf_mask return a 0 value if the action is valid and a big negative
         # value if it is invalid. Example:
