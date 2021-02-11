@@ -1,3 +1,4 @@
 .idea/
 */__pycache__/*
 ray/
+/build_ray_from_source.txt

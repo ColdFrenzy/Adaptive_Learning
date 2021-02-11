@@ -18,6 +18,9 @@ class Connect4Env(MultiAgentEnv):
             -1 = Draw
              0 = player 1 (X)
              1 = player 2 (O) 
+        
+        Action Space:
+            0 to width-1
     """
 
     def __init__(self, width=7, height=6, connect=4):
@@ -27,15 +30,16 @@ class Connect4Env(MultiAgentEnv):
         self.connect = 4
         self.player1 = "player1"
         self.player2 = "player2"
-        # observation_space needs to include action masking 
-        self.observation_space = Dict({
-            "state" : Box(low=-1, high=1, shape = (7,6), dtype=np.float32),
-            "action_mask": Box(low=0.0,high=1.0,shape = (7,),dtype=np.float32)
-            })
-        self.action_space =  Discrete(7)
-    
-        self.score = {self.player1: 0,
-                    self.player2: 0}
+        # observation_space needs to include action masking
+        self.observation_space = Dict(
+            {
+                "state": Box(low=-1, high=1, shape=(7, 6), dtype=np.float32),
+                "action_mask": Box(low=0.0, high=1.0, shape=(7,), dtype=np.float32),
+            }
+        )
+        self.action_space = Discrete(7)
+
+        self.score = {self.player1: 0, self.player2: 0}
         self.num_moves = 0
         self.last_move = None
         self.reset()
@@ -46,19 +50,13 @@ class Connect4Env(MultiAgentEnv):
         """
         self.board = np.full((7, 6), -1, dtype=np.float32)
 
-        self.current_player = 0 # Player 1 (represented by value 0) will move now
+        self.current_player = 0  # Player 1 (represented by value 0) will move now
         self.num_moves = 0
         self.winner = None
-        return {self.player1 : self.get_player_observations()}
-
-
-
+        return {self.player1: self.get_player_observations()}
 
     def get_player_observations(self):
-        obs= {
-            "state" : self.board,
-            "action_mask": self.get_moves()
-            }
+        obs = {"state": self.board, "action_mask": self.get_moves()}
         return obs
 
     def clone(self):
@@ -81,15 +79,19 @@ class Connect4Env(MultiAgentEnv):
         :param movecol: column over which a chip will be dropped
         """
 
-        # It should learn by itself to set the action 
+        # It should learn by itself to set the action
         print("Player actions: " + str(action_dict))
         if self.current_player == 0:
             act = action_dict[self.player1]
-        else: 
+        else:
             act = action_dict[self.player2]
-        
-        if not(act >= 0 and act <= self.width and self.board[act][self.height - 1] == -1):
-            raise IndexError(f'Invalid move. tried to place a chip on column {act} which is already full. Valid moves are: {self.get_moves(mask=False)}')
+
+        if not (
+            act >= 0 and act <= self.width and self.board[act][self.height - 1] == -1
+        ):
+            raise IndexError(
+                f"Invalid move. tried to place a chip on column {act} which is already full. Valid moves are: {self.get_moves(mask=False)}"
+            )
         row = self.height - 1
         while row >= 0 and self.board[act][row] == -1:
             row -= 1
@@ -98,80 +100,79 @@ class Connect4Env(MultiAgentEnv):
 
         self.board[act][row] = self.current_player
 
-        self.winner,reward_vector = self.check_for_episode_termination(act, row)
+        self.winner, reward_vector = self.check_for_episode_termination(act, row)
 
         single_info = {}
-        done = {"__all__" : self.winner is not None}
+        done = {"__all__": self.winner is not None}
         single_obs = self.get_player_observations()
 
-
         if done["__all__"] == True:
-            obs = {self.player1: single_obs,
-                   self.player2: single_obs
-                   }
-            reward = {self.player1: reward_vector[0],
-                      self.player2: reward_vector[1]
-                      }
-            info = {self.player1 : single_info,
-                    self.player2 : single_info}    
-            print("PLAYER " + str(self.current_player+1) + " WON!!!!")
-            print("ACTUAL SCORE: P1 = " + str(self.score[self.player1]) + " VS " + \
-                  "P2 = " + str(self.score[self.player2]))
-    
+            obs = {self.player1: single_obs, self.player2: single_obs}
+            reward = {self.player1: reward_vector[0], self.player2: reward_vector[1]}
+            info = {self.player1: single_info, self.player2: single_info}
+            print("PLAYER " + str(self.current_player + 1) + " WON!!!!")
+            print(
+                "ACTUAL SCORE: P1 = "
+                + str(self.score[self.player1])
+                + " VS "
+                + "P2 = "
+                + str(self.score[self.player2])
+            )
+
         elif self.current_player == 0:
             obs = {self.player2: single_obs}
-            reward = {self.player2 : reward_vector[0]}
-            info = {self.player2 : single_info}           
+            reward = {self.player2: reward_vector[0]}
+            info = {self.player2: single_info}
         elif self.current_player == 1:
             obs = {self.player1: single_obs}
-            reward = {self.player1 : reward_vector[1]}
-            info = {self.player1 : single_info}  
-            
-        
+            reward = {self.player1: reward_vector[1]}
+            info = {self.player1: single_info}
+
         self.current_player = 1 - self.current_player
-        
-    
+
         print("Player rewards: " + str(reward))
         self.render()
-        
-    
+
         return obs, reward, done, info
 
     def check_for_episode_termination(self, movecol, row):
         winner, reward_vector = self.winner, [0, 0]
         if self.does_move_win(movecol, row):
             winner = self.current_player
-            if winner == 0: 
+            if winner == 0:
                 reward_vector = [1, -1]
-                self.score[self.player1] += 1 
-            elif winner == 1: 
+                self.score[self.player1] += 1
+            elif winner == 1:
                 reward_vector = [-1, 1]
-                self.score[self.player2] += 1 
+                self.score[self.player2] += 1
         elif self.get_moves(mask=False) == []:  # A draw has happened
             winner = -1
             reward_vector = [0, 0]
         return winner, reward_vector
-            
-    def get_moves(self,mask = True):
+
+    def get_moves(self, mask=True):
         """
         :returns: array with all possible moves, index of columns which aren't full
         """
         if mask == False:
-            if self.winner is not None: 
+            if self.winner is not None:
                 return []
-            return [col for col in range(self.width) if self.board[col][self.height - 1] == -1]
-        #return an array of 0 if the action is invalid and 1 if it's valid
+            return [
+                col
+                for col in range(self.width)
+                if self.board[col][self.height - 1] == -1
+            ]
+        # return an array of 0 if the action is invalid and 1 if it's valid
         if mask == True:
             if self.winner is not None:
-                return [0.0]*7
+                return [0.0] * 7
             act_mask = []
             for col in range(self.width):
-                if self.board[col][self.height -1] == -1:
+                if self.board[col][self.height - 1] == -1:
                     act_mask.append(1.0)
                 else:
                     act_mask.append(0.0)
             return act_mask
-
 
     def does_move_win(self, x, y):
         """ 
@@ -184,13 +185,21 @@ class Connect4Env(MultiAgentEnv):
         me = self.board[x][y]
         for (dx, dy) in [(0, +1), (+1, +1), (+1, 0), (+1, -1)]:
             p = 1
-            while self.is_on_board(x+p*dx, y+p*dy) and self.board[x+p*dx][y+p*dy] == me:
+            while (
+                self.is_on_board(x + p * dx, y + p * dy)
+                and self.board[x + p * dx][y + p * dy] == me
+            ):
                 p += 1
             n = 1
-            while self.is_on_board(x-n*dx, y-n*dy) and self.board[x-n*dx][y-n*dy] == me:
+            while (
+                self.is_on_board(x - n * dx, y - n * dy)
+                and self.board[x - n * dx][y - n * dy] == me
+            ):
                 n += 1
 
-            if p + n >= (self.connect + 1): # want (p-1) + (n-1) + 1 >= 4, or more simply p + n >- 5
+            if p + n >= (
+                self.connect + 1
+            ):  # want (p-1) + (n-1) + 1 >= 4, or more simply p + n >- 5
                 return True
 
         return False
@@ -205,61 +214,82 @@ class Connect4Env(MultiAgentEnv):
         """
         return +1 if player == self.winner else -1
 
-    def render(self, mode='human',screen_width = 600, screen_height = 400):
-        if mode == 'human':
+    def render(self, mode="human", screen_width=600, screen_height=400):
+        if mode == "human":
             s = ""
             for x in range(self.height - 1, -1, -1):
                 for y in range(self.width):
-                    s += {-1: Fore.WHITE + '.', 0: Fore.RED + 'X', 1: Fore.YELLOW + 'O'}[self.board[y][x]]
+                    s += {
+                        -1: Fore.WHITE + ".",
+                        0: Fore.RED + "X",
+                        1: Fore.YELLOW + "O",
+                    }[self.board[y][x]]
                     s += Fore.RESET
                 s += "\n"
             print(s)
-        
-        elif mode == 'classic':
 
+        elif mode == "classic":
 
             square_len = 70
             circle_radius = 30
-            screen_width = square_len*self.width
-            screen_height = square_len*(self.height+1)
-            background_height = square_len*(self.height+1)
-            background_width = square_len*self.width
-            circle_x = screen_width/2 - background_width/2 + square_len/2
-            circle_y = screen_height/2 - background_height/2 + square_len/2
-            top_bar_x = screen_width/2
-            top_bar_y = screen_height - square_len/2
-            
+            screen_width = square_len * self.width
+            screen_height = square_len * (self.height + 1)
+            background_height = square_len * (self.height + 1)
+            background_width = square_len * self.width
+            circle_x = screen_width / 2 - background_width / 2 + square_len / 2
+            circle_y = screen_height / 2 - background_height / 2 + square_len / 2
+            top_bar_x = screen_width / 2
+            top_bar_y = screen_height - square_len / 2
+
             if self.viewer is None:
                 from gym.envs.classic_control import rendering
+
                 self.viewer = rendering.Viewer(screen_width, screen_height)
-                l, r, t, b = -background_width / 2, background_width / 2, background_height / 2, -background_height / 2
-                
+                l, r, t, b = (
+                    -background_width / 2,
+                    background_width / 2,
+                    background_height / 2,
+                    -background_height / 2,
+                )
+
                 background = rendering.FilledPolygon([(l, b), (l, t), (r, t), (r, b)])
-                backtrans = rendering.Transform(translation=(screen_width/2, screen_height/2))
+                backtrans = rendering.Transform(
+                    translation=(screen_width / 2, screen_height / 2)
+                )
                 background.add_attr(backtrans)
                 background.set_color(0.0, 0.0, 1.0)
                 self.viewer.add_geom(background)
-                
-                t_l, t_r, t_t, t_b = -background_width / 2, background_width / 2, square_len / 2, -square_len / 2
-                top_bar = rendering.FilledPolygon([(t_l, t_b), (t_l, t_t), (t_r, t_t), (t_r, t_b)])
+
+                t_l, t_r, t_t, t_b = (
+                    -background_width / 2,
+                    background_width / 2,
+                    square_len / 2,
+                    -square_len / 2,
+                )
+                top_bar = rendering.FilledPolygon(
+                    [(t_l, t_b), (t_l, t_t), (t_r, t_t), (t_r, t_b)]
+                )
                 toptrans = rendering.Transform(translation=(top_bar_x, top_bar_y))
                 top_bar.add_attr(toptrans)
                 top_bar.set_color(0.0, 0.0, 0.0)
                 self.viewer.add_geom(top_bar)
-                
+
                 self.cells = []
                 for row in range(self.height):
                     self.cells.append([])
                     for col in range(self.width):
                         cell = rendering.make_circle(radius=circle_radius, filled=True)
-                        celltrans = rendering.Transform(translation=(circle_x + square_len*col,circle_y + square_len*row))
+                        celltrans = rendering.Transform(
+                            translation=(
+                                circle_x + square_len * col,
+                                circle_y + square_len * row,
+                            )
+                        )
                         cell.add_attr(celltrans)
                         cell.set_color(0.0, 0.0, 0.0)
                         self.viewer.add_geom(cell)
                         self.cells[-1].append(cell)
-            
-            
-            
+
             for row in range(self.height):
                 for col in range(self.width):
                     if self.board[col][row] == -1:
@@ -269,15 +299,14 @@ class Connect4Env(MultiAgentEnv):
                     elif self.board[col][row] == 1:
                         self.cells[row][col].set_color(1.0, 1.0, 0.0)
                     else:
-                        print("Error: board values is " + str(self.board[row][col]) )
-                
-            
-            return self.viewer.render(return_rgb_array=mode == 'rgb_array')
-            
-        
-        
-        else: raise NotImplementedError('This mode has not been coded yet, select "human" or "classic"')
+                        print("Error: board values is " + str(self.board[row][col]))
 
+            return self.viewer.render(return_rgb_array=mode == "rgb_array")
+
+        else:
+            raise NotImplementedError(
+                'This mode has not been coded yet, select "human" or "classic"'
+            )
 
     def close(self):
         if self.viewer:
