@@ -13,11 +13,14 @@ class Connect4Env(MultiAgentEnv):
         0 = player 1 (X)
         1 = player 2 (O)
 
-    Winner can be:
-         None = No winner (yet)
-        -1 = Draw
-         0 = player 1 (X)
-         1 = player 2 (O)
+        Winner can be:
+             None = No winner (yet)
+            -1 = Draw
+             0 = player 1 (X)
+             1 = player 2 (O) 
+        
+        Action Space:
+            0 to width-1
     """
 
     def __init__(self, width=7, height=6, connect=4):
