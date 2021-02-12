@@ -1,7 +1,6 @@
 # import gym
 
 # import argparse
-import logging
 import os
 
 from ray.rllib.agents.pg import PGTFPolicy  # PGTorchPolicy
@@ -11,6 +10,7 @@ from ray.rllib.agents.trainer_template import build_trainer
 from env.LogWrapper import LogsWrapper
 from models import Connect4ActionMaskModel
 from policies.random_policy import RandomPolicy
+
 
 # import gym
 # import gym_connect4
@@ -52,6 +52,35 @@ from policies.random_policy import RandomPolicy
 # =============================================================================
 #  IMPORT CUSTOM MODEL, ENV, POLICIES AND CALLBACKS
 # =============================================================================
+
+def self_play(trainer_obj):
+    # self learning     from 1 to 0
+    # Copy weights from "player1" to "player2" after each training iteration
+    P2key_P1val = {}  # Temp storage with "player2" keys & "player1" values
+
+    for (p2_k, p2_v), (p1_k, p1_v) in zip(
+            trainer_obj.get_policy("player2").get_weights(True).items(),
+            trainer_obj.get_policy("player1").get_weights(True).items(),
+    ):
+        P2key_P1val[p2_k] = p1_v
+
+    # set weights
+    trainer_obj.set_weights(
+        {
+            "player2": P2key_P1val,  # weights or values from "player1" with "player2" keys
+            "player1": trainer_obj.get_policy("player1").get_weights(
+                True
+            ),  # no change
+        }
+    )
+
+    print("Weight succesfully updated")
+    # To check
+    for (p2_k, p2_v), (p1_k, p1_v) in zip(
+            trainer_obj.get_policy("player1").get_weights(True).items(),
+            trainer_obj.get_policy("player2").get_weights(True).items(),
+    ):
+        assert (p2_v == p1_v).all()
 
 
 if __name__ == "__main__":
@@ -140,8 +169,7 @@ if __name__ == "__main__":
     print("trainer configured")
     env = trainer_obj.workers.local_worker().env
     print("local_worker environment acquired: " + str(env))
-    epochs = 100
-    stop_timesteps = 500
+    epochs = 10
     reward_diff = 10
     weight_update_steps = 10
 
@@ -153,40 +181,12 @@ if __name__ == "__main__":
         # UPDATE WEIGHTS FOR SELF-PLAY
         # =============================================================================
         if epoch % weight_update_steps == 0 and epoch != 0:
-            # self learning     from 1 to 0
-            # Copy weights from "player1" to "player2" after each training iteration
-            P2key_P1val = {}  # Temp storage with "player2" keys & "player1" values
-
-            for (p2_k, p2_v), (p1_k, p1_v) in zip(
-                    trainer_obj.get_policy("player2").get_weights(True).items(),
-                    trainer_obj.get_policy("player1").get_weights(True).items(),
-            ):
-                P2key_P1val[p2_k] = p1_v
-
-            # set weights
-            trainer_obj.set_weights(
-                {
-                    "player2": P2key_P1val,  # weights or values from "player1" with "player2" keys
-                    "player1": trainer_obj.get_policy("player1").get_weights(
-                        True
-                    ),  # no change
-                }
-            )
-
-            print("Weight succesfully updated")
-            # To check
-            for (p2_k, p2_v), (p1_k, p1_v) in zip(
-                    trainer_obj.get_policy("player1").get_weights(True).items(),
-                    trainer_obj.get_policy("player2").get_weights(True).items(),
-            ):
-                assert (p2_v == p1_v).all()
+            self_play(trainer_obj)
 
         print(results)
-        # Timesteps reached.
-        if results["timesteps_total"] > stop_timesteps:
-            break
+
         # Reward (difference) reached -> all good, return.
-        elif env.score[env.player1] - env.score[env.player2] > reward_diff:
+        if env.score[env.player1] - env.score[env.player2] > reward_diff:
             break
 
     # Reward (difference) not reached: Error if `as_test`.
