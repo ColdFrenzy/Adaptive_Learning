@@ -1,16 +1,18 @@
 # import gym
-import numpy as np
-from gym.spaces import Box
 
 # import argparse
+import logging
 import os
-import random
-from datetime import datetime
+
+from ray.rllib.agents.pg import PGTFPolicy  # PGTorchPolicy
+from ray.rllib.agents.trainer import with_common_config
+from ray.rllib.agents.trainer_template import build_trainer
+
+from env.LogWrapper import LogsWrapper
+from models import Connect4ActionMaskModel
+from policies.random_policy import RandomPolicy
 
 # import gym
-import numpy as np
-from gym.spaces import Box
-
 # import gym_connect4
 # import sys
 # TO CHECK CONDA ENV INFO
@@ -22,7 +24,6 @@ from gym.spaces import Box
 #                         "envs","connect4_env")
 # # insert at 1, 0 is the script path (or '' in REPL)
 # sys.path.insert(1, connect4)
-
 # =============================================================================
 # CONNECT 4 CUSTOM ENV IMPORT
 # =============================================================================
@@ -32,8 +33,6 @@ from gym.spaces import Box
 #         print("Remove {} from registry".format(env))
 #         del gym.envs.registration.registry.env_specs[env]
 # from gym_connect4.envs import connect4_env
-
-
 # =============================================================================
 # PARSER
 # =============================================================================
@@ -43,63 +42,35 @@ from gym.spaces import Box
 # parser.add_argument("--stop-iters", type=int, default=150)
 # parser.add_argument("--stop-reward", type=float, default=1000.0)
 # parser.add_argument("--stop-timesteps", type=int, default=100000)
-
 # CURDIR = os.path.abspath(os.path.curdir)
 # LOGDIR = os.path.join(CURDIR,"log")
 # if not os.path.exists(LOGDIR):
 #     os.mkdir(LOGDIR)
 # LOG_FILENAME = datetime.now().strftime("logfile_%H_%M_%S_%d_%m_%Y.log")
-
-
-# REGISTER CUSTOM MODEL AND CUSTOM ENV
-from models.action_mask_model import Connect4ActionMaskModel
-from ray.rllib.agents.a3c.a3c_tf_policy import A3CTFPolicy
-from ray.rllib.agents.dqn.dqn_tf_policy import DQNTFPolicy
-# =============================================================================
-# RAY IMPORTS
-# =============================================================================
-# import ray
-# from ray.rllib import agents
-# from ray import tune
-from ray.rllib.agents.pg import PGTFPolicy, PGTrainer  # PGTorchPolicy
-from ray.rllib.agents.trainer_template import build_trainer
-from ray.rllib.agents.a3c.a3c_tf_policy import A3CTFPolicy
-from ray.rllib.agents.dqn.dqn_tf_policy import DQNTFPolicy
-from ray.rllib.agents.trainer import with_common_config
-
 # from ray.rllib.policy.policy import Policy
 # from ray.rllib.policy.view_requirement import ViewRequirement
-from ray.rllib.models import ModelCatalog
-
-ModelCatalog.register_custom_model("connect4_mask", Connect4ActionMaskModel)
-
 # =============================================================================
 #  IMPORT CUSTOM MODEL, ENV, POLICIES AND CALLBACKS
 # =============================================================================
-from models.action_mask_model import Connect4ActionMaskModel
-
-ModelCatalog.register_custom_model("connect4_mask", Connect4ActionMaskModel)
-
-from policies.random_policy import RandomPolicy
-
-# connect4 = gym.make('Connect4-v0')
-from env.connect4_multiagent_env import Connect4Env
-
-from callbacks.custom_callbacks import Connect4Callbacks
 
 
 if __name__ == "__main__":
-    multiagent_connect4 = Connect4Env()
+    # register model
+    _ = Connect4ActionMaskModel
+
+    multiagent_connect4 = LogsWrapper()
 
     use_lstm = False
     as_test = True
     trainer_name = "PG"
+
 
     def select_policy(agent_id):
         if agent_id == "player1":
             return "player1"
         else:
             return "player2"
+
 
     obs_space = multiagent_connect4.observation_space
     print("The observation space is: ")
@@ -120,7 +91,7 @@ if __name__ == "__main__":
         "rollout_fragment_length": 10,
         "train_batch_size": 200,
         # === Environment Settings ===
-        "env": Connect4Env,
+        "env": LogsWrapper,
         # discounter factor of the MDP
         "gamma": 0.9,
         # === Settings for Multi-Agent Environments ===
@@ -169,26 +140,26 @@ if __name__ == "__main__":
     print("trainer configured")
     env = trainer_obj.workers.local_worker().env
     print("local_worker environment acquired: " + str(env))
-    stop_iters = 100
+    epochs = 100
     stop_timesteps = 500
     reward_diff = 10
     weight_update_steps = 10
 
-    for i in range(stop_iters):
-        print("starting iteration number " + str(i))
+    for epoch in range(epochs):
+        print("Epoch " + str(epoch))
         results = trainer_obj.train()
 
         # =============================================================================
         # UPDATE WEIGHTS FOR SELF-PLAY
         # =============================================================================
-        if i % weight_update_steps == 0 and i != 0:
+        if epoch % weight_update_steps == 0 and epoch != 0:
             # self learning     from 1 to 0
             # Copy weights from "player1" to "player2" after each training iteration
             P2key_P1val = {}  # Temp storage with "player2" keys & "player1" values
 
             for (p2_k, p2_v), (p1_k, p1_v) in zip(
-                trainer_obj.get_policy("player2").get_weights(True).items(),
-                trainer_obj.get_policy("player1").get_weights(True).items(),
+                    trainer_obj.get_policy("player2").get_weights(True).items(),
+                    trainer_obj.get_policy("player1").get_weights(True).items(),
             ):
                 P2key_P1val[p2_k] = p1_v
 
@@ -205,8 +176,8 @@ if __name__ == "__main__":
             print("Weight succesfully updated")
             # To check
             for (p2_k, p2_v), (p1_k, p1_v) in zip(
-                trainer_obj.get_policy("player1").get_weights(True).items(),
-                trainer_obj.get_policy("player2").get_weights(True).items(),
+                    trainer_obj.get_policy("player1").get_weights(True).items(),
+                    trainer_obj.get_policy("player2").get_weights(True).items(),
             ):
                 assert (p2_v == p1_v).all()
 

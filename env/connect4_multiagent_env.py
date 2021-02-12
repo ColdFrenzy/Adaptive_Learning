@@ -80,7 +80,6 @@ class Connect4Env(MultiAgentEnv):
         """
 
         # It should learn by itself to set the action
-        print("Player actions: " + str(action_dict))
         if self.current_player == 0:
             act = action_dict[self.player1]
         else:
@@ -110,14 +109,6 @@ class Connect4Env(MultiAgentEnv):
             obs = {self.player1: single_obs, self.player2: single_obs}
             reward = {self.player1: reward_vector[0], self.player2: reward_vector[1]}
             info = {self.player1: single_info, self.player2: single_info}
-            print("PLAYER " + str(self.current_player + 1) + " WON!!!!")
-            print(
-                "ACTUAL SCORE: P1 = "
-                + str(self.score[self.player1])
-                + " VS "
-                + "P2 = "
-                + str(self.score[self.player2])
-            )
 
         elif self.current_player == 0:
             obs = {self.player2: single_obs}
@@ -130,8 +121,6 @@ class Connect4Env(MultiAgentEnv):
 
         self.current_player = 1 - self.current_player
 
-        print("Player rewards: " + str(reward))
-        print(self)
 
         return obs, reward, done, info
 
@@ -303,7 +292,7 @@ class Connect4Env(MultiAgentEnv):
                     elif self.board[col][row] == 1:
                         self.cells[row][col].set_color(1.0, 1.0, 0.0)
                     else:
-                        print("Error: board values is " + str(self.board[row][col]))
+                        raise  ValueError("Error: board values is " + str(self.board[row][col]))
 
             return self.viewer.render(return_rgb_array=mode == "rgb_array")
 
