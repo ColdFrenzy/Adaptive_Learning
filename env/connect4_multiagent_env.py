@@ -131,7 +131,7 @@ class Connect4Env(MultiAgentEnv):
         self.current_player = 1 - self.current_player
 
         print("Player rewards: " + str(reward))
-        self.render()
+        print(self)
 
         return obs, reward, done, info
 
@@ -214,21 +214,25 @@ class Connect4Env(MultiAgentEnv):
         """
         return +1 if player == self.winner else -1
 
-    def render(self, mode="human", screen_width=600, screen_height=400):
-        if mode == "human":
-            s = ""
-            for x in range(self.height - 1, -1, -1):
-                for y in range(self.width):
-                    s += {
-                        -1: Fore.WHITE + ".",
-                        0: Fore.RED + "X",
-                        1: Fore.YELLOW + "O",
-                    }[self.board[y][x]]
-                    s += Fore.RESET
-                s += "\n"
-            print(s)
+    def __repr__(self):
+        """
+        Return current game status as class representation
+        """
+        s = ""
+        for x in range(self.height - 1, -1, -1):
+            for y in range(self.width):
+                s += {
+                    -1: Fore.WHITE + ".",
+                    0: Fore.RED + "X",
+                    1: Fore.YELLOW + "O",
+                }[self.board[y][x]]
+                s += Fore.RESET
+            s += "\n"
+        return s
 
-        elif mode == "classic":
+    def render(self, mode="human", screen_width=600, screen_height=400):
+
+        if mode == "classic":
 
             square_len = 70
             circle_radius = 30
