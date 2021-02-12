@@ -23,11 +23,11 @@ class Connect4Env(MultiAgentEnv):
             0 to width-1
     """
 
-    def __init__(self, width=7, height=6, connect=4):
+    def __init__(self, env_context, width=7, height=6, connect=4):
 
-        self.width = 7
-        self.height = 6
-        self.connect = 4
+        self.width = width
+        self.height = height
+        self.connect = connect
         self.player1 = "player1"
         self.player2 = "player2"
         # observation_space needs to include action masking
@@ -211,11 +211,11 @@ class Connect4Env(MultiAgentEnv):
         for x in range(self.height - 1, -1, -1):
             for y in range(self.width):
                 s += {
-                    -1: Fore.WHITE + ".",
-                    0: Fore.RED + "X",
-                    1: Fore.YELLOW + "O",
+                    -1: ".",
+                    0: "X",
+                    1: "O",
                 }[self.board[y][x]]
-                s += Fore.RESET
+                s += " "
             s += "\n"
         return s
 

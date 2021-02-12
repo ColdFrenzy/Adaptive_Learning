@@ -2,9 +2,10 @@
 
 # import argparse
 import os
+from typing import Type
 
 from ray.rllib.agents.pg import PGTFPolicy  # PGTorchPolicy
-from ray.rllib.agents.trainer import with_common_config
+from ray.rllib.agents.trainer import with_common_config, Trainer
 from ray.rllib.agents.trainer_template import build_trainer
 
 from env.LogWrapper import LogsWrapper
@@ -53,22 +54,26 @@ from policies.random_policy import RandomPolicy
 #  IMPORT CUSTOM MODEL, ENV, POLICIES AND CALLBACKS
 # =============================================================================
 
-def self_play(trainer_obj):
+def self_play(trainer: Type[Trainer]):
     # self learning     from 1 to 0
     # Copy weights from "player1" to "player2" after each training iteration
     P2key_P1val = {}  # Temp storage with "player2" keys & "player1" values
 
+    # todo: check if this works with two policies of the same kind
+    if not trainer.get_policy("player1") == trainer.get_policy("player2"):
+        return
+
     for (p2_k, p2_v), (p1_k, p1_v) in zip(
-            trainer_obj.get_policy("player2").get_weights(True).items(),
-            trainer_obj.get_policy("player1").get_weights(True).items(),
+            trainer.get_policy("player2").get_weights().items(),
+            trainer.get_policy("player1").get_weights().items(),
     ):
         P2key_P1val[p2_k] = p1_v
 
     # set weights
-    trainer_obj.set_weights(
+    trainer.set_weights(
         {
             "player2": P2key_P1val,  # weights or values from "player1" with "player2" keys
-            "player1": trainer_obj.get_policy("player1").get_weights(
+            "player1": trainer.get_policy("player1").get_weights(
                 True
             ),  # no change
         }
@@ -77,29 +82,28 @@ def self_play(trainer_obj):
     print("Weight succesfully updated")
     # To check
     for (p2_k, p2_v), (p1_k, p1_v) in zip(
-            trainer_obj.get_policy("player1").get_weights(True).items(),
-            trainer_obj.get_policy("player2").get_weights(True).items(),
+            trainer.get_policy("player1").get_weights().items(),
+            trainer.get_policy("player2").get_weights().items(),
     ):
         assert (p2_v == p1_v).all()
+
+
+def select_policy(agent_id):
+    if agent_id == "player1":
+        return "player1"
+    else:
+        return "player2"
 
 
 if __name__ == "__main__":
     # register model
     _ = Connect4ActionMaskModel
 
-    multiagent_connect4 = LogsWrapper()
+    multiagent_connect4 = LogsWrapper(None)
 
     use_lstm = False
     as_test = True
     trainer_name = "PG"
-
-
-    def select_policy(agent_id):
-        if agent_id == "player1":
-            return "player1"
-        else:
-            return "player2"
-
 
     obs_space = multiagent_connect4.observation_space
     print("The observation space is: ")
@@ -169,9 +173,10 @@ if __name__ == "__main__":
     print("trainer configured")
     env = trainer_obj.workers.local_worker().env
     print("local_worker environment acquired: " + str(env))
-    epochs = 10
-    reward_diff = 10
-    weight_update_steps = 10
+    epochs = 100
+    reward_diff = 100
+    weight_update_steps = 5
+    reward_diff_reached = False
 
     for epoch in range(epochs):
         print("Epoch " + str(epoch))
@@ -187,10 +192,11 @@ if __name__ == "__main__":
 
         # Reward (difference) reached -> all good, return.
         if env.score[env.player1] - env.score[env.player2] > reward_diff:
+            reward_diff_reached = True
             break
 
     # Reward (difference) not reached: Error if `as_test`.
-    if as_test:
+    if not reward_diff_reached:
         print(
             "Desired reward difference {} not reached! Only got to {}.".format(
                 reward_diff, env.score[env.player1] - env.score[env.player2]
@@ -200,3 +206,7 @@ if __name__ == "__main__":
         # raise ValueError(
         #     "Desired reward difference ({}) not reached! Only got to {}.".
         #     format(reward_diff, env.score[env.player1] - env.score[env.player2]))
+    else:
+        print(
+            f"Desired reward difference {reward_diff} reached"
+        )
