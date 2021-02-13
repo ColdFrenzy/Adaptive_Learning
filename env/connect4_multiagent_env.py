@@ -1,17 +1,17 @@
 import numpy as np
-from gym.spaces import Box, Discrete, Dict
 from colorama import Fore
+from gym.spaces import Box, Dict, Discrete
 from ray.rllib.env.multi_agent_env import MultiAgentEnv
 
 
 class Connect4Env(MultiAgentEnv):
     """
-        GameState for the Connect 4 game.
-        The board is represented as a 2D array (rows and columns).
-        Each entry on the array can be:
-            -1 = empty    (.)
-            0 = player 1 (X)
-            1 = player 2 (O)
+    GameState for the Connect 4 game.
+    The board is represented as a 2D array (rows and columns).
+    Each entry on the array can be:
+        -1 = empty    (.)
+        0 = player 1 (X)
+        1 = player 2 (O)
 
         Winner can be:
              None = No winner (yet)
@@ -23,11 +23,11 @@ class Connect4Env(MultiAgentEnv):
             0 to width-1
     """
 
-    def __init__(self, width=7, height=6, connect=4):
+    def __init__(self, env_context, width=7, height=6, connect=4):
 
-        self.width = 7
-        self.height = 6
-        self.connect = 4
+        self.width = width
+        self.height = height
+        self.connect = connect
         self.player1 = "player1"
         self.player2 = "player2"
         # observation_space needs to include action masking
@@ -45,7 +45,7 @@ class Connect4Env(MultiAgentEnv):
         self.reset()
 
     def reset(self):
-        """ 
+        """
         Initialises the Connect 4 gameboard and return observations
         """
         self.board = np.full((7, 6), -1, dtype=np.float32)
@@ -60,7 +60,7 @@ class Connect4Env(MultiAgentEnv):
         return obs
 
     def clone(self):
-        """ 
+        """
         Creates a deep copy of the game state.
         NOTE: it is _really_ important that a copy is used during simulations
               Because otherwise MCTS would be operating on the real game board.
@@ -73,14 +73,13 @@ class Connect4Env(MultiAgentEnv):
         return st
 
     def step(self, action_dict):
-        """ 
+        """
         Changes this GameState by "dropping" a chip in the column
         specified by param movecol.
         :param movecol: column over which a chip will be dropped
         """
 
         # It should learn by itself to set the action
-        print("Player actions: " + str(action_dict))
         if self.current_player == 0:
             act = action_dict[self.player1]
         else:
@@ -110,14 +109,6 @@ class Connect4Env(MultiAgentEnv):
             obs = {self.player1: single_obs, self.player2: single_obs}
             reward = {self.player1: reward_vector[0], self.player2: reward_vector[1]}
             info = {self.player1: single_info, self.player2: single_info}
-            print("PLAYER " + str(self.current_player + 1) + " WON!!!!")
-            print(
-                "ACTUAL SCORE: P1 = "
-                + str(self.score[self.player1])
-                + " VS "
-                + "P2 = "
-                + str(self.score[self.player2])
-            )
 
         elif self.current_player == 0:
             obs = {self.player2: single_obs}
@@ -130,8 +121,6 @@ class Connect4Env(MultiAgentEnv):
 
         self.current_player = 1 - self.current_player
 
-        print("Player rewards: " + str(reward))
-        self.render()
 
         return obs, reward, done, info
 
@@ -175,7 +164,7 @@ class Connect4Env(MultiAgentEnv):
             return act_mask
 
     def does_move_win(self, x, y):
-        """ 
+        """
         Checks whether a newly dropped chip at position param x, param y
         wins the game.
         :param x: column index
@@ -208,27 +197,31 @@ class Connect4Env(MultiAgentEnv):
         return x >= 0 and x < self.width and y >= 0 and y < self.height
 
     def get_result(self, player):
-        """ 
+        """
         :param player: (int) player which we want to see if he / she is a winner
         :returns: winner from the perspective of the param player
         """
         return +1 if player == self.winner else -1
 
-    def render(self, mode="human", screen_width=600, screen_height=400):
-        if mode == "human":
-            s = ""
-            for x in range(self.height - 1, -1, -1):
-                for y in range(self.width):
-                    s += {
-                        -1: Fore.WHITE + ".",
-                        0: Fore.RED + "X",
-                        1: Fore.YELLOW + "O",
-                    }[self.board[y][x]]
-                    s += Fore.RESET
-                s += "\n"
-            print(s)
+    def __repr__(self):
+        """
+        Return current game status as class representation
+        """
+        s = ""
+        for x in range(self.height - 1, -1, -1):
+            for y in range(self.width):
+                s += {
+                    -1: ".",
+                    0: "X",
+                    1: "O",
+                }[self.board[y][x]]
+                s += " "
+            s += "\n"
+        return s
 
-        elif mode == "classic":
+    def render(self, mode="human", screen_width=600, screen_height=400):
+
+        if mode == "classic":
 
             square_len = 70
             circle_radius = 30
@@ -299,7 +292,7 @@ class Connect4Env(MultiAgentEnv):
                     elif self.board[col][row] == 1:
                         self.cells[row][col].set_color(1.0, 1.0, 0.0)
                     else:
-                        print("Error: board values is " + str(self.board[row][col]))
+                        raise  ValueError("Error: board values is " + str(self.board[row][col]))
 
             return self.viewer.render(return_rgb_array=mode == "rgb_array")
 

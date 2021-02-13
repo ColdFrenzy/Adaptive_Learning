@@ -27,7 +27,6 @@ class RandomPolicy(Policy):
                     allowed_act.append(i)
 
             random_acts.append(random.choice(allowed_act))
-            print(random_acts)
         return random_acts, [], {}
 
     def learn_on_batch(self, samples):

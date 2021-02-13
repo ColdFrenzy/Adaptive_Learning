@@ -1,4 +1,6 @@
 # from ray.rllib.models import ModelCatalog
+from functools import reduce
+
 from ray.rllib.models.tf import TFModelV2
 
 # from ray.rllib.models.tf.fcnet import FullyConnectedNetwork
@@ -6,7 +8,6 @@ from ray.rllib.models.tf import TFModelV2
 from ray.rllib.utils.framework import try_import_tf
 
 tf1, tf, tfv = try_import_tf()
-
 
 class Connect4ActionMaskModel(TFModelV2):
     """Parametric action model that handles the dot product and masking.
