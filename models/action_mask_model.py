@@ -9,6 +9,7 @@ from ray.rllib.utils.framework import try_import_tf
 
 tf1, tf, tfv = try_import_tf()
 
+
 class Connect4ActionMaskModel(TFModelV2):
     """Parametric action model that handles the dot product and masking.
     """

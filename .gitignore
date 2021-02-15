@@ -2,3 +2,11 @@
 */__pycache__/*
 ray/
 /build_ray_from_source.txt
+/match.log
+
+# exclude everything
+checkpoints/*
+# exception to the rule
+!checkpoints/.gitkeep 
+ray_results/*
+!ray_results/.gitkeep

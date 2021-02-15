@@ -17,14 +17,16 @@ class LogsWrapper(Connect4Env):
     def init_logger(file_path):
         logger = logging.getLogger("Connect4Logger")
 
-        f_handler = logging.FileHandler(file_path, 'w', 'utf-8')
+        f_handler = logging.FileHandler(file_path, "w", "utf-8")
         f_handler.setLevel(logging.DEBUG)
-        f_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        f_format = logging.Formatter(
+            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        )
         f_handler.setFormatter(f_format)
 
         c_handler = logging.StreamHandler()
         c_handler.setLevel(logging.WARN)
-        c_format = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
+        c_format = logging.Formatter("%(name)s - %(levelname)s - %(message)s")
         c_handler.setFormatter(c_format)
 
         logger.addHandler(f_handler)

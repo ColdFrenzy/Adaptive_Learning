@@ -121,7 +121,6 @@ class Connect4Env(MultiAgentEnv):
 
         self.current_player = 1 - self.current_player
 
-
         return obs, reward, done, info
 
     def check_for_episode_termination(self, movecol, row):
@@ -210,11 +209,7 @@ class Connect4Env(MultiAgentEnv):
         s = ""
         for x in range(self.height - 1, -1, -1):
             for y in range(self.width):
-                s += {
-                    -1: ".",
-                    0: "X",
-                    1: "O",
-                }[self.board[y][x]]
+                s += {-1: ".", 0: "X", 1: "O",}[self.board[y][x]]
                 s += " "
             s += "\n"
         return s
@@ -292,7 +287,9 @@ class Connect4Env(MultiAgentEnv):
                     elif self.board[col][row] == 1:
                         self.cells[row][col].set_color(1.0, 1.0, 0.0)
                     else:
-                        raise  ValueError("Error: board values is " + str(self.board[row][col]))
+                        raise ValueError(
+                            "Error: board values is " + str(self.board[row][col])
+                        )
 
             return self.viewer.render(return_rgb_array=mode == "rgb_array")
 
