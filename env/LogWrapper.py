@@ -9,10 +9,9 @@ class LogsWrapper(Connect4Env):
     """
 
     def __init__(self, env_context, width=7, height=6, connect=4):
-        self.log_step = 50
-        self.log_idx = 0
-        self.logger = self.init_logger("match.log")
-        super(LogsWrapper, self).__init__(env_context, width, height, connect)
+        super().__init__(env_context, width, height, connect)
+
+        self.logger = self.init_logger("log/match.log")
 
     def reset(self):
         self.log_idx += 1
@@ -46,7 +45,15 @@ class LogsWrapper(Connect4Env):
 
         obs, reward, done, info = super(LogsWrapper, self).step(action_dict)
 
-        if self.log_step % self.log_idx == 0:
+        if done["__all__"] == True:
+            self.logger.info("PLAYER " + str(self.current_player) + " WON!!!!")
+            self.logger.info(
+                "ACTUAL SCORE: P1 = "
+                + str(self.score[self.player1])
+                + " VS "
+                + "P2 = "
+                + str(self.score[self.player2])
+            )
 
             self.logger.info("Player actions: " + str(action_dict))
             self.logger.info(f"Player rewards: {reward}\n{self}")

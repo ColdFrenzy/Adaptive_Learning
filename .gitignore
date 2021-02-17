@@ -10,3 +10,5 @@ checkpoints/*
 !checkpoints/.gitkeep 
 ray_results/*
 !ray_results/.gitkeep
+log/*
+!log/.gitkeep
