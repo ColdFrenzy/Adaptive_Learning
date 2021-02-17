@@ -11,7 +11,7 @@ class LogsWrapper(Connect4Env):
     def __init__(self, env_context, width=7, height=6, connect=4):
         super().__init__(env_context, width, height, connect)
 
-        self.logger = self.init_logger("match.log")
+        self.logger = self.init_logger("log/match.log")
 
     @staticmethod
     def init_logger(file_path):
@@ -42,7 +42,7 @@ class LogsWrapper(Connect4Env):
         obs, reward, done, info = super().step(action_dict)
 
         if done["__all__"] == True:
-            self.logger.info("PLAYER " + str(self.current_player + 1) + " WON!!!!")
+            self.logger.info("PLAYER " + str(self.current_player) + " WON!!!!")
             self.logger.info(
                 "ACTUAL SCORE: P1 = "
                 + str(self.score[self.player1])

@@ -12,6 +12,11 @@ class Connect4Env(MultiAgentEnv):
         -1 = empty    (.)
         0 = player 1 (X)
         1 = player 2 (O)
+    from the player 1 point of view, while it's:
+        -1 = empty   (.)
+        0 = player 2 (0)
+        1 = player 1 (X)
+    from the player 2 point of view
 
         Winner can be:
              None = No winner (yet)
@@ -40,8 +45,8 @@ class Connect4Env(MultiAgentEnv):
         self.action_space = Discrete(7)
 
         self.score = {self.player1: 0, self.player2: 0}
+        self.num_draws = 0
         self.num_moves = 0
-        self.last_move = None
         self.reset()
 
     def reset(self):
@@ -49,14 +54,19 @@ class Connect4Env(MultiAgentEnv):
         Initialises the Connect 4 gameboard and return observations
         """
         self.board = np.full((7, 6), -1, dtype=np.float32)
+        # board seen from player 2 point of view
+        self.board_p2 = np.full((7, 6), -1, dtype=np.float32)
 
         self.current_player = 0  # Player 1 (represented by value 0) will move now
         self.num_moves = 0
         self.winner = None
-        return {self.player1: self.get_player_observations()}
+        return {self.player1: self.get_player_observations(self.player1)}
 
-    def get_player_observations(self):
-        obs = {"state": self.board, "action_mask": self.get_moves()}
+    def get_player_observations(self, player):
+        if player == 0:
+            obs = {"state": self.board, "action_mask": self.get_moves()}
+        else:
+            obs = {"state": self.board_p2, "action_mask": self.get_moves()}
         return obs
 
     def clone(self):
@@ -70,6 +80,7 @@ class Connect4Env(MultiAgentEnv):
         st.current_player = self.current_player
         st.winner = self.winner
         st.board = np.array([self.board[col][:] for col in range(self.width)])
+        st.board_p2 = np.array([self.board_p2[col][:] for col in range(self.width)])
         return st
 
     def step(self, action_dict):
@@ -78,8 +89,7 @@ class Connect4Env(MultiAgentEnv):
         specified by param movecol.
         :param movecol: column over which a chip will be dropped
         """
-
-        # It should learn by itself to set the action
+        # self.reset_score()
         if self.current_player == 0:
             act = action_dict[self.player1]
         else:
@@ -98,24 +108,27 @@ class Connect4Env(MultiAgentEnv):
         row += 1
 
         self.board[act][row] = self.current_player
+        self.board_p2[act][row] = 1 - self.current_player
 
+        self.num_moves += 1
         self.winner, reward_vector = self.check_for_episode_termination(act, row)
 
         single_info = {}
         done = {"__all__": self.winner is not None}
-        single_obs = self.get_player_observations()
+        p1_obs = self.get_player_observations(self.player1)
+        p2_obs = self.get_player_observations(self.player2)
 
         if done["__all__"] == True:
-            obs = {self.player1: single_obs, self.player2: single_obs}
+            obs = {self.player1: p1_obs, self.player2: p2_obs}
             reward = {self.player1: reward_vector[0], self.player2: reward_vector[1]}
             info = {self.player1: single_info, self.player2: single_info}
 
         elif self.current_player == 0:
-            obs = {self.player2: single_obs}
+            obs = {self.player2: p2_obs}
             reward = {self.player2: reward_vector[0]}
             info = {self.player2: single_info}
         elif self.current_player == 1:
-            obs = {self.player1: single_obs}
+            obs = {self.player1: p1_obs}
             reward = {self.player1: reward_vector[1]}
             info = {self.player1: single_info}
 
@@ -136,7 +149,15 @@ class Connect4Env(MultiAgentEnv):
         elif self.get_moves(mask=False) == []:  # A draw has happened
             winner = -1
             reward_vector = [0, 0]
+            self.num_draws += 1
         return winner, reward_vector
+
+    def reset_score(self, n_steps=500):
+        total_score = self.score[self.player1] + self.score[self.player2]
+        if total_score >= n_steps:
+            self.score[self.player1] = 0
+            self.score[self.player2] = 0
+            self.num_draws = 0
 
     def get_moves(self, mask=True):
         """

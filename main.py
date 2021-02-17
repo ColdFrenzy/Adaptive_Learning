@@ -1,6 +1,6 @@
 # import gym
 
-# import argparse
+import argparse
 import os
 
 # import shutil
@@ -13,81 +13,47 @@ from ray.rllib.agents.trainer import with_common_config, Trainer
 from ray.rllib.agents.trainer_template import build_trainer
 from ray.tune.logger import UnifiedLogger
 
+# =============================================================================
+#  IMPORT CUSTOM MODEL, ENV, POLICIES AND CALLBACKS
+# =============================================================================
 from env.LogWrapper import LogsWrapper
 from models import Connect4ActionMaskModel
 from policies.random_policy import RandomPolicy
+from callbacks.custom_callbacks import Connect4Callbacks
 
-
-# import gym
-# import gym_connect4
-# import sys
-# TO CHECK CONDA ENV INFO
-# project_dir = os.getenv("PROJECT_DIR")
-# env = os.getenv("CONDA_DEFAULT_ENV")
-# conda_path = os.getenv("PATH")
-# curdir = os.path.abspath(os.getcwd())
-# connect4 = os.path.join(curdir, "gym-connect4-master","gym_connect4",
-#                         "envs","connect4_env")
-# # insert at 1, 0 is the script path (or '' in REPL)
-# sys.path.insert(1, connect4)
-# =============================================================================
-# CONNECT 4 CUSTOM ENV IMPORT
-# =============================================================================
-# env_dict = gym.envs.registration.registry.env_specs.copy()
-# for env in env_dict:
-#     if 'Connect4-v0' in env:
-#         print("Remove {} from registry".format(env))
-#         del gym.envs.registration.registry.env_specs[env]
-# from gym_connect4.envs import connect4_env
 # =============================================================================
 # PARSER
 # =============================================================================
 # parser = argparse.ArgumentParser()
-# parser.add_argument("--torch", action="store_true")
+# parser.add_argument("--player1-policy", type=str)
 # parser.add_argument("--as-test", action="store_true")
 # parser.add_argument("--stop-iters", type=int, default=150)
 # parser.add_argument("--stop-reward", type=float, default=1000.0)
 # parser.add_argument("--stop-timesteps", type=int, default=100000)
 CURDIR = os.path.abspath(os.path.curdir)
-# LOGDIR = os.path.join(CURDIR,"log")
-# if not os.path.exists(LOGDIR):
-#     os.mkdir(LOGDIR)
-# LOG_FILENAME = datetime.now().strftime("logfile_%H_%M_%S_%d_%m_%Y.log")
-# =============================================================================
-#  IMPORT CUSTOM MODEL, ENV, POLICIES AND CALLBACKS
-# =============================================================================
 
 
 def self_play(trainer: Type[Trainer]):
-    # self learning     from 1 to 0
-    # Copy weights from "player1" to "player2" after each training iteration
-    P2key_P1val = {}  # Temp storage with "player2" keys & "player1" values
-
-    # todo: check if this works with two policies of the same kind
-    if not trainer.get_policy("player1") == trainer.get_policy("player2"):
+    # check if the two policies have the same model (by comparing the models name)
+    if (
+        not trainer.get_policy("player1").model.base_model.name
+        == trainer.get_policy("player2").model.base_model.name
+    ):
         return
 
-    for (p2_k, p2_v), (p1_k, p1_v) in zip(
-        trainer.get_policy("player2").get_weights().items(),
-        trainer.get_policy("player1").get_weights().items(),
-    ):
-        P2key_P1val[p2_k] = p1_v
+    # get weights
+    p1_weights = trainer.get_policy("player1").model.base_model.get_weights()
 
     # set weights
-    trainer.set_weights(
-        {
-            "player2": P2key_P1val,  # weights or values from "player1" with "player2" keys
-            "player1": trainer.get_policy("player1").get_weights(True),  # no change
-        }
-    )
+    trainer.get_policy("player2").model.base_model.set_weights(p1_weights)
 
     print("Weight succesfully updated")
     # To check
-    for (p2_k, p2_v), (p1_k, p1_v) in zip(
-        trainer.get_policy("player1").get_weights().items(),
-        trainer.get_policy("player2").get_weights().items(),
+    for w1, w2 in zip(
+        trainer.get_policy("player1").model.base_model.get_weights(),
+        trainer.get_policy("player2").model.base_model.get_weights(),
     ):
-        assert (p2_v == p1_v).all()
+        assert (w1 == w2).all()
 
 
 def select_policy(agent_id):
@@ -98,10 +64,12 @@ def select_policy(agent_id):
         return "player2"
 
 
-def custom_log_creator(custom_path, trainer_name, env_id):
+def custom_log_creator(custom_path, p1_trainer_name, p2_trainer_name, env_id):
 
     timestr = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
-    logdir_prefix = "{}_{}_{}".format(trainer_name, env_id, timestr)
+    logdir_prefix = "{}_vs_{}_{}_{}".format(
+        p1_trainer_name, p2_trainer_name, env_id, timestr
+    )
 
     def logger_creator(config):
 
@@ -121,8 +89,8 @@ if __name__ == "__main__":
 
     use_lstm = False
     as_test = True
-    trainer_name = "PG"
-
+    p1_trainer_name = "PG"
+    p2_trainer_name = "PG"
     obs_space = multiagent_connect4.observation_space
     print("The observation space is: ")
     print(obs_space)
@@ -147,7 +115,7 @@ if __name__ == "__main__":
         "gamma": 0.9,
         # === Settings for Multi-Agent Environments ===
         "multiagent": {
-            "policies_to_train": ["player1"],  # ,"player2"],
+            "policies_to_train": ["player1", "player2"],  # ,"player2"],
             # MultiAgentPolicyConfigDict = Dict[PolicyID, Tuple[Union[
             # type, None], gym.Space, gym.Space, PartialTrainerConfigDict]]
             # Map of type MultiAgentPolicyConfigDict from policy ids to tuples
@@ -166,7 +134,7 @@ if __name__ == "__main__":
                     },
                 ),
                 "player2": (
-                    RandomPolicy,
+                    PGTFPolicy,
                     obs_space,
                     act_space,
                     {
@@ -179,7 +147,7 @@ if __name__ == "__main__":
             },
             "policy_mapping_fn": select_policy,
         },
-        # "callbacks": Connect4Callbacks,
+        "callbacks": Connect4Callbacks,
         "framework": "tf2",
         # allow tracing in eager mode
         # "eager_tracing": True,
@@ -204,10 +172,12 @@ if __name__ == "__main__":
     # shutil.rmtree(ray_results, ignore_errors=True, onerror=None)
 
     new_config = with_common_config(config)
-    trainer = build_trainer(name=trainer_name, default_config=new_config)
+    trainer = build_trainer(name=p1_trainer_name, default_config=new_config)
     trainer_obj = trainer(
         config=new_config,
-        logger_creator=custom_log_creator(ray_results_dir, trainer_name, "Connect4Env"),
+        logger_creator=custom_log_creator(
+            ray_results_dir, p1_trainer_name, p2_trainer_name, "Connect4Env"
+        ),
     )
     print("trainer configured")
     env = trainer_obj.workers.local_worker().env
@@ -224,13 +194,15 @@ if __name__ == "__main__":
         # =============================================================================
         # UPDATE WEIGHTS FOR SELF-PLAY
         # =============================================================================
-        if epoch % weight_update_steps == 0 and epoch != 0:
-            self_play(trainer_obj)
-
+        # if epoch % weight_update_steps == 0 and epoch != 0:
+        #     try:
+        #         self_play(trainer_obj)
+        #     except:
+        #         print("Error while updating weights")
         print(results)
 
         # Reward (difference) reached -> all good, return.
-        if env.score[env.player1] - env.score[env.player2] > reward_diff:
+        if env.score[env.player1] - env.score[env.player2] >= reward_diff:
             reward_diff_reached = True
             break
 
