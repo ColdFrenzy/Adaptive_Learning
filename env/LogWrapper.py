@@ -49,6 +49,7 @@ class LogsWrapper(Connect4Env):
         if self.log_step % self.log_idx == 0:
 
             self.logger.info("Player actions: " + str(action_dict))
+            self.logger.info(f"Player rewards: {reward}\n{self}")
 
             if done["__all__"] == True:
                 self.logger.info("PLAYER " + str(self.current_player + 1) + " WON!!!!")
@@ -59,7 +60,5 @@ class LogsWrapper(Connect4Env):
                     + "P2 = "
                     + str(self.score[self.player2])
                 )
-
-            self.logger.info(f"Player rewards: {reward}\n{self}")
 
         return obs, reward, done, info
