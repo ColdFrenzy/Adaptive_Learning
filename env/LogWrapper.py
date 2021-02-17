@@ -50,7 +50,7 @@ class LogsWrapper(Connect4Env):
 
             self.logger.info("Player actions: " + str(action_dict))
 
-            if done["__all__"] == True:
+            if done["__all__"]:
                 self.logger.info("PLAYER " + str(self.current_player + 1) + " WON!!!!")
                 self.logger.info(
                     "ACTUAL SCORE: P1 = "
