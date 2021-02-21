@@ -1,17 +1,23 @@
 import logging
 
 from env.connect4_multiagent_env import Connect4Env
-
+from config.custom_config import Config
 
 class LogsWrapper(Connect4Env):
     """
     Wrapper for Connect4Env
     """
 
-    def __init__(self, env_context, width=7, height=6, connect=4):
-        super().__init__(env_context, width, height, connect)
-
+    def __init__(self, env_context, width=Config.WIDTH, height=Config.HEIGHT,n_actions=Config.N_ACTIONS ,connect=Config.CONNECT):
+        self.log_step = 50
+        self.log_idx = 0
         self.logger = self.init_logger("log/match.log")
+        super(LogsWrapper, self).__init__(env_context, width, height, connect)
+
+    def reset(self):
+        self.log_idx += 1
+
+        return super(LogsWrapper, self).reset()
 
     @staticmethod
     def init_logger(file_path):
@@ -37,20 +43,23 @@ class LogsWrapper(Connect4Env):
         return logger
 
     def step(self, action_dict):
-        self.logger.info("Player actions: " + str(action_dict))
+        obs, reward, done, info = super(LogsWrapper, self).step(action_dict)
 
-        obs, reward, done, info = super().step(action_dict)
+        if self.log_step % self.log_idx == 0:
 
-        if done["__all__"] == True:
-            self.logger.info("PLAYER " + str(self.current_player) + " WON!!!!")
-            self.logger.info(
-                "ACTUAL SCORE: P1 = "
-                + str(self.score[self.player1])
-                + " VS "
-                + "P2 = "
-                + str(self.score[self.player2])
-            )
+            self.logger.info("Player actions: " + str(action_dict))
 
-        self.logger.info(f"Player rewards: {reward}\n{self}")
+
+            if done["__all__"]:
+                self.logger.info("PLAYER " + str(self.current_player) + " WON!!!!")
+                self.logger.info(
+                    "ACTUAL SCORE: P1 = "
+                    + str(self.score[self.player1])
+                    + " VS "
+                    + "P2 = "
+                    + str(self.score[self.player2])
+                )
+    
+                self.logger.info(f"Player rewards: {reward}\n{self}")
 
         return obs, reward, done, info

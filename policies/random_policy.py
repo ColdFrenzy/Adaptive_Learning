@@ -40,16 +40,3 @@ class RandomPolicy(Policy):
     def set_weights(self, weights):
         pass
 
-
-def connect4_available_action(obs):
-    """
-    Parameters
-    ----------
-    obs : list[list]
-        connect4 board state
-
-    Returns
-    -------
-    acts = list
-        index of all available columns
-    """
