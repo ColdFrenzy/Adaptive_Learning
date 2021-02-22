@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Feb 17 22:23:55 2021
-
-@author: Francesco
-"""
-
 class Config:
     
     use_lstm = False
@@ -21,6 +14,8 @@ class Config:
     PLAYER2 = 1
     EMPTY = -1
     GAMMA = 0.9
+    PLAYER_DICT = {"player1": PLAYER1,
+                   "player2": PLAYER2}
     
     # =============================================================================
     # ROLLOUT WORKERS

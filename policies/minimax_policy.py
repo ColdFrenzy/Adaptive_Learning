@@ -15,6 +15,7 @@ class MiniMaxPolicy(Policy):
         episodes=None,
         **kwargs
     ):
+        actual_player = Config.PLAYER_DICT[list(episodes[0]._agent_to_last_obs.keys())[0]]
         
         action_space_len = self.action_space.n
         # first n elements of a single observation is the action mask
@@ -24,7 +25,7 @@ class MiniMaxPolicy(Policy):
             # first n elements are the action mask.
             board = obs[action_space_len:]
             board = board.reshape((width,height))
-            act,score = self.minimax(board, Config.PLAYER2, True)
+            act,score = self.minimax(board, actual_player, True)
             actions.append(act)
             
         return actions, [], {}
@@ -40,7 +41,7 @@ class MiniMaxPolicy(Policy):
     def set_weights(self, weights):
         pass
     
-    def minimax(self,board,current_player, maximize, depth = Config.SEARCH_DEPTH,x=None,y=None):
+    def minimax(self,board,current_player, maximize, depth = Config.SEARCH_DEPTH):
         """
         Minimax algorithm
         board: array
@@ -60,27 +61,18 @@ class MiniMaxPolicy(Policy):
             next_action and score 
         """
         opponent_player = 1 - current_player
+
         valid_actions = self.available_actions(board)
-        if x == None and y == None:
-            # game just started
-            winning_move = False
-        else:
-            winning_move = self.is_winning(board,x,y)
         terminal_move = len(valid_actions) == 0
-        # Check if the game is over.
-        # If we have a winning move and the maximize is true, it means that 
-        # in the previous move the player that we wanted to minimize just made
-        # a winning move. Hence we return a negative score, otherwise we return
-        # a positive ones
-        if winning_move and maximize:
-            return (None,-1000000)
-        elif winning_move and not maximize:
-            return (None,1000000)
-        elif terminal_move:
+
+        if terminal_move:
             return (None,0)
         elif depth == 0:
-            return (None,self.score_position(board,current_player))
-        
+            if maximize:
+                return (None,self.score_position(board,current_player))
+            else:
+                return (None,self.score_position(board, opponent_player))
+            
         if maximize:
             best_score = -math.inf
             # if there are more than one action with the same score
@@ -89,7 +81,12 @@ class MiniMaxPolicy(Policy):
                 y = self.get_open_row(board,act)
                 board_copy = copy.deepcopy(board)
                 self.drop_piece(board_copy,current_player,act,y)
-                _ ,new_score = self.minimax(board_copy,opponent_player,False,depth-1,act,y)
+                winning_move = self.is_winning(board_copy,act,y)
+                if not winning_move:
+                    _ ,new_score = self.minimax(board_copy,opponent_player,False,depth-1)
+                else:
+                    # reward is time-scaled
+                    new_score = 100000*depth
                 if new_score >= best_score:
                     if new_score == best_score:
                         best_actions.append(act)
@@ -108,14 +105,18 @@ class MiniMaxPolicy(Policy):
                 y = self.get_open_row(board,act)
                 board_copy = copy.deepcopy(board)
                 self.drop_piece(board_copy,current_player,act,y)
-                _ ,new_score = self.minimax(board_copy,opponent_player,True,depth-1,act,y)
-            if new_score <= best_score:
-                if new_score == best_score:
-                    best_actions.append(act)
-                    best_score = new_score
-                elif new_score < best_score:
-                    best_actions = [act]
-                    best_score = new_score
+                winning_move = self.is_winning(board_copy,act,y)
+                if not winning_move:
+                    _ ,new_score = self.minimax(board_copy,opponent_player,True,depth-1)
+                else:
+                    new_score = -100000*depth
+                if new_score <= best_score:
+                    if new_score == best_score:
+                        best_actions.append(act)
+                        best_score = new_score
+                    elif new_score < best_score:
+                        best_actions = [act]
+                        best_score = new_score
             best_action = random.choice(best_actions)
                 
             return best_action, best_score
@@ -344,9 +345,3 @@ class MiniMaxPolicy(Policy):
         
 
 
-    
-if __name__ == "__main__":
-    # test if the score works
-    import numpy as np
-    board = np.array([[0,0,0,-1,-1,-1],[1,0,0,1,-1,-1],[1,0,0,1,-1,-1],[1,1,1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[0,1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1]])
-    MiniMaxPolicy.score_position(board, 1)
