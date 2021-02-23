@@ -2,7 +2,7 @@ import numpy as np
 from colorama import Fore
 from gym.spaces import Box, Dict, Discrete
 from ray.rllib.env.multi_agent_env import MultiAgentEnv
-
+from config.custom_config import Config
 
 class Connect4Env(MultiAgentEnv):
     """
@@ -28,21 +28,22 @@ class Connect4Env(MultiAgentEnv):
             0 to width-1
     """
 
-    def __init__(self, env_context, width=7, height=6, connect=4):
+    def __init__(self, env_context, width=Config.WIDTH, height=Config.HEIGHT, n_actions=Config.N_ACTIONS,connect=Config.CONNECT):
 
         self.width = width
         self.height = height
+        self.n_actions = n_actions
         self.connect = connect
         self.player1 = "player1"
         self.player2 = "player2"
         # observation_space needs to include action masking
         self.observation_space = Dict(
             {
-                "state": Box(low=-1, high=1, shape=(7, 6), dtype=np.float32),
-                "action_mask": Box(low=0.0, high=1.0, shape=(7,), dtype=np.float32),
+                "state": Box(low=-1, high=1, shape=(width, height), dtype=np.float32),
+                "action_mask": Box(low=0.0, high=1.0, shape=(n_actions,), dtype=np.float32),
             }
         )
-        self.action_space = Discrete(7)
+        self.action_space = Discrete(n_actions)
 
         self.score = {self.player1: 0, self.player2: 0}
         self.num_draws = 0
@@ -53,9 +54,9 @@ class Connect4Env(MultiAgentEnv):
         """
         Initialises the Connect 4 gameboard and return observations
         """
-        self.board = np.full((7, 6), -1, dtype=np.float32)
+        self.board = np.full((self.width, self.height), -1, dtype=np.float32)
         # board seen from player 2 point of view
-        self.board_p2 = np.full((7, 6), -1, dtype=np.float32)
+        self.board_p2 = np.full((self.width, self.height), -1, dtype=np.float32)
 
         self.current_player = 0  # Player 1 (represented by value 0) will move now
         self.num_moves = 0

@@ -3,6 +3,7 @@
 ray/
 /build_ray_from_source.txt
 /match.log
+policies/minimax_test.py
 
 # exclude everything
 checkpoints/*

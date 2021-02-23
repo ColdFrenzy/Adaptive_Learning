@@ -1,5 +1,4 @@
 # import gym
-
 import argparse
 import os
 
@@ -19,7 +18,9 @@ from ray.tune.logger import UnifiedLogger
 from env.LogWrapper import LogsWrapper
 from models import Connect4ActionMaskModel
 from policies.random_policy import RandomPolicy
+from policies.minimax_policy import MiniMaxPolicy
 from callbacks.custom_callbacks import Connect4Callbacks
+from config.custom_config import Config
 
 # =============================================================================
 # PARSER
@@ -86,11 +87,11 @@ if __name__ == "__main__":
     _ = Connect4ActionMaskModel
 
     multiagent_connect4 = LogsWrapper(None)
-
-    use_lstm = False
-    as_test = True
-    p1_trainer_name = "PG"
-    p2_trainer_name = "PG"
+    
+    use_lstm = Config.use_lstm
+    as_test = Config.as_test
+    p1_trainer_name = "Minimax"
+    p2_trainer_name = "Random"
     obs_space = multiagent_connect4.observation_space
     print("The observation space is: ")
     print(obs_space)
@@ -104,15 +105,15 @@ if __name__ == "__main__":
         # Use GPUs iff `RLLIB_NUM_GPUS` env var set to > 0.
         "num_gpus": int(os.environ.get("RLLIB_NUM_GPUS", "0")),
         # parallel workers
-        "num_workers": 0,
+        "num_workers": Config.NUM_WORKERS,
         # number of vectorwise environment per worker (for batching)
-        "num_envs_per_worker": 1,
-        "rollout_fragment_length": 10,
-        "train_batch_size": 200,
+        "num_envs_per_worker": Config.NUM_ENVS_PER_WORKER,
+        "rollout_fragment_length": Config.ROLLOUT_FRAGMENT_LENGTH,
+        "train_batch_size": Config.TRAIN_BATCH_SIZE,
         # === Environment Settings ===
         "env": LogsWrapper,
         # discounter factor of the MDP
-        "gamma": 0.9,
+        "gamma": Config.GAMMA,
         # === Settings for Multi-Agent Environments ===
         "multiagent": {
             "policies_to_train": ["player1", "player2"],  # ,"player2"],
@@ -123,7 +124,7 @@ if __name__ == "__main__":
             "policies": {
                 # the last argument accept a policy config dict
                 "player1": (
-                    PGTFPolicy,
+                    MiniMaxPolicy,
                     obs_space,
                     act_space,
                     {
@@ -134,7 +135,7 @@ if __name__ == "__main__":
                     },
                 ),
                 "player2": (
-                    PGTFPolicy,
+                    RandomPolicy,
                     obs_space,
                     act_space,
                     {
@@ -181,10 +182,10 @@ if __name__ == "__main__":
     )
     print("trainer configured")
     env = trainer_obj.workers.local_worker().env
-    print("local_worker environment acquired: " + str(env))
-    epochs = 100
-    reward_diff = 100
-    weight_update_steps = 5
+    print("local_worker environment acquired: \n" + str(env))
+    epochs = Config.EPOCHS
+    reward_diff = Config.REWARD_DIFFERENCE
+    weight_update_steps = Config.WEIGHT_UPDATE_STEP
     reward_diff_reached = False
 
     for epoch in range(epochs):
