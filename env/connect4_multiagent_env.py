@@ -4,6 +4,7 @@ from gym.spaces import Box, Dict, Discrete
 from ray.rllib.env.multi_agent_env import MultiAgentEnv
 from config.custom_config import Config
 
+
 class Connect4Env(MultiAgentEnv):
     """
     GameState for the Connect 4 game.
@@ -28,19 +29,28 @@ class Connect4Env(MultiAgentEnv):
             0 to width-1
     """
 
-    def __init__(self, env_context, width=Config.WIDTH, height=Config.HEIGHT, n_actions=Config.N_ACTIONS,connect=Config.CONNECT):
+    def __init__(
+        self,
+        env_context,
+        width=Config.WIDTH,
+        height=Config.HEIGHT,
+        n_actions=Config.N_ACTIONS,
+        connect=Config.CONNECT,
+    ):
 
         self.width = width
         self.height = height
         self.n_actions = n_actions
         self.connect = connect
-        self.player1 = "player1"
-        self.player2 = "player2"
+        self.player1 = Config.PLAYER1
+        self.player2 = Config.PLAYER2
         # observation_space needs to include action masking
         self.observation_space = Dict(
             {
                 "state": Box(low=-1, high=1, shape=(width, height), dtype=np.float32),
-                "action_mask": Box(low=0.0, high=1.0, shape=(n_actions,), dtype=np.float32),
+                "action_mask": Box(
+                    low=0.0, high=1.0, shape=(n_actions,), dtype=np.float32
+                ),
             }
         )
         self.action_space = Discrete(n_actions)

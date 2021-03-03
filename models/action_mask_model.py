@@ -1,4 +1,5 @@
 # from ray.rllib.models import ModelCatalog
+import custom_models
 from functools import reduce
 
 from ray.rllib.models.tf import TFModelV2
@@ -7,6 +8,7 @@ from ray.rllib.models.tf import TFModelV2
 # from ray.rllib.models.tf.visionnet import VisionNetwork
 from ray.rllib.utils.framework import try_import_tf
 from config.custom_config import Config
+
 tf1, tf, tfv = try_import_tf()
 
 
@@ -39,23 +41,11 @@ class Connect4ActionMaskModel(TFModelV2):
         print(obs_space)
         original_obs = obs_space.original_space.spaces["state"]
         print("The restored obs_space is: " + str(original_obs))
-        in_shape = original_obs.shape[0]*original_obs.shape[1]
-        
+        in_shape = original_obs.shape[0] * original_obs.shape[1]
+
         # The observation space has already been flattered
         # self.inputs = tf.keras.layers.Input(shape=obs_space.shape[0]*obs_space.shape[1], name="observations")
-        inputs = tf.keras.layers.Input(shape=(in_shape,), name="observations")
-        hidden_layer = tf.keras.layers.Dense(256, name="layer1", activation=tf.nn.relu)(
-            inputs
-        )  # tf.nn.relu
-        out_layer = tf.keras.layers.Dense(num_outputs, name="out", activation=None)(
-            hidden_layer
-        )
-        value_layer = tf.keras.layers.Dense(1, name="value", activation=None)(
-            hidden_layer
-        )
-        self.base_model = tf.keras.Model(
-            inputs, [out_layer, value_layer], name="action_mask"
-        )
+        self.base_mode = custom_models.dense_model(in_shape, num_outputs, "action_mask")
 
         if show_model == True:
             self.base_model.summary()

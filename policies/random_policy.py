@@ -39,4 +39,3 @@ class RandomPolicy(Policy):
 
     def set_weights(self, weights):
         pass
-

@@ -25,9 +25,12 @@ from config.custom_config import Config
 # =============================================================================
 # PARSER
 # =============================================================================
-# parser = argparse.ArgumentParser()
-# parser.add_argument("--player1-policy", type=str)
-# parser.add_argument("--as-test", action="store_true")
+# parser = argparse.ArgumentParser(description="Execute the training of 2 bots and save the results\
+#                                  in a tensorboard format for easy visualization.")
+# parser.add_argument("-p1","--player1-policy", type=str,choices=Config.AVAILABLE_POLICIES,\
+#                     help="Policy for player 1",required=True)
+# parser.add_argument("-p2","--player2-policy", type=str,choices=Config.AVAILABLE_POLICIES,\
+#                     help="Policy for player 2",required=True)
 # parser.add_argument("--stop-iters", type=int, default=150)
 # parser.add_argument("--stop-reward", type=float, default=1000.0)
 # parser.add_argument("--stop-timesteps", type=int, default=100000)
@@ -87,7 +90,7 @@ if __name__ == "__main__":
     _ = Connect4ActionMaskModel
 
     multiagent_connect4 = LogsWrapper(None)
-    
+
     use_lstm = Config.use_lstm
     as_test = Config.as_test
     p1_trainer_name = "Minimax"
