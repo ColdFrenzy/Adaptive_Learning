@@ -1,5 +1,5 @@
 # from ray.rllib.models import ModelCatalog
-import custom_models
+from models import custom_models
 from functools import reduce
 
 from ray.rllib.models.tf import TFModelV2

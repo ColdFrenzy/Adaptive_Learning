@@ -14,6 +14,7 @@ class Config:
     PLAYER2 = "player2"
     PLAYER1_ID = 0
     PLAYER2_ID = 1
+    DRAW_ID = -1
     EMPTY = -1
     GAMMA = 0.9
     PLAYER_DICT = {"player1": PLAYER1_ID, "player2": PLAYER2_ID}

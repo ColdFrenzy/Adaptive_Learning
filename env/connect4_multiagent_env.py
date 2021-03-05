@@ -44,6 +44,8 @@ class Connect4Env(MultiAgentEnv):
         self.connect = connect
         self.player1 = Config.PLAYER1
         self.player2 = Config.PLAYER2
+        self.player1_ID = Config.PLAYER1_ID
+        self.player2_ID = Config.PLAYER2_ID
         # observation_space needs to include action masking
         self.observation_space = Dict(
             {
@@ -60,21 +62,28 @@ class Connect4Env(MultiAgentEnv):
         self.num_moves = 0
         self.reset()
 
-    def reset(self):
+    def reset(self, starting_player=Config.PLAYER1_ID):
         """
         Initialises the Connect 4 gameboard and return observations
         """
+        assert starting_player in [
+            self.player1_ID,
+            self.player2_ID,
+        ], "starting player value is not valid"
         self.board = np.full((self.width, self.height), -1, dtype=np.float32)
         # board seen from player 2 point of view
         self.board_p2 = np.full((self.width, self.height), -1, dtype=np.float32)
 
-        self.current_player = 0  # Player 1 (represented by value 0) will move now
+        self.current_player = starting_player
         self.num_moves = 0
         self.winner = None
-        return {self.player1: self.get_player_observations(self.player1)}
+        if self.current_player == self.player1_ID:
+            return {self.player1: self.get_player_observations(self.player1)}
+        else:
+            return {self.player2: self.get_player_observations(self.player2)}
 
     def get_player_observations(self, player):
-        if player == 0:
+        if player == self.player1_ID:
             obs = {"state": self.board, "action_mask": self.get_moves()}
         else:
             obs = {"state": self.board_p2, "action_mask": self.get_moves()}
@@ -101,7 +110,7 @@ class Connect4Env(MultiAgentEnv):
         :param movecol: column over which a chip will be dropped
         """
         # self.reset_score()
-        if self.current_player == 0:
+        if self.current_player == self.player1_ID:
             act = action_dict[self.player1]
         else:
             act = action_dict[self.player2]
@@ -134,11 +143,11 @@ class Connect4Env(MultiAgentEnv):
             reward = {self.player1: reward_vector[0], self.player2: reward_vector[1]}
             info = {self.player1: single_info, self.player2: single_info}
 
-        elif self.current_player == 0:
+        elif self.current_player == self.player1_ID:
             obs = {self.player2: p2_obs}
             reward = {self.player2: reward_vector[0]}
             info = {self.player2: single_info}
-        elif self.current_player == 1:
+        elif self.current_player == self.player2_ID:
             obs = {self.player1: p1_obs}
             reward = {self.player1: reward_vector[1]}
             info = {self.player1: single_info}
@@ -151,10 +160,10 @@ class Connect4Env(MultiAgentEnv):
         winner, reward_vector = self.winner, [0, 0]
         if self.does_move_win(movecol, row):
             winner = self.current_player
-            if winner == 0:
+            if winner == self.player1_ID:
                 reward_vector = [1, -1]
                 self.score[self.player1] += 1
-            elif winner == 1:
+            elif winner == self.player2_ID:
                 reward_vector = [-1, 1]
                 self.score[self.player2] += 1
         elif self.get_moves(mask=False) == []:  # A draw has happened
@@ -239,6 +248,7 @@ class Connect4Env(MultiAgentEnv):
         Return current game status as class representation
         """
         s = ""
+        s += "\n"
         for x in range(self.height - 1, -1, -1):
             for y in range(self.width):
                 s += {-1: ".", 0: "X", 1: "O",}[self.board[y][x]]
