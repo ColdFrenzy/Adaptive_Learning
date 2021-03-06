@@ -25,9 +25,6 @@ def minimax_vs_random_elo(
     depth,
     number_of_games,
     logger,
-    player1=Config.PLAYER1_ID,
-    player2=Config.PLAYER2_ID,
-    draw=Config.DRAW_ID,
 ):
     """
     Use the inverse of the elo formula to compute the outcome of a match,
@@ -49,26 +46,48 @@ def minimax_vs_random_elo(
         elo difference
     """
     game = Connect4Env(None)
-    for i in range(number_of_games):
-        game.reset()
+    if logger:
+        logger.info(
+            "**********MINIMAX_depth_"
+            + str(depth)
+            + "_(X) VS (O)_RANDOM"
+            + "**********"
+        )
+    for i in tqdm(range(number_of_games)):
         game_over = False
         actions = {}
-        # who is the first one to move?
         starting_player = random.choice([player1_ID, player2_ID])
         game.reset(starting_player=starting_player)
-        print("Player " + str(starting_player + 1) + " is starting")
+        print("\nPlayer " + str(starting_player + 1) + " is starting")
         while not game_over:
-            board = game.board
             actual_player = game.current_player
+            board = game.board
             if actual_player == player1_ID:
-                act, _ = minimax(board, player1_ID, True, depth)
+                act, action_values = minimax(board, player1_ID, True, depth=depth,return_distr=True)
                 actions[player1] = act
                 _, _, done, _ = game.step(actions)
             else:
-                actions[player2] = random.choice(game.get_moves(False))
+                act = random.choice(game.get_moves(False))
+                actions[player2] = act
                 _, _, done, _ = game.step(actions)
+            if logger:
+                logger.info("Game number " + str(i) + "/" + str(number_of_games))
+                if actual_player == player1_ID:
+                    logger.info("action distribution: " + str(action_values))
+                logger.info(
+                    "Player " + str(actual_player + 1) + " actions: " + str(act)
+                )
+                logger.info("\n" + repr(board))
+                logger.info(board_print(board))
 
             if done["__all__"]:
+                logger.info("PLAYER " + str(game.winner + 1) + " WON...")
+                logger.info(
+                    "CURRENT SCORE: "
+                    + str(game.score[player1])
+                    + " VS "
+                    + str(game.score[player2])
+                )
                 game_over = True
 
     if game.score[player1] > game.score[player2]:
@@ -81,15 +100,22 @@ def minimax_vs_random_elo(
         )
     elif game.score[player1] == game.score[player2]:
         return 0
-    # print("Difference in score between minimax of depth 1 and random action is " + str(score))
-    # print("player 1 score: " + str(game.score[player1]))
-    # print("player 2 score: " + str(game.score[player2]))
+
     if score >= 10 / 11:
         elo_diff = 400
     else:
         elo_diff = -400 * math.log((1 / score - 1), 10)
-    # print("elo difference computed over " + str(number_of_games) + \
-    #       " between the 2 algortithms is " + str(elo_diff))
+
+    print("\nplayer 1 score: " + str(game.score[player1]))
+    print("player 2 score: " + str(game.score[player2]))
+    print("number of draw: " + str(game.num_draws))
+    print(
+        "elo difference computed over "
+        + str(number_of_games)
+        + " between the 2 algortithms is "
+        + str(elo_diff)
+    )
+
     return elo_diff
 
 
@@ -239,11 +265,13 @@ if __name__ == "__main__":
     # over 101 games and so on. In order to stop this from growing toward infinity,
     # we cap the maximum difference in elo between 2 player as 400 and we compute
     # it over 1000k games.
-    logger = init_logger("../log/elo.log")
+    minimax_logger = init_logger("../log/minimax_vs_minimax.log")
+    random_logger = init_logger("../log/minimax_vs_random.log")
     number_of_games = 50
     depth = 1
     player1 = Config.PLAYER1
     player2 = Config.PLAYER2
     player1_ID = Config.PLAYER1_ID
     player2_ID = Config.PLAYER2_ID
-    minimax_vs_minimax_elo(3, 2, number_of_games, logger)
+    # elo = minimax_vs_random_elo(2, number_of_games, random_logger)
+    elo = minimax_vs_minimax_elo(4, 2, number_of_games, minimax_logger)

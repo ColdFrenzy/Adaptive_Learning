@@ -86,14 +86,15 @@ def minimax(
             return (None, score_position(board, opponent_player))
         else:
             return (None, -score_position(board, opponent_player))
-
+        
+    random.shuffle(valid_actions)
     if maximize:
         value = -math.inf
         best_val = -math.inf
         # if there are more than one action with the same score
-        best_actions = []
+        # best_actions = []
         if return_distr:
-            act_distr = []
+            act_distr = {}
         for act in valid_actions:
             y = get_open_row(board, act)
             # board_copy = copy.deepcopy(board)
@@ -104,20 +105,22 @@ def minimax(
             else:
                 # reward is time-scaled (for example a victory now is better 
                 # than a victory in 3 turns from now)
-                value = 100000 * depth
+                value = 1000 * depth
+  
+            
             if return_distr:
-                act_distr.append(value)
+                act_distr[str(act)] = value
             undo_last_move(board, act, y)
-            if value >= best_val:
-                if value > best_val:
-                    best_val = value
-                    best_actions = [act]
-                else:
-                    best_actions.append(act)
+            # if value >= best_val:
+            if value > best_val:
+                best_val = value
+                best_action = act
+                # else:
+                #     best_actions.append(act)
             alpha = max(alpha, value)
             if alpha >= beta:
-                break
-        best_action = random.choice(best_actions)
+                break  
+        # best_action = random.choice(best_actions)
         if return_distr:
             return best_action, act_distr
 
@@ -127,9 +130,9 @@ def minimax(
     else:
         value = math.inf
         best_val = math.inf
-        best_actions = []
+        # best_actions = []
         if return_distr:
-            act_distr = []
+            act_distr = {}
         for act in valid_actions:
             y = get_open_row(board, act)
             # board_copy = copy.deepcopy(board)
@@ -138,20 +141,22 @@ def minimax(
             if not winning_move:
                 value = minimax(board, opponent_player, True, alpha, beta, depth - 1,False)[1]
             else:
-                value = -100000 * depth
+                value = -1000 * depth
+                
+                
             if return_distr:
-                act_distr.append(value)
-            beta = min(beta, value)
+                act_distr[str(act)] = value
             undo_last_move(board, act, y)
-            if value <= best_val:
-                if value < best_val:
-                    best_val = value
-                    best_actions = [act]
-                else:
-                    best_actions.append(act)
+            # if value <= best_val:
+            if value < best_val:
+                best_val = value
+                best_action = act
+                # else:
+                #     best_actions.append(act)
+            beta = min(beta, value)
             if beta <= alpha:
                 break
-        best_action = random.choice(best_actions)
+        # best_action = random.choice(best_actions)
 
         if return_distr:
             return best_action, act_distr
@@ -175,12 +180,12 @@ def score_position(
     opponent_player = 1 - player
     open_line_score = 5  # low score since it is easy to block with one move
     opponent_open_line_score = 100  # the score is high because if we leave an open line
-    # opened the opponent will connect in the next move. This usually
+    # the opponent will connect in the next move. This usually
     # is already predicted by increasing the depth of minimax
-    fork_2_score = 10
-    fork_3_score = 20
-    opponent_fork_2_score = 50
-    opponent_fork_3_score = 100
+    fork_2_score = 10 # better than open line, but still easy to block 
+    fork_3_score = 50 # we can win in 2 turns 
+    opponent_fork_2_score = 50  # opponent can win in 2 moves 
+    opponent_fork_3_score = 100 # opponent win in the next move
     fork_2, fork_3 = check_forks(board, player)
     open_lines = check_open_line(board, player)
     opponent_fork_2, opponent_fork_3 = check_forks(board, opponent_player)
@@ -193,7 +198,12 @@ def score_position(
         - opponent_fork_3 * opponent_fork_3_score
         - opponent_open_lines * opponent_open_line_score
     )
-
+    # Heuristic function bounded to [-999,999] since a victory and a loss are
+    # respectively >= 1000 and <= -1000
+    if score >= 1000:
+        score = 999
+    elif score <= -1000:
+        score = -999
     return score
 
 
