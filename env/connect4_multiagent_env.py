@@ -46,6 +46,7 @@ class Connect4Env(MultiAgentEnv):
         self.player2 = Config.PLAYER2
         self.player1_ID = Config.PLAYER1_ID
         self.player2_ID = Config.PLAYER2_ID
+        self.viewer = None
         # observation_space needs to include action masking
         self.observation_space = Dict(
             {
@@ -256,7 +257,7 @@ class Connect4Env(MultiAgentEnv):
             s += "\n"
         return s
 
-    def render(self, mode="human", screen_width=600, screen_height=400):
+    def render(self, mode="classic", screen_width=600, screen_height=400):
 
         if mode == "classic":
 
