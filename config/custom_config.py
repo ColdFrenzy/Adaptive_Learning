@@ -23,6 +23,7 @@ class Config:
     # ROLLOUT WORKERS
     # =============================================================================
     NUM_WORKERS = 0
+    NUM_EVAL_WORKERS = 0
     NUM_ENVS_PER_WORKER = 1
     ROLLOUT_FRAGMENT_LENGTH = 10
     TRAIN_BATCH_SIZE = 200
@@ -30,12 +31,18 @@ class Config:
     # =============================================================================
     # TRAINING PARAMS
     # =============================================================================
-    EPOCHS = 100
+    EPOCHS = 10
     REWARD_DIFFERENCE = 100
     WEIGHT_UPDATE_STEP = 5
     AVAILABLE_POLICIES = ["RANDOM", "MINIMAX", "PG"]
-
+    EVALUATION_INTERVAL = 2
+    EVALUATION_NUMBER_OF_EPISODES = 10
+    CKPT_STEP = 10
+    
     # =============================================================================
     # MINIMAX PARAMS
     # =============================================================================
     SEARCH_DEPTH = 3
+    
+    
+    

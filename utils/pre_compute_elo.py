@@ -14,6 +14,11 @@ from config.custom_config import Config
 from policies.minimax_policy import minimax
 from env.connect4_multiagent_env import Connect4Env
 
+player1 = Config.PLAYER1
+player2 = Config.PLAYER2
+player1_ID = Config.PLAYER1_ID
+player2_ID = Config.PLAYER2_ID
+
 # =============================================================================
 # algorithms to rank:
 # random, minimax with deep 1,minimax with deep 2,minimax with deep 3,
@@ -203,7 +208,7 @@ def minimax_vs_minimax_elo(depth1, depth2, number_of_games, logger=None):
     return elo_diff
 
 
-def model_vs_minimax(model, checkpoint, elo, number_of_games):
+def model_vs_minimax(model,depth, number_of_games, checkpoint=None,logger=None ):
     """
     Use the inverse of the elo formula to compute the outcome of a match,
     given that we already know the result of a match.
@@ -219,8 +224,96 @@ def model_vs_minimax(model, checkpoint, elo, number_of_games):
     checkpoint:
         path to chekpoint of the model to use
     """
-    pass
+    
+    game = Connect4Env(None)
+    model_name = model.name
+    if logger:
+        logger.info(
+            "**********"
+            + str(model_name)
+            + "_(X) VS (O)_MINIMAX_depth_"
+            + str(depth)
+            + "**********"
+        )
+    for i in tqdm(range(number_of_games)):
+        game_over = False
+        actions = {}
+        starting_player = random.choice([player1_ID, player2_ID])
+        game.reset(starting_player=starting_player)
+        print("\nPlayer " + str(starting_player + 1) + " is starting")
+        while not game_over:
+            actual_player = game.current_player
+            board = game.board
+            if actual_player == player1_ID:
+                input_dict = {"obs" : {}}
+                reshaped_board = np.reshape(board,(1,board.shape[0]*board.shape[1]) )
+                action_mask = game.get_moves(True)
+                input_dict["obs"]["state"] =  reshaped_board
+                input_dict["obs"]["action_mask"] = action_mask
+                action_logits,_ = model.forward(input_dict, None,None)
+                # max_act = max(action_logits[0])
+                act = np.argmax(action_logits[0])
+                # act = [i for i, j in enumerate(action_logits[0]) if j == max_act]
+                # act = random.choice(act)
+                actions[player1] = act
+                _, _, done, _ = game.step(actions)
+            else:
+                act, _ = minimax(board, player2_ID, True, depth=depth)
+                actions[player2] = act
+                _, _, done, _ = game.step(actions)
+            if logger:
+                logger.info("Game number " + str(i) + "/" + str(number_of_games))
+                logger.info(
+                    "Player " + str(actual_player + 1) + " actions: " + str(act)
+                )
+                logger.info("\n" + repr(board))
+                logger.info(board_print(board))
 
+            if done["__all__"]:
+                logger.info("PLAYER " + str(game.winner + 1) + " WON...")
+                logger.info(
+                    "CURRENT SCORE: "
+                    + str(game.score[player1])
+                    + " VS "
+                    + str(game.score[player2])
+                )
+                game_over = True
+
+    score = game.score[player1] / number_of_games + game.num_draws / (
+            2 * number_of_games)
+
+    if score >= 10 / 11:
+        elo_diff = 400
+    elif score <= -10 / 11:
+        elo_diff = -400
+    else:
+        elo_diff = -400 * math.log((1 / score - 1), 10)
+
+    print("\nplayer 1 score: " + str(game.score[player1]))
+    print("player 2 score: " + str(game.score[player2]))
+    print("number of draw: " + str(game.num_draws))
+    print(
+        "elo difference computed over "
+        + str(number_of_games)
+        + " between the 2 algortithms is "
+        + str(elo_diff)
+    )
+
+    return elo_diff
+
+
+def compute_elo_difference(player1_score,draws,number_of_games):
+
+    score = player1_score / number_of_games + draws / (
+            2 * number_of_games)
+    if score >= 10 / 11:
+        elo_diff = 400
+    elif score == 0:
+        elo_diff = -400
+    else:
+        elo_diff = -400 * math.log((1 / score - 1), 10)
+    
+    return elo_diff 
 
 def board_print(board, height=Config.HEIGHT, width=Config.WIDTH):
     """
@@ -269,9 +362,6 @@ if __name__ == "__main__":
     random_logger = init_logger("../log/minimax_vs_random.log")
     number_of_games = 50
     depth = 1
-    player1 = Config.PLAYER1
-    player2 = Config.PLAYER2
-    player1_ID = Config.PLAYER1_ID
-    player2_ID = Config.PLAYER2_ID
+
     # elo = minimax_vs_random_elo(2, number_of_games, random_logger)
     elo = minimax_vs_minimax_elo(4, 2, number_of_games, minimax_logger)

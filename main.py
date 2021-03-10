@@ -1,10 +1,13 @@
 # import gym
 import argparse
 import os
-
+# NO GPU
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 # import shutil
 from datetime import datetime
 import tempfile
+import random
+import ray 
 from typing import Type
 
 from ray.rllib.agents.pg import PGTFPolicy  # PGTorchPolicy
@@ -21,6 +24,7 @@ from policies.random_policy import RandomPolicy
 from policies.minimax_policy import MiniMaxPolicy
 from callbacks.custom_callbacks import Connect4Callbacks
 from config.custom_config import Config
+from evaluation.custom_eval import Connect4Eval
 
 # =============================================================================
 # PARSER
@@ -64,9 +68,17 @@ def select_policy(agent_id):
 
     if agent_id == "player1":
         return "player1"
+    # to avoid overfitting over a single strategy, we keep 3 networks trained
+    # independently
     else:
         return "player2"
+        # return random.choice(["player2_1","player2_2","player2_3"])
 
+def select_evaluation_policy(agent_id):
+    if agent_id == "player1":
+        return "player1"
+    else:
+        return "minimax"
 
 def custom_log_creator(custom_path, p1_trainer_name, p2_trainer_name, env_id):
 
@@ -86,15 +98,14 @@ def custom_log_creator(custom_path, p1_trainer_name, p2_trainer_name, env_id):
 
 
 if __name__ == "__main__":
+    ray.init(ignore_reinit_error=True)
     # register model
     _ = Connect4ActionMaskModel
 
     multiagent_connect4 = LogsWrapper(None)
-
-    use_lstm = Config.use_lstm
     as_test = Config.as_test
-    p1_trainer_name = "Minimax"
-    p2_trainer_name = "Random"
+    p1_trainer_name = "Dense_Network1"
+    p2_trainer_name = "Dense_Network2"
     obs_space = multiagent_connect4.observation_space
     print("The observation space is: ")
     print(obs_space)
@@ -107,7 +118,10 @@ if __name__ == "__main__":
         # "log_level": "INFO",
         # Use GPUs iff `RLLIB_NUM_GPUS` env var set to > 0.
         "num_gpus": int(os.environ.get("RLLIB_NUM_GPUS", "0")),
-        # parallel workers
+        # evaluation workers 
+        "evaluation_num_workers": Config.NUM_EVAL_WORKERS,
+        # parallel workers, if 0 it will force rollouts to be done 
+        # in the trainer actor
         "num_workers": Config.NUM_WORKERS,
         # number of vectorwise environment per worker (for batching)
         "num_envs_per_worker": Config.NUM_ENVS_PER_WORKER,
@@ -119,7 +133,8 @@ if __name__ == "__main__":
         "gamma": Config.GAMMA,
         # === Settings for Multi-Agent Environments ===
         "multiagent": {
-            "policies_to_train": ["player1", "player2"],  # ,"player2"],
+            # None for all policies
+            "policies_to_train": ["player1","player2"],  # ,"player2"],
             # MultiAgentPolicyConfigDict = Dict[PolicyID, Tuple[Union[
             # type, None], gym.Space, gym.Space, PartialTrainerConfigDict]]
             # Map of type MultiAgentPolicyConfigDict from policy ids to tuples
@@ -127,7 +142,7 @@ if __name__ == "__main__":
             "policies": {
                 # the last argument accept a policy config dict
                 "player1": (
-                    MiniMaxPolicy,
+                    PGTFPolicy,
                     obs_space,
                     act_space,
                     {
@@ -138,7 +153,7 @@ if __name__ == "__main__":
                     },
                 ),
                 "player2": (
-                    RandomPolicy,
+                    PGTFPolicy,
                     obs_space,
                     act_space,
                     {
@@ -148,9 +163,110 @@ if __name__ == "__main__":
                         },
                     },
                 ),
+                "minimax": (
+                    MiniMaxPolicy,
+                    obs_space,
+                    act_space,
+                    {
+                        "model":{
+                            "custom_model": "connect4_mask",
+                            "custom_model_config": {},
+                        },
+                    },
+                ),
+                # "player2_2": (
+                #     PGTFPolicy,
+                #     obs_space,
+                #     act_space,
+                #     {
+                #         "model": {
+                #             "custom_model": "connect4_mask",
+                #             "custom_model_config": {},
+                #         },
+                #     },
+                # ),
+                # "player2_3": (
+                #     PGTFPolicy,
+                #     obs_space,
+                #     act_space,
+                #     {
+                #         "model": {
+                #             "custom_model": "connect4_mask",
+                #             "custom_model_config": {},
+                #         },
+                #     },
+                # ),
             },
             "policy_mapping_fn": select_policy,
         },
+        # === Evaluation Settings ===
+        # Evaluate with every `evaluation_interval` training iterations.
+        # The evaluation stats will be reported under the "evaluation" metric key.
+        # Note that evaluation is currently not parallelized, and that for Ape-X
+        # metrics are already only reported for the lowest epsilon workers.
+        "evaluation_interval": Config.EVALUATION_INTERVAL,
+        # Number of episodes to run per evaluation period. If using multiple
+        # evaluation workers, we will run at least this many episodes total.
+        "evaluation_num_episodes": Config.EVALUATION_NUMBER_OF_EPISODES,
+        # Internal flag that is set to True for evaluation workers.
+        "in_evaluation": False,
+        # Typical usage is to pass extra args to evaluation env creator
+        # and to disable exploration by computing deterministic actions.
+        # IMPORTANT NOTE: Policy gradient algorithms are able to find the optimal
+        # policy, even if this is a stochastic one. Setting "explore=False" here
+        # will result in the evaluation workers not using this optimal policy!
+        "evaluation_config": {
+            # Example: overriding env_config, exploration, etc:
+            # "env_config": {...},
+            # "explore": False
+            "multiagent": {
+                # None for all policies
+                "policies_to_train": ["player1","player2"],  # ,"player2"],
+                # MultiAgentPolicyConfigDict = Dict[PolicyID, Tuple[Union[
+                # type, None], gym.Space, gym.Space, PartialTrainerConfigDict]]
+                # Map of type MultiAgentPolicyConfigDict from policy ids to tuples
+                # of (policy_cls, obs_space, act_space, config)
+                "policies": {
+                    # the last argument accept a policy config dict
+                    "player1": (
+                        PGTFPolicy,
+                        obs_space,
+                        act_space,
+                        {
+                            "model": {
+                                "custom_model": "connect4_mask",
+                                "custom_model_config": {},
+                            },
+                        },
+                    ),
+                    "player2": (
+                        PGTFPolicy,
+                        obs_space,
+                        act_space,
+                        {
+                            "model": {
+                                "custom_model": "connect4_mask",
+                                "custom_model_config": {},
+                            },
+                        },
+                    ),
+                    "minimax": (
+                        MiniMaxPolicy,
+                        obs_space,
+                        act_space,
+                        {
+                            "model":{
+                                "custom_model": "connect4_mask",
+                                "custom_model_config": {},
+                            },
+                        },
+                    ),
+
+                },
+                "policy_mapping_fn": select_evaluation_policy,
+        },
+        },
+        "custom_eval_function": Connect4Eval,
         "callbacks": Connect4Callbacks,
         "framework": "tf2",
         # allow tracing in eager mode
@@ -189,12 +305,14 @@ if __name__ == "__main__":
     epochs = Config.EPOCHS
     reward_diff = Config.REWARD_DIFFERENCE
     weight_update_steps = Config.WEIGHT_UPDATE_STEP
+    ckpt_step = Config.CKPT_STEP
     reward_diff_reached = False
 
     for epoch in range(epochs):
         print("Epoch " + str(epoch))
         results = trainer_obj.train()
-        trainer_obj.save(ckpt_dir)
+        if epoch % ckpt_step:
+            trainer_obj.save(ckpt_dir)
         # =============================================================================
         # UPDATE WEIGHTS FOR SELF-PLAY
         # =============================================================================
@@ -223,3 +341,5 @@ if __name__ == "__main__":
         #     format(reward_diff, env.score[env.player1] - env.score[env.player2]))
     else:
         print(f"Desired reward difference {reward_diff} reached")
+
+    ray.shutdown()
