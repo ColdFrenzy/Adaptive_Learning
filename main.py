@@ -1,30 +1,23 @@
 # import gym
 import argparse
+import sys
 import os
+
 # NO GPU
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-# import shutil
-from datetime import datetime
-import tempfile
-import random
-import ray 
-from typing import Type
+sys.path.insert(1, os.path.abspath(os.path.curdir))
+import shutil
 
-from ray.rllib.agents.pg import PGTFPolicy  # PGTorchPolicy
-from ray.rllib.agents.trainer import with_common_config, Trainer
+import ray
+from tqdm import tqdm
+
+from ray.rllib.agents.trainer import with_common_config
 from ray.rllib.agents.trainer_template import build_trainer
-from ray.tune.logger import UnifiedLogger
-
-# =============================================================================
-#  IMPORT CUSTOM MODEL, ENV, POLICIES AND CALLBACKS
-# =============================================================================
-from env.LogWrapper import LogsWrapper
 from models import Connect4ActionMaskModel
-from policies.random_policy import RandomPolicy
-from policies.minimax_policy import MiniMaxPolicy
-from callbacks.custom_callbacks import Connect4Callbacks
+from utils.utils import custom_log_creator, self_play
 from config.custom_config import Config
-from evaluation.custom_eval import Connect4Eval
+from config.trainer_config import TrainerConfig
+
 
 # =============================================================================
 # PARSER
@@ -38,308 +31,68 @@ from evaluation.custom_eval import Connect4Eval
 # parser.add_argument("--stop-iters", type=int, default=150)
 # parser.add_argument("--stop-reward", type=float, default=1000.0)
 # parser.add_argument("--stop-timesteps", type=int, default=100000)
-CURDIR = os.path.abspath(os.path.curdir)
-
-
-def self_play(trainer: Type[Trainer]):
-    # check if the two policies have the same model (by comparing the models name)
-    if (
-        not trainer.get_policy("player1").model.base_model.name
-        == trainer.get_policy("player2").model.base_model.name
-    ):
-        return
-
-    # get weights
-    p1_weights = trainer.get_policy("player1").model.base_model.get_weights()
-
-    # set weights
-    trainer.get_policy("player2").model.base_model.set_weights(p1_weights)
-
-    print("Weight succesfully updated")
-    # To check
-    for w1, w2 in zip(
-        trainer.get_policy("player1").model.base_model.get_weights(),
-        trainer.get_policy("player2").model.base_model.get_weights(),
-    ):
-        assert (w1 == w2).all()
-
-
-def select_policy(agent_id):
-
-    if agent_id == "player1":
-        return "player1"
-    # to avoid overfitting over a single strategy, we keep 3 networks trained
-    # independently
-    else:
-        return "player2"
-        # return random.choice(["player2_1","player2_2","player2_3"])
-
-def select_evaluation_policy(agent_id):
-    if agent_id == "player1":
-        return "player1"
-    else:
-        return "minimax"
-
-def custom_log_creator(custom_path, p1_trainer_name, p2_trainer_name, env_id):
-
-    timestr = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
-    logdir_prefix = "{}_vs_{}_{}_{}".format(
-        p1_trainer_name, p2_trainer_name, env_id, timestr
-    )
-
-    def logger_creator(config):
-
-        if not os.path.exists(custom_path):
-            os.makedirs(custom_path)
-        logdir = tempfile.mkdtemp(prefix=logdir_prefix, dir=custom_path)
-        return UnifiedLogger(config, logdir, loggers=None)
-
-    return logger_creator
 
 
 if __name__ == "__main__":
     ray.init(ignore_reinit_error=True)
     # register model
     _ = Connect4ActionMaskModel
+    epochs = Config.EPOCHS
+    reward_diff = Config.REWARD_DIFFERENCE
+    ckpt_step = Config.CKPT_STEP
+    reward_diff_reached = False
+    ray_results_dir = Config.RAY_RESULTS_DIR
+    ckpt_dir = Config.CKPT_DIR
 
-    multiagent_connect4 = LogsWrapper(None)
     as_test = Config.as_test
     p1_trainer_name = "Dense_Network1"
     p2_trainer_name = "Dense_Network2"
-    obs_space = multiagent_connect4.observation_space
+    obs_space = TrainerConfig.OBS_SPACE
     print("The observation space is: ")
     print(obs_space)
     print("The action space is: ")
-    act_space = multiagent_connect4.action_space
+    act_space = TrainerConfig.ACT_SPACE
     print(act_space)
 
-    config = {
-        # === Settings for Rollout Worker processes ===
-        # "log_level": "INFO",
-        # Use GPUs iff `RLLIB_NUM_GPUS` env var set to > 0.
-        "num_gpus": int(os.environ.get("RLLIB_NUM_GPUS", "0")),
-        # evaluation workers 
-        "evaluation_num_workers": Config.NUM_EVAL_WORKERS,
-        # parallel workers, if 0 it will force rollouts to be done 
-        # in the trainer actor
-        "num_workers": Config.NUM_WORKERS,
-        # number of vectorwise environment per worker (for batching)
-        "num_envs_per_worker": Config.NUM_ENVS_PER_WORKER,
-        "rollout_fragment_length": Config.ROLLOUT_FRAGMENT_LENGTH,
-        "train_batch_size": Config.TRAIN_BATCH_SIZE,
-        # === Environment Settings ===
-        "env": LogsWrapper,
-        # discounter factor of the MDP
-        "gamma": Config.GAMMA,
-        # === Settings for Multi-Agent Environments ===
-        "multiagent": {
-            # None for all policies
-            "policies_to_train": ["player1","player2"],  # ,"player2"],
-            # MultiAgentPolicyConfigDict = Dict[PolicyID, Tuple[Union[
-            # type, None], gym.Space, gym.Space, PartialTrainerConfigDict]]
-            # Map of type MultiAgentPolicyConfigDict from policy ids to tuples
-            # of (policy_cls, obs_space, act_space, config)
-            "policies": {
-                # the last argument accept a policy config dict
-                "player1": (
-                    PGTFPolicy,
-                    obs_space,
-                    act_space,
-                    {
-                        "model": {
-                            "custom_model": "connect4_mask",
-                            "custom_model_config": {},
-                        },
-                    },
-                ),
-                "player2": (
-                    PGTFPolicy,
-                    obs_space,
-                    act_space,
-                    {
-                        "model": {
-                            "custom_model": "connect4_mask",
-                            "custom_model_config": {},
-                        },
-                    },
-                ),
-                "minimax": (
-                    MiniMaxPolicy,
-                    obs_space,
-                    act_space,
-                    {
-                        "model":{
-                            "custom_model": "connect4_mask",
-                            "custom_model_config": {},
-                        },
-                    },
-                ),
-                # "player2_2": (
-                #     PGTFPolicy,
-                #     obs_space,
-                #     act_space,
-                #     {
-                #         "model": {
-                #             "custom_model": "connect4_mask",
-                #             "custom_model_config": {},
-                #         },
-                #     },
-                # ),
-                # "player2_3": (
-                #     PGTFPolicy,
-                #     obs_space,
-                #     act_space,
-                #     {
-                #         "model": {
-                #             "custom_model": "connect4_mask",
-                #             "custom_model_config": {},
-                #         },
-                #     },
-                # ),
-            },
-            "policy_mapping_fn": select_policy,
-        },
-        # === Evaluation Settings ===
-        # Evaluate with every `evaluation_interval` training iterations.
-        # The evaluation stats will be reported under the "evaluation" metric key.
-        # Note that evaluation is currently not parallelized, and that for Ape-X
-        # metrics are already only reported for the lowest epsilon workers.
-        "evaluation_interval": Config.EVALUATION_INTERVAL,
-        # Number of episodes to run per evaluation period. If using multiple
-        # evaluation workers, we will run at least this many episodes total.
-        "evaluation_num_episodes": Config.EVALUATION_NUMBER_OF_EPISODES,
-        # Internal flag that is set to True for evaluation workers.
-        "in_evaluation": False,
-        # Typical usage is to pass extra args to evaluation env creator
-        # and to disable exploration by computing deterministic actions.
-        # IMPORTANT NOTE: Policy gradient algorithms are able to find the optimal
-        # policy, even if this is a stochastic one. Setting "explore=False" here
-        # will result in the evaluation workers not using this optimal policy!
-        "evaluation_config": {
-            # Example: overriding env_config, exploration, etc:
-            # "env_config": {...},
-            # "explore": False
-            "multiagent": {
-                # None for all policies
-                "policies_to_train": ["player1","player2"],  # ,"player2"],
-                # MultiAgentPolicyConfigDict = Dict[PolicyID, Tuple[Union[
-                # type, None], gym.Space, gym.Space, PartialTrainerConfigDict]]
-                # Map of type MultiAgentPolicyConfigDict from policy ids to tuples
-                # of (policy_cls, obs_space, act_space, config)
-                "policies": {
-                    # the last argument accept a policy config dict
-                    "player1": (
-                        PGTFPolicy,
-                        obs_space,
-                        act_space,
-                        {
-                            "model": {
-                                "custom_model": "connect4_mask",
-                                "custom_model_config": {},
-                            },
-                        },
-                    ),
-                    "player2": (
-                        PGTFPolicy,
-                        obs_space,
-                        act_space,
-                        {
-                            "model": {
-                                "custom_model": "connect4_mask",
-                                "custom_model_config": {},
-                            },
-                        },
-                    ),
-                    "minimax": (
-                        MiniMaxPolicy,
-                        obs_space,
-                        act_space,
-                        {
-                            "model":{
-                                "custom_model": "connect4_mask",
-                                "custom_model_config": {},
-                            },
-                        },
-                    ),
-
-                },
-                "policy_mapping_fn": select_evaluation_policy,
-        },
-        },
-        "custom_eval_function": Connect4Eval,
-        "callbacks": Connect4Callbacks,
-        "framework": "tf2",
-        # allow tracing in eager mode
-        # "eager_tracing": True,
-    }
-
-    # =============================================================================
-    # CHECKPOINT DIR
-    # =============================================================================
-    # i.e. serialize a policy to disk
-    ckpt_dir = os.path.join(CURDIR, "checkpoints")
-    if not os.path.exists(ckpt_dir):
-        os.mkdir(ckpt_dir)
-    # shutil.rmtree(chkpt_root, ignore_errors=True, onerror=None)
-
-    # windows default result directory in C:/Users/*UserName*/ray_results
-    # =============================================================================
-    # RESULTS DIR
-    # =============================================================================
-    ray_results_dir = os.path.join(CURDIR, "ray_results")
-    if not os.path.exists(ray_results_dir):
-        os.mkdir(ray_results_dir)
-    # shutil.rmtree(ray_results, ignore_errors=True, onerror=None)
-
-    new_config = with_common_config(config)
+    new_config = with_common_config(TrainerConfig.PG_TRAINER)
     trainer = build_trainer(name=p1_trainer_name, default_config=new_config)
     trainer_obj = trainer(
         config=new_config,
         logger_creator=custom_log_creator(
-            ray_results_dir, p1_trainer_name, p2_trainer_name, "Connect4Env"
+            ray_results_dir, p1_trainer_name, p2_trainer_name, epochs
         ),
     )
     print("trainer configured")
     env = trainer_obj.workers.local_worker().env
     print("local_worker environment acquired: \n" + str(env))
-    epochs = Config.EPOCHS
-    reward_diff = Config.REWARD_DIFFERENCE
-    weight_update_steps = Config.WEIGHT_UPDATE_STEP
-    ckpt_step = Config.CKPT_STEP
-    reward_diff_reached = False
 
-    for epoch in range(epochs):
+    for epoch in tqdm(range(1, epochs)):
         print("Epoch " + str(epoch))
         results = trainer_obj.train()
-        if epoch % ckpt_step:
+        if epoch % ckpt_step == 0 and epoch != 0:
             trainer_obj.save(ckpt_dir)
-        # =============================================================================
-        # UPDATE WEIGHTS FOR SELF-PLAY
-        # =============================================================================
-        # if epoch % weight_update_steps == 0 and epoch != 0:
-        #     try:
-        #         self_play(trainer_obj)
-        #     except:
-        #         print("Error while updating weights")
-        print(results)
+            ckpts = os.listdir(ckpt_dir)
+            # keep only the last 5 ckpts and delete the older ones
+            if len(ckpts) > 20:
+                for elem in ckpts:
+                    if elem == ".gitkeep":
+                        continue
+                    index = int(elem.split("_")[1])
+                    if index < epoch - 5:
+                        dir_to_remove = os.path.join(ckpt_dir, elem)
+                        shutil.rmtree(dir_to_remove)
 
-        # Reward (difference) reached -> all good, return.
+        # if the updated network is able to beat it's previous self "reward_diff"
+        # times we update the weights of the previous network
         if env.score[env.player1] - env.score[env.player2] >= reward_diff:
-            reward_diff_reached = True
-            break
-
-    # Reward (difference) not reached: Error if `as_test`.
-    if not reward_diff_reached:
-        print(
-            "Desired reward difference {} not reached! Only got to {}.".format(
-                reward_diff, env.score[env.player1] - env.score[env.player2]
-            )
-        )
-
-        # raise ValueError(
-        #     "Desired reward difference ({}) not reached! Only got to {}.".
-        #     format(reward_diff, env.score[env.player1] - env.score[env.player2]))
-    else:
-        print(f"Desired reward difference {reward_diff} reached")
+            # =============================================================================
+            # UPDATE WEIGHTS FOR SELF-PLAY
+            # =============================================================================
+            try:
+                self_play(trainer_obj)
+                # we also reset the score
+                env.reset_score()
+            except:
+                print("Error while updating weights")
 
     ray.shutdown()

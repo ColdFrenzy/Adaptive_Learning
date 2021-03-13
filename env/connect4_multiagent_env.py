@@ -1,8 +1,11 @@
+# import sys
+# import os
+# sys.path.insert(1, os.path.abspath(os.pardir))
 import numpy as np
 from colorama import Fore
 from gym.spaces import Box, Dict, Discrete
 from ray.rllib.env.multi_agent_env import MultiAgentEnv
-from config.custom_config import Config
+from config.connect4_config import Connect4Config
 
 
 class Connect4Env(MultiAgentEnv):
@@ -32,20 +35,20 @@ class Connect4Env(MultiAgentEnv):
     def __init__(
         self,
         env_context,
-        width=Config.WIDTH,
-        height=Config.HEIGHT,
-        n_actions=Config.N_ACTIONS,
-        connect=Config.CONNECT,
+        width=Connect4Config.WIDTH,
+        height=Connect4Config.HEIGHT,
+        n_actions=Connect4Config.N_ACTIONS,
+        connect=Connect4Config.CONNECT,
     ):
 
         self.width = width
         self.height = height
         self.n_actions = n_actions
         self.connect = connect
-        self.player1 = Config.PLAYER1
-        self.player2 = Config.PLAYER2
-        self.player1_ID = Config.PLAYER1_ID
-        self.player2_ID = Config.PLAYER2_ID
+        self.player1 = Connect4Config.PLAYER1
+        self.player2 = Connect4Config.PLAYER2
+        self.player1_ID = Connect4Config.PLAYER1_ID
+        self.player2_ID = Connect4Config.PLAYER2_ID
         self.viewer = None
         # observation_space needs to include action masking
         self.observation_space = Dict(
@@ -63,7 +66,7 @@ class Connect4Env(MultiAgentEnv):
         self.num_moves = 0
         self.reset()
 
-    def reset(self, starting_player=Config.PLAYER1_ID):
+    def reset(self, starting_player=Connect4Config.PLAYER1_ID):
         """
         Initialises the Connect 4 gameboard and return observations
         """
@@ -173,12 +176,10 @@ class Connect4Env(MultiAgentEnv):
             self.num_draws += 1
         return winner, reward_vector
 
-    def reset_score(self, n_steps=500):
-        total_score = self.score[self.player1] + self.score[self.player2]
-        if total_score >= n_steps:
-            self.score[self.player1] = 0
-            self.score[self.player2] = 0
-            self.num_draws = 0
+    def reset_score(self):
+        self.score[self.player1] = 0
+        self.score[self.player2] = 0
+        self.num_draws = 0
 
     def get_moves(self, mask=True):
         """

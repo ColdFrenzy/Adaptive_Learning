@@ -1,13 +1,8 @@
-# from ray.rllib.models import ModelCatalog
 from models import custom_models
 from functools import reduce
-
 from ray.rllib.models.tf import TFModelV2
-
-# from ray.rllib.models.tf.fcnet import FullyConnectedNetwork
-# from ray.rllib.models.tf.visionnet import VisionNetwork
 from ray.rllib.utils.framework import try_import_tf
-from config.custom_config import Config
+from config.connect4_config import Connect4Config
 
 tf1, tf, tfv = try_import_tf()
 
@@ -23,8 +18,8 @@ class Connect4ActionMaskModel(TFModelV2):
         num_outputs,
         model_config,
         name,
-        true_obs_shape=(Config.WIDTH, Config.HEIGHT),
-        action_embed_size=Config.N_ACTIONS,
+        true_obs_shape=(Connect4Config.WIDTH, Connect4Config.HEIGHT),
+        action_embed_size=Connect4Config.N_ACTIONS,
         show_model=False,
         *args,
         **kwargs
@@ -53,7 +48,9 @@ class Connect4ActionMaskModel(TFModelV2):
         # self.base_model = tf.keras.Model(inputs, [out_layer, value_layer], name=name)
         # The observation space has already been flattered
         # self.inputs = tf.keras.layers.Input(shape=obs_space.shape[0]*obs_space.shape[1], name="observations")
-        self.base_model = custom_models.dense_model(in_shape,256, num_outputs, "action_mask")
+        self.base_model = custom_models.dense_model(
+            in_shape, 256, num_outputs, "action_mask"
+        )
 
         if show_model == True:
             self.base_model.summary()

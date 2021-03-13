@@ -9,15 +9,16 @@ sys.path.insert(1, os.path.abspath(os.pardir))
 
 from tqdm import tqdm
 from config.custom_config import Config
+from config.connect4_config import Connect4Config
 
 # from policies.random_policy import iniMax
 from policies.minimax_policy import minimax
 from env.connect4_multiagent_env import Connect4Env
 
-player1 = Config.PLAYER1
-player2 = Config.PLAYER2
-player1_ID = Config.PLAYER1_ID
-player2_ID = Config.PLAYER2_ID
+player1 = Connect4Config.PLAYER1
+player2 = Connect4Config.PLAYER2
+player1_ID = Connect4Config.PLAYER1_ID
+player2_ID = Connect4Config.PLAYER2_ID
 
 # =============================================================================
 # algorithms to rank:
@@ -27,9 +28,7 @@ player2_ID = Config.PLAYER2_ID
 
 
 def minimax_vs_random_elo(
-    depth,
-    number_of_games,
-    logger,
+    depth, number_of_games, logger,
 ):
     """
     Use the inverse of the elo formula to compute the outcome of a match,
@@ -68,7 +67,9 @@ def minimax_vs_random_elo(
             actual_player = game.current_player
             board = game.board
             if actual_player == player1_ID:
-                act, action_values = minimax(board, player1_ID, True, depth=depth,return_distr=True)
+                act, action_values = minimax(
+                    board, player1_ID, True, depth=depth, return_distr=True
+                )
                 actions[player1] = act
                 _, _, done, _ = game.step(actions)
             else:
@@ -208,7 +209,7 @@ def minimax_vs_minimax_elo(depth1, depth2, number_of_games, logger=None):
     return elo_diff
 
 
-def model_vs_minimax(model,depth, number_of_games, checkpoint=None,logger=None ):
+def model_vs_minimax(model, depth, number_of_games, checkpoint=None, logger=None):
     """
     Use the inverse of the elo formula to compute the outcome of a match,
     given that we already know the result of a match.
@@ -224,7 +225,7 @@ def model_vs_minimax(model,depth, number_of_games, checkpoint=None,logger=None )
     checkpoint:
         path to chekpoint of the model to use
     """
-    
+
     game = Connect4Env(None)
     model_name = model.name
     if logger:
@@ -245,12 +246,12 @@ def model_vs_minimax(model,depth, number_of_games, checkpoint=None,logger=None )
             actual_player = game.current_player
             board = game.board
             if actual_player == player1_ID:
-                input_dict = {"obs" : {}}
-                reshaped_board = np.reshape(board,(1,board.shape[0]*board.shape[1]) )
+                input_dict = {"obs": {}}
+                reshaped_board = np.reshape(board, (1, board.shape[0] * board.shape[1]))
                 action_mask = game.get_moves(True)
-                input_dict["obs"]["state"] =  reshaped_board
+                input_dict["obs"]["state"] = reshaped_board
                 input_dict["obs"]["action_mask"] = action_mask
-                action_logits,_ = model.forward(input_dict, None,None)
+                action_logits, _ = model.forward(input_dict, None, None)
                 # max_act = max(action_logits[0])
                 act = np.argmax(action_logits[0])
                 # act = [i for i, j in enumerate(action_logits[0]) if j == max_act]
@@ -280,7 +281,8 @@ def model_vs_minimax(model,depth, number_of_games, checkpoint=None,logger=None )
                 game_over = True
 
     score = game.score[player1] / number_of_games + game.num_draws / (
-            2 * number_of_games)
+        2 * number_of_games
+    )
 
     if score >= 10 / 11:
         elo_diff = 400
@@ -302,20 +304,20 @@ def model_vs_minimax(model,depth, number_of_games, checkpoint=None,logger=None )
     return elo_diff
 
 
-def compute_elo_difference(player1_score,draws,number_of_games):
+def compute_elo_difference(player1_score, draws, number_of_games):
 
-    score = player1_score / number_of_games + draws / (
-            2 * number_of_games)
+    score = player1_score / number_of_games + draws / (2 * number_of_games)
     if score >= 10 / 11:
         elo_diff = 400
-    elif score == 0:
+    elif score == 0 or score < 1 / 11:
         elo_diff = -400
     else:
         elo_diff = -400 * math.log((1 / score - 1), 10)
-    
-    return elo_diff 
 
-def board_print(board, height=Config.HEIGHT, width=Config.WIDTH):
+    return elo_diff
+
+
+def board_print(board, height=Connect4Config.HEIGHT, width=Connect4Config.WIDTH):
     """
     Return current game status as class representation
     """

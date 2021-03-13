@@ -1,11 +1,17 @@
 from ray.rllib import Policy
 import random
 from config.custom_config import Config
-import copy
+from config.connect4_config import Connect4Config
 import math
 
 
 class MiniMaxPolicy(Policy):
+    def __init__(self, observation_space, action_space, config, *args, **kwargs):
+        super(MiniMaxPolicy, self).__init__(
+            observation_space, action_space, config, *args, **kwargs
+        )
+        self.depth = 1
+
     def compute_actions(
         self,
         obs_batch,
@@ -16,19 +22,19 @@ class MiniMaxPolicy(Policy):
         episodes=None,
         **kwargs
     ):
-        actual_player = Config.PLAYER_DICT[
+        actual_player = Connect4Config.PLAYER_DICT[
             list(episodes[0]._agent_to_last_obs.keys())[0]
         ]
 
         action_space_len = self.action_space.n
         # first n elements of a single observation is the action mask
         actions = []
-        width, height = Config.WIDTH, Config.HEIGHT
+        width, height = Connect4Config.WIDTH, Connect4Config.HEIGHT
         for obs in obs_batch:
             # first n elements are the action mask.
             board = obs[action_space_len:]
             board = board.reshape((width, height))
-            act, score = minimax(board, actual_player, True)
+            act, score = minimax(board, actual_player, True, depth=self.depth)
             actions.append(act)
 
         return actions, [], {}
@@ -52,7 +58,7 @@ def minimax(
     alpha=-math.inf,
     beta=math.inf,
     depth=Config.SEARCH_DEPTH,
-    return_distr = False,
+    return_distr=False,
 ):
     """
     Minimax algorithm
@@ -86,7 +92,7 @@ def minimax(
             return (None, score_position(board, opponent_player))
         else:
             return (None, -score_position(board, opponent_player))
-        
+
     random.shuffle(valid_actions)
     if maximize:
         value = -math.inf
@@ -101,13 +107,14 @@ def minimax(
             drop_piece(board, current_player, act, y)
             winning_move = is_winning(board, act, y)
             if not winning_move:
-                value = minimax(board, opponent_player, False, alpha, beta, depth - 1,False)[1]
+                value = minimax(
+                    board, opponent_player, False, alpha, beta, depth - 1, False
+                )[1]
             else:
-                # reward is time-scaled (for example a victory now is better 
+                # reward is time-scaled (for example a victory now is better
                 # than a victory in 3 turns from now)
                 value = 1000 * depth
-  
-            
+
             if return_distr:
                 act_distr[str(act)] = value
             undo_last_move(board, act, y)
@@ -119,7 +126,7 @@ def minimax(
                 #     best_actions.append(act)
             alpha = max(alpha, value)
             if alpha >= beta:
-                break  
+                break
         # best_action = random.choice(best_actions)
         if return_distr:
             return best_action, act_distr
@@ -139,11 +146,12 @@ def minimax(
             drop_piece(board, current_player, act, y)
             winning_move = is_winning(board, act, y)
             if not winning_move:
-                value = minimax(board, opponent_player, True, alpha, beta, depth - 1,False)[1]
+                value = minimax(
+                    board, opponent_player, True, alpha, beta, depth - 1, False
+                )[1]
             else:
                 value = -1000 * depth
-                
-                
+
             if return_distr:
                 act_distr[str(act)] = value
             undo_last_move(board, act, y)
@@ -163,12 +171,17 @@ def minimax(
         # return best_action, best_score
         return best_action, best_val
 
-def undo_last_move(board, x, y, empty=Config.EMPTY):
+
+def undo_last_move(board, x, y, empty=Connect4Config.EMPTY):
     board[x][y] = empty
 
 
 def score_position(
-    board, player, width=Config.WIDTH, height=Config.HEIGHT, connect=Config.CONNECT
+    board,
+    player,
+    width=Connect4Config.WIDTH,
+    height=Connect4Config.HEIGHT,
+    connect=Connect4Config.CONNECT,
 ):
     """
     compute the heuristic of a given board configuration. The score is based
@@ -182,10 +195,10 @@ def score_position(
     opponent_open_line_score = 100  # the score is high because if we leave an open line
     # the opponent will connect in the next move. This usually
     # is already predicted by increasing the depth of minimax
-    fork_2_score = 10 # better than open line, but still easy to block 
-    fork_3_score = 50 # we can win in 2 turns 
-    opponent_fork_2_score = 50  # opponent can win in 2 moves 
-    opponent_fork_3_score = 100 # opponent win in the next move
+    fork_2_score = 10  # better than open line, but still easy to block
+    fork_3_score = 50  # we can win in 2 turns
+    opponent_fork_2_score = 50  # opponent can win in 2 moves
+    opponent_fork_3_score = 100  # opponent win in the next move
     fork_2, fork_3 = check_forks(board, player)
     open_lines = check_open_line(board, player)
     opponent_fork_2, opponent_fork_3 = check_forks(board, opponent_player)
@@ -208,7 +221,11 @@ def score_position(
 
 
 def check_forks(
-    board, player, empty=Config.EMPTY, width=Config.WIDTH, height=Config.HEIGHT
+    board,
+    player,
+    empty=Connect4Config.EMPTY,
+    width=Connect4Config.WIDTH,
+    height=Connect4Config.HEIGHT,
 ):
     """
     A fork is a serie of 2 or 3 consecutive chips of the same player,
@@ -333,7 +350,11 @@ def check_forks(
 
 
 def check_open_line(
-    board, player, empty=Config.EMPTY, width=Config.WIDTH, height=Config.HEIGHT
+    board,
+    player,
+    empty=Connect4Config.EMPTY,
+    width=Connect4Config.WIDTH,
+    height=Connect4Config.HEIGHT,
 ):
     """
     An open line is a serie of 3 consecutive chips from the same player,
@@ -426,7 +447,7 @@ def check_open_line(
     return open_lines
 
 
-def is_winning(board, x, y, connect=Config.CONNECT):
+def is_winning(board, x, y, connect=Connect4Config.CONNECT):
     """
     check if the current move is a winning move 
     """
@@ -453,18 +474,18 @@ def is_winning(board, x, y, connect=Config.CONNECT):
     return False
 
 
-def available_actions(board, width=Config.WIDTH, height=Config.HEIGHT):
+def available_actions(board, width=Connect4Config.WIDTH, height=Connect4Config.HEIGHT):
     """
     check for the current available actions
     """
     return [col for col in range(width) if board[col][height - 1] == -1]
 
 
-def valid_location(x, y, width=Config.WIDTH, height=Config.HEIGHT):
+def valid_location(x, y, width=Connect4Config.WIDTH, height=Connect4Config.HEIGHT):
     return x >= 0 and x < width and y >= 0 and y < height
 
 
-def get_open_row(board, x, height=Config.HEIGHT):
+def get_open_row(board, x, height=Connect4Config.HEIGHT):
     """
     return the index (height) of the first position in a given column
     """

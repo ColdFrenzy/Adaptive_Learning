@@ -1,7 +1,6 @@
 import logging
-
 from env.connect4_multiagent_env import Connect4Env
-from config.custom_config import Config
+from config.connect4_config import Connect4Config
 
 
 class LogsWrapper(Connect4Env):
@@ -12,12 +11,12 @@ class LogsWrapper(Connect4Env):
     def __init__(
         self,
         env_context,
-        width=Config.WIDTH,
-        height=Config.HEIGHT,
-        n_actions=Config.N_ACTIONS,
-        connect=Config.CONNECT,
+        width=Connect4Config.WIDTH,
+        height=Connect4Config.HEIGHT,
+        n_actions=Connect4Config.N_ACTIONS,
+        connect=Connect4Config.CONNECT,
     ):
-        self.log_step = 50
+        self.log_step = Connect4Config.ENV_LOG_STEP
         self.log_idx = 0
         self.logger = self.init_logger("log/match.log")
         super(LogsWrapper, self).__init__(
@@ -55,8 +54,8 @@ class LogsWrapper(Connect4Env):
     def step(self, action_dict):
         obs, reward, done, info = super(LogsWrapper, self).step(action_dict)
 
-        # if self.log_step % self.log_idx == 0:
-        if True:
+        if self.log_idx % self.log_step == 0:
+            self.logger.info("GAME NUMBER " + str(self.log_idx))
             self.logger.info("Player actions: " + str(action_dict))
             self.logger.info(self)
 

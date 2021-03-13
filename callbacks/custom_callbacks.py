@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Feb 11 16:01:15 2021
-
-@author: Francesco
-"""
-
 from ray.rllib.agents.callbacks import DefaultCallbacks
 
 
