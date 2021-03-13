@@ -7,7 +7,7 @@ policies/minimax_test.py
 /train_info.txt
 old_data/*
 important_checkpoints/*
-!important_checkpoint/.gitkeep
+!important_checkpoints/.gitkeep
 
 # exclude everything
 checkpoints/*
