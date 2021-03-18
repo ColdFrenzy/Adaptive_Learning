@@ -14,8 +14,8 @@ class Config:
     NUM_WORKERS = 0
     NUM_EVAL_WORKERS = 0
     NUM_ENVS_PER_WORKER = 1
-    ROLLOUT_FRAGMENT_LENGTH = 40
-    TRAIN_BATCH_SIZE = 200
+    ROLLOUT_FRAGMENT_LENGTH = 200
+    TRAIN_BATCH_SIZE = 4000
 
     # =============================================================================
     # TRAINING PARAMS

@@ -1,0 +1,4190 @@
+2021-03-18 11:33:58,106 - Connect4Logger - INFO - GAME NUMBER 100
+2021-03-18 11:33:58,106 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:33:58,107 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . X . . 
+
+2021-03-18 11:33:58,115 - Connect4Logger - INFO - GAME NUMBER 100
+2021-03-18 11:33:58,116 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:33:58,117 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O X . . 
+
+2021-03-18 11:33:58,126 - Connect4Logger - INFO - GAME NUMBER 100
+2021-03-18 11:33:58,127 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:33:58,127 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O X . . 
+
+2021-03-18 11:33:58,136 - Connect4Logger - INFO - GAME NUMBER 100
+2021-03-18 11:33:58,137 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:33:58,137 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . X . . . 
+. . . O X . . 
+
+2021-03-18 11:33:58,146 - Connect4Logger - INFO - GAME NUMBER 100
+2021-03-18 11:33:58,146 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:33:58,148 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . X . . . 
+. . X O X . . 
+
+2021-03-18 11:33:58,158 - Connect4Logger - INFO - GAME NUMBER 100
+2021-03-18 11:33:58,158 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:33:58,159 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . O X . . . 
+. . X O X . . 
+
+2021-03-18 11:33:58,168 - Connect4Logger - INFO - GAME NUMBER 100
+2021-03-18 11:33:58,168 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:33:58,169 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . O X X . . 
+. . X O X . . 
+
+2021-03-18 11:33:58,178 - Connect4Logger - INFO - GAME NUMBER 100
+2021-03-18 11:33:58,178 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:33:58,179 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O O . . . 
+. . O X X . . 
+. . X O X . . 
+
+2021-03-18 11:33:58,189 - Connect4Logger - INFO - GAME NUMBER 100
+2021-03-18 11:33:58,189 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:33:58,190 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O O . . . 
+. . O X X . . 
+. . X O X . . 
+
+2021-03-18 11:33:58,200 - Connect4Logger - INFO - GAME NUMBER 100
+2021-03-18 11:33:58,200 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:33:58,201 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O O . . . 
+. . O X X . . 
+. O X O X . . 
+
+2021-03-18 11:33:58,211 - Connect4Logger - INFO - GAME NUMBER 100
+2021-03-18 11:33:58,211 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:33:58,212 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O O . . . 
+. X O X X . . 
+. O X O X . . 
+
+2021-03-18 11:33:58,222 - Connect4Logger - INFO - GAME NUMBER 100
+2021-03-18 11:33:58,222 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:33:58,223 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O O O . . 
+. X O X X . . 
+. O X O X . . 
+
+2021-03-18 11:33:58,232 - Connect4Logger - INFO - GAME NUMBER 100
+2021-03-18 11:33:58,233 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:33:58,234 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . X . . 
+. . O O O . . 
+. X O X X . . 
+. O X O X . . 
+
+2021-03-18 11:33:58,243 - Connect4Logger - INFO - GAME NUMBER 100
+2021-03-18 11:33:58,244 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:33:58,245 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . X . . 
+. O O O O . . 
+. X O X X . . 
+. O X O X . . 
+
+2021-03-18 11:33:58,246 - Connect4Logger - INFO - PLAYER 1 WON!!!!
+2021-03-18 11:33:58,246 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 60 VS P2 = 39
+2021-03-18 11:33:58,247 - Connect4Logger - INFO - Player rewards: {'player1': -1.0, 'player2': 1.0}
+
+. . . . . . . 
+. . . . . . . 
+. . X . X . . 
+. O O O O . . 
+. X O X X . . 
+. O X O X . . 
+
+2021-03-18 11:34:13,507 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,507 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:34:13,508 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+
+2021-03-18 11:34:13,518 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,519 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:34:13,519 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. O . X . . . 
+
+2021-03-18 11:34:13,530 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,530 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:34:13,531 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. O . X . . . 
+
+2021-03-18 11:34:13,541 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,541 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:34:13,542 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . X . . . 
+. O . X . . . 
+
+2021-03-18 11:34:13,551 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,552 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:34:13,553 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . X . . . 
+. O X X . . . 
+
+2021-03-18 11:34:13,563 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,564 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:34:13,565 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . O X . . . 
+. O X X . . . 
+
+2021-03-18 11:34:13,575 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,576 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:34:13,576 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O . . . 
+. . O X . . . 
+. O X X . . . 
+
+2021-03-18 11:34:13,587 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,587 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:34:13,588 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . O O . . . 
+. . O X . . . 
+. O X X . . . 
+
+2021-03-18 11:34:13,598 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,599 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:34:13,599 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . O O . . . 
+. . O X . . . 
+. O X X X . . 
+
+2021-03-18 11:34:13,609 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,610 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:34:13,610 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O X . . . 
+. . O O . . . 
+. . O X . . . 
+. O X X X . . 
+
+2021-03-18 11:34:13,620 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,620 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:34:13,621 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O X . . . 
+. . O O . . . 
+. . O X X . . 
+. O X X X . . 
+
+2021-03-18 11:34:13,630 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,630 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:34:13,631 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O X . . . 
+. . O O . . . 
+. O O X X . . 
+. O X X X . . 
+
+2021-03-18 11:34:13,641 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,642 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:34:13,642 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O X . . . 
+. . O O X . . 
+. O O X X . . 
+. O X X X . . 
+
+2021-03-18 11:34:13,652 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,653 - Connect4Logger - INFO - Player actions: {'player2': 5}
+2021-03-18 11:34:13,653 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O X . . . 
+. . O O X . . 
+. O O X X . . 
+. O X X X O . 
+
+2021-03-18 11:34:13,663 - Connect4Logger - INFO - GAME NUMBER 200
+2021-03-18 11:34:13,664 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:34:13,664 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O X X . . 
+. . O O X . . 
+. O O X X . . 
+. O X X X O . 
+
+2021-03-18 11:34:13,666 - Connect4Logger - INFO - PLAYER 2 WON!!!!
+2021-03-18 11:34:13,667 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 120 VS P2 = 78
+2021-03-18 11:34:13,667 - Connect4Logger - INFO - Player rewards: {'player1': 1.0, 'player2': -1.0}
+
+. . . . . . . 
+. . . . . . . 
+. . O X X . . 
+. . O O X . . 
+. O O X X . . 
+. O X X X O . 
+
+2021-03-18 11:34:37,259 - Connect4Logger - INFO - GAME NUMBER 300
+2021-03-18 11:34:37,260 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:34:37,261 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+
+2021-03-18 11:34:37,270 - Connect4Logger - INFO - GAME NUMBER 300
+2021-03-18 11:34:37,271 - Connect4Logger - INFO - Player actions: {'player2': 0}
+2021-03-18 11:34:37,271 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+O . . X . . . 
+
+2021-03-18 11:34:37,282 - Connect4Logger - INFO - GAME NUMBER 300
+2021-03-18 11:34:37,282 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:34:37,283 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+O . . X . . . 
+
+2021-03-18 11:34:37,293 - Connect4Logger - INFO - GAME NUMBER 300
+2021-03-18 11:34:37,293 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:34:37,294 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+O . O X . . . 
+
+2021-03-18 11:34:37,304 - Connect4Logger - INFO - GAME NUMBER 300
+2021-03-18 11:34:37,304 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:34:37,305 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . X . . . 
+O . O X . . . 
+
+2021-03-18 11:34:37,314 - Connect4Logger - INFO - GAME NUMBER 300
+2021-03-18 11:34:37,315 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:34:37,315 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . X . . . 
+O . O X O . . 
+
+2021-03-18 11:34:37,325 - Connect4Logger - INFO - GAME NUMBER 300
+2021-03-18 11:34:37,325 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:34:37,326 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . X . . . 
+. . . X . . . 
+O . O X O . . 
+
+2021-03-18 11:34:37,327 - Connect4Logger - INFO - PLAYER 2 WON!!!!
+2021-03-18 11:34:37,328 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 177 VS P2 = 121
+2021-03-18 11:34:37,328 - Connect4Logger - INFO - Player rewards: {'player1': 1.0, 'player2': -1.0}
+
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . X . . . 
+. . . X . . . 
+O . O X O . . 
+
+2021-03-18 11:34:53,549 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,550 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:34:53,550 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+
+2021-03-18 11:34:53,560 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,561 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:34:53,561 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X O . . 
+
+2021-03-18 11:34:53,572 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,572 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:34:53,573 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. X . X O . . 
+
+2021-03-18 11:34:53,583 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,584 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:34:53,584 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. X . X O . . 
+
+2021-03-18 11:34:53,594 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,594 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:34:53,595 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. X X X O . . 
+
+2021-03-18 11:34:53,605 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,606 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:34:53,606 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . O . . . 
+. X X X O . . 
+
+2021-03-18 11:34:53,617 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,617 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:34:53,618 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O . . . 
+. . . O . . . 
+. X X X O . . 
+
+2021-03-18 11:34:53,629 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,630 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:34:53,630 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O . . . 
+. . O O . . . 
+. X X X O . . 
+
+2021-03-18 11:34:53,639 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,639 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:34:53,640 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O . . . 
+. . O O X . . 
+. X X X O . . 
+
+2021-03-18 11:34:53,649 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,650 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:34:53,651 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O O . . 
+. . O O X . . 
+. X X X O . . 
+
+2021-03-18 11:34:53,661 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,661 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:34:53,662 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O O . . 
+. X O O X . . 
+. X X X O . . 
+
+2021-03-18 11:34:53,671 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,672 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:34:53,673 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . O O O . . 
+. X O O X . . 
+. X X X O . . 
+
+2021-03-18 11:34:53,682 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,683 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:34:53,683 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X X . . 
+. . O O O . . 
+. X O O X . . 
+. X X X O . . 
+
+2021-03-18 11:34:53,696 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,697 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:34:53,697 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O X X . . 
+. . O O O . . 
+. X O O X . . 
+. X X X O . . 
+
+2021-03-18 11:34:53,707 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,708 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:34:53,708 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . O X X . . 
+. . O O O . . 
+. X O O X . . 
+. X X X O . . 
+
+2021-03-18 11:34:53,717 - Connect4Logger - INFO - GAME NUMBER 400
+2021-03-18 11:34:53,718 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:34:53,718 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . O X X . . 
+. O O O O . . 
+. X O O X . . 
+. X X X O . . 
+
+2021-03-18 11:34:53,720 - Connect4Logger - INFO - PLAYER 1 WON!!!!
+2021-03-18 11:34:53,721 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 233 VS P2 = 162
+2021-03-18 11:34:53,721 - Connect4Logger - INFO - Player rewards: {'player1': -1.0, 'player2': 1.0}
+
+. . . . . . . 
+. . . X . . . 
+. . O X X . . 
+. O O O O . . 
+. X O O X . . 
+. X X X O . . 
+
+2021-03-18 11:35:17,013 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,013 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:35:17,014 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+
+2021-03-18 11:35:17,027 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,028 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:35:17,028 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . X . . . 
+
+2021-03-18 11:35:17,039 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,039 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:35:17,040 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . X X . . 
+
+2021-03-18 11:35:17,050 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,050 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:35:17,051 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. O . X X . . 
+
+2021-03-18 11:35:17,061 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,062 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:35:17,062 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O . . . 
+. O . X X . . 
+
+2021-03-18 11:35:17,072 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,073 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:35:17,073 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O O . . 
+. O . X X . . 
+
+2021-03-18 11:35:17,083 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,084 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:35:17,084 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X X . . 
+. . . O O . . 
+. O . X X . . 
+
+2021-03-18 11:35:17,093 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,093 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:35:17,094 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X X . . 
+. . . O O . . 
+. O O X X . . 
+
+2021-03-18 11:35:17,104 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,105 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:35:17,105 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . X X . . 
+. . . O O . . 
+. O O X X . . 
+
+2021-03-18 11:35:17,125 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,126 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:35:17,127 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . X X . . 
+. O . O O . . 
+. O O X X . . 
+
+2021-03-18 11:35:17,136 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,136 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:35:17,137 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . X X . . 
+. O X O O . . 
+. O O X X . . 
+
+2021-03-18 11:35:17,146 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,147 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:35:17,147 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X O . . 
+. . . X X . . 
+. O X O O . . 
+. O O X X . . 
+
+2021-03-18 11:35:17,156 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,157 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:35:17,157 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X O . . 
+. . X X X . . 
+. O X O O . . 
+. O O X X . . 
+
+2021-03-18 11:35:17,167 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,167 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:35:17,168 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X O . . 
+. O X X X . . 
+. O X O O . . 
+. O O X X . . 
+
+2021-03-18 11:35:17,178 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,178 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:35:17,179 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . X . . 
+. . . X O . . 
+. O X X X . . 
+. O X O O . . 
+. O O X X . . 
+
+2021-03-18 11:35:17,188 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,189 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:35:17,189 - Connect4Logger - INFO - 
+. . . . O . . 
+. . . . X . . 
+. . . X O . . 
+. O X X X . . 
+. O X O O . . 
+. O O X X . . 
+
+2021-03-18 11:35:17,199 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,200 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:35:17,200 - Connect4Logger - INFO - 
+. . . . O . . 
+. . . . X . . 
+. . X X O . . 
+. O X X X . . 
+. O X O O . . 
+. O O X X . . 
+
+2021-03-18 11:35:17,211 - Connect4Logger - INFO - GAME NUMBER 500
+2021-03-18 11:35:17,211 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:35:17,212 - Connect4Logger - INFO - 
+. . . . O . . 
+. . . . X . . 
+. O X X O . . 
+. O X X X . . 
+. O X O O . . 
+. O O X X . . 
+
+2021-03-18 11:35:17,213 - Connect4Logger - INFO - PLAYER 1 WON!!!!
+2021-03-18 11:35:17,214 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 283 VS P2 = 211
+2021-03-18 11:35:17,214 - Connect4Logger - INFO - Player rewards: {'player1': -1.0, 'player2': 1.0}
+
+. . . . O . . 
+. . . . X . . 
+. O X X O . . 
+. O X X X . . 
+. O X O O . . 
+. O O X X . . 
+
+2021-03-18 11:35:33,272 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,273 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:35:33,274 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+
+2021-03-18 11:35:33,287 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,287 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:35:33,288 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O X . . . 
+
+2021-03-18 11:35:33,298 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,299 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:35:33,300 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O X . . . 
+
+2021-03-18 11:35:33,310 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,310 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:35:33,310 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X O . . . 
+. . O X . . . 
+
+2021-03-18 11:35:33,321 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,322 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:35:33,322 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . X O . . . 
+. . O X . . . 
+
+2021-03-18 11:35:33,332 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,333 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:35:33,334 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . X O . . . 
+. . O X O . . 
+
+2021-03-18 11:35:33,344 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,345 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:35:33,345 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . X . . . 
+. . X O . . . 
+. . O X O . . 
+
+2021-03-18 11:35:33,355 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,355 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:35:33,356 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . X . . . 
+. . X O . . . 
+. O O X O . . 
+
+2021-03-18 11:35:33,366 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,367 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:35:33,368 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . X X . . . 
+. . X O . . . 
+. O O X O . . 
+
+2021-03-18 11:35:33,378 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,378 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:35:33,379 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . X X . . . 
+. O X O . . . 
+. O O X O . . 
+
+2021-03-18 11:35:33,388 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,389 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:35:33,389 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . . X . . . 
+. . X X . . . 
+. O X O . . . 
+. O O X O . . 
+
+2021-03-18 11:35:33,399 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,400 - Connect4Logger - INFO - Player actions: {'player2': 5}
+2021-03-18 11:35:33,400 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . . X . . . 
+. . X X . . . 
+. O X O . . . 
+. O O X O O . 
+
+2021-03-18 11:35:33,411 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,412 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:35:33,412 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . . X . . . 
+. X X X . . . 
+. O X O . . . 
+. O O X O O . 
+
+2021-03-18 11:35:33,423 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,423 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:35:33,424 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . O X . . . 
+. X X X . . . 
+. O X O . . . 
+. O O X O O . 
+
+2021-03-18 11:35:33,434 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,434 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:35:33,435 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . O X . . . 
+. X X X . . . 
+. O X O X . . 
+. O O X O O . 
+
+2021-03-18 11:35:33,444 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,445 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:35:33,445 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . O X . . . 
+. X X X O . . 
+. O X O X . . 
+. O O X O O . 
+
+2021-03-18 11:35:33,455 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,456 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:35:33,457 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . O X X . . 
+. X X X O . . 
+. O X O X . . 
+. O O X O O . 
+
+2021-03-18 11:35:33,466 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,467 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:35:33,468 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X O . . 
+. . O X X . . 
+. X X X O . . 
+. O X O X . . 
+. O O X O O . 
+
+2021-03-18 11:35:33,477 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,478 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:35:33,478 - Connect4Logger - INFO - 
+. . . . X . . 
+. . . X O . . 
+. . O X X . . 
+. X X X O . . 
+. O X O X . . 
+. O O X O O . 
+
+2021-03-18 11:35:33,488 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,488 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:35:33,489 - Connect4Logger - INFO - 
+. . . . X . . 
+. . . X O . . 
+. O O X X . . 
+. X X X O . . 
+. O X O X . . 
+. O O X O O . 
+
+2021-03-18 11:35:33,499 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,500 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:35:33,500 - Connect4Logger - INFO - 
+. . . . X . . 
+. X . X O . . 
+. O O X X . . 
+. X X X O . . 
+. O X O X . . 
+. O O X O O . 
+
+2021-03-18 11:35:33,510 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,511 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:35:33,511 - Connect4Logger - INFO - 
+. . . . X . . 
+. X O X O . . 
+. O O X X . . 
+. X X X O . . 
+. O X O X . . 
+. O O X O O . 
+
+2021-03-18 11:35:33,521 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,522 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:35:33,522 - Connect4Logger - INFO - 
+. . X . X . . 
+. X O X O . . 
+. O O X X . . 
+. X X X O . . 
+. O X O X . . 
+. O O X O O . 
+
+2021-03-18 11:35:33,536 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,536 - Connect4Logger - INFO - Player actions: {'player2': 5}
+2021-03-18 11:35:33,537 - Connect4Logger - INFO - 
+. . X . X . . 
+. X O X O . . 
+. O O X X . . 
+. X X X O . . 
+. O X O X O . 
+. O O X O O . 
+
+2021-03-18 11:35:33,547 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,548 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:35:33,548 - Connect4Logger - INFO - 
+. X X . X . . 
+. X O X O . . 
+. O O X X . . 
+. X X X O . . 
+. O X O X O . 
+. O O X O O . 
+
+2021-03-18 11:35:33,557 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,557 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:35:33,558 - Connect4Logger - INFO - 
+. X X O X . . 
+. X O X O . . 
+. O O X X . . 
+. X X X O . . 
+. O X O X O . 
+. O O X O O . 
+
+2021-03-18 11:35:33,568 - Connect4Logger - INFO - GAME NUMBER 600
+2021-03-18 11:35:33,568 - Connect4Logger - INFO - Player actions: {'player1': 5}
+2021-03-18 11:35:33,569 - Connect4Logger - INFO - 
+. X X O X . . 
+. X O X O . . 
+. O O X X . . 
+. X X X O X . 
+. O X O X O . 
+. O O X O O . 
+
+2021-03-18 11:35:33,570 - Connect4Logger - INFO - PLAYER 2 WON!!!!
+2021-03-18 11:35:33,571 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 344 VS P2 = 249
+2021-03-18 11:35:33,571 - Connect4Logger - INFO - Player rewards: {'player1': 1.0, 'player2': -1.0}
+
+. X X O X . . 
+. X O X O . . 
+. O O X X . . 
+. X X X O X . 
+. O X O X O . 
+. O O X O O . 
+
+2021-03-18 11:35:57,167 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,168 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:35:57,168 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+
+2021-03-18 11:35:57,178 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,180 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:35:57,180 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X O . . . 
+
+2021-03-18 11:35:57,190 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,190 - Connect4Logger - INFO - Player actions: {'player1': 5}
+2021-03-18 11:35:57,191 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X O . X . 
+
+2021-03-18 11:35:57,203 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,204 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:35:57,204 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . X O . X . 
+
+2021-03-18 11:35:57,215 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,215 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:35:57,216 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X O . . . 
+. . X O . X . 
+
+2021-03-18 11:35:57,227 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,228 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:35:57,229 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . X O . . . 
+. . X O . X . 
+
+2021-03-18 11:35:57,238 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,239 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:35:57,239 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O X . . . 
+. . X O . . . 
+. . X O . X . 
+
+2021-03-18 11:35:57,251 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,252 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:35:57,252 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O X . . . 
+. . X O . . . 
+. . X O O X . 
+
+2021-03-18 11:35:57,264 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,265 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:35:57,265 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O X . . . 
+. . X O . . . 
+. . X O O X . 
+
+2021-03-18 11:35:57,278 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,279 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:35:57,279 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O X . . . 
+. . X O O . . 
+. . X O O X . 
+
+2021-03-18 11:35:57,290 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,291 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:35:57,292 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O X X . . 
+. . X O O . . 
+. . X O O X . 
+
+2021-03-18 11:35:57,304 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,305 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:35:57,307 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X O . . . 
+. . O X X . . 
+. . X O O . . 
+. . X O O X . 
+
+2021-03-18 11:35:57,330 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,331 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:35:57,331 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . . . . 
+. . X O . . . 
+. . O X X . . 
+. . X O O . . 
+. . X O O X . 
+
+2021-03-18 11:35:57,343 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,344 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:35:57,345 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . . . . 
+. . X O O . . 
+. . O X X . . 
+. . X O O . . 
+. . X O O X . 
+
+2021-03-18 11:35:57,356 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,356 - Connect4Logger - INFO - Player actions: {'player1': 5}
+2021-03-18 11:35:57,357 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . . . . 
+. . X O O . . 
+. . O X X . . 
+. . X O O X . 
+. . X O O X . 
+
+2021-03-18 11:35:57,367 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,368 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:35:57,369 - Connect4Logger - INFO - 
+. . O . . . . 
+. . X . . . . 
+. . X O O . . 
+. . O X X . . 
+. . X O O X . 
+. . X O O X . 
+
+2021-03-18 11:35:57,381 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,381 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:35:57,382 - Connect4Logger - INFO - 
+. . O . . . . 
+. . X . X . . 
+. . X O O . . 
+. . O X X . . 
+. . X O O X . 
+. . X O O X . 
+
+2021-03-18 11:35:57,393 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,393 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:35:57,394 - Connect4Logger - INFO - 
+. . O . . . . 
+. . X O X . . 
+. . X O O . . 
+. . O X X . . 
+. . X O O X . 
+. . X O O X . 
+
+2021-03-18 11:35:57,407 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,408 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:35:57,408 - Connect4Logger - INFO - 
+. . O . X . . 
+. . X O X . . 
+. . X O O . . 
+. . O X X . . 
+. . X O O X . 
+. . X O O X . 
+
+2021-03-18 11:35:57,420 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,421 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:35:57,422 - Connect4Logger - INFO - 
+. . O . X . . 
+. . X O X . . 
+. . X O O . . 
+. . O X X . . 
+. . X O O X . 
+. O X O O X . 
+
+2021-03-18 11:35:57,436 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,437 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:35:57,437 - Connect4Logger - INFO - 
+. . O . X . . 
+. . X O X . . 
+. . X O O . . 
+. . O X X . . 
+. X X O O X . 
+. O X O O X . 
+
+2021-03-18 11:35:57,449 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,450 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:35:57,450 - Connect4Logger - INFO - 
+. . O . X . . 
+. . X O X . . 
+. . X O O . . 
+. O O X X . . 
+. X X O O X . 
+. O X O O X . 
+
+2021-03-18 11:35:57,464 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,465 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:35:57,465 - Connect4Logger - INFO - 
+. . O . X . . 
+. . X O X . . 
+. X X O O . . 
+. O O X X . . 
+. X X O O X . 
+. O X O O X . 
+
+2021-03-18 11:35:57,478 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,479 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:35:57,479 - Connect4Logger - INFO - 
+. . O . X . . 
+. O X O X . . 
+. X X O O . . 
+. O O X X . . 
+. X X O O X . 
+. O X O O X . 
+
+2021-03-18 11:35:57,491 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,492 - Connect4Logger - INFO - Player actions: {'player1': 5}
+2021-03-18 11:35:57,493 - Connect4Logger - INFO - 
+. . O . X . . 
+. O X O X . . 
+. X X O O . . 
+. O O X X X . 
+. X X O O X . 
+. O X O O X . 
+
+2021-03-18 11:35:57,505 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,505 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:35:57,506 - Connect4Logger - INFO - 
+. . O O X . . 
+. O X O X . . 
+. X X O O . . 
+. O O X X X . 
+. X X O O X . 
+. O X O O X . 
+
+2021-03-18 11:35:57,518 - Connect4Logger - INFO - GAME NUMBER 700
+2021-03-18 11:35:57,519 - Connect4Logger - INFO - Player actions: {'player1': 5}
+2021-03-18 11:35:57,519 - Connect4Logger - INFO - 
+. . O O X . . 
+. O X O X . . 
+. X X O O X . 
+. O O X X X . 
+. X X O O X . 
+. O X O O X . 
+
+2021-03-18 11:35:57,521 - Connect4Logger - INFO - PLAYER 2 WON!!!!
+2021-03-18 11:35:57,521 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 402 VS P2 = 291
+2021-03-18 11:35:57,523 - Connect4Logger - INFO - Player rewards: {'player1': 1.0, 'player2': -1.0}
+
+. . O O X . . 
+. O X O X . . 
+. X X O O X . 
+. O O X X X . 
+. X X O O X . 
+. O X O O X . 
+
+2021-03-18 11:36:15,555 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,556 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:36:15,556 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+
+2021-03-18 11:36:15,566 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,567 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:36:15,568 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . X . . . 
+
+2021-03-18 11:36:15,582 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,583 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:36:15,583 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O . . . 
+. . . X . . . 
+
+2021-03-18 11:36:15,595 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,596 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:36:15,596 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O . . . 
+. . O X . . . 
+
+2021-03-18 11:36:15,609 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,610 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:36:15,610 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . X O . . . 
+. . O X . . . 
+
+2021-03-18 11:36:15,623 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,624 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:36:15,624 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . X O . . . 
+. . O X O . . 
+
+2021-03-18 11:36:15,637 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,638 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:36:15,638 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X X . . . 
+. . X O . . . 
+. . O X O . . 
+
+2021-03-18 11:36:15,649 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,649 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:36:15,650 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . X X . . . 
+. . X O . . . 
+. . O X O . . 
+
+2021-03-18 11:36:15,666 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,667 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:36:15,667 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X O . . . 
+. . X X . . . 
+. . X O . . . 
+. . O X O . . 
+
+2021-03-18 11:36:15,676 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,677 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:36:15,677 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X O . . . 
+. . X X . . . 
+. . X O . . . 
+. O O X O . . 
+
+2021-03-18 11:36:15,688 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,689 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:36:15,689 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X O . . . 
+. . X X . . . 
+. . X O X . . 
+. O O X O . . 
+
+2021-03-18 11:36:15,700 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,700 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:36:15,701 - Connect4Logger - INFO - 
+. . . . . . . 
+. . O . . . . 
+. . X O . . . 
+. . X X . . . 
+. . X O X . . 
+. O O X O . . 
+
+2021-03-18 11:36:15,714 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,714 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:36:15,715 - Connect4Logger - INFO - 
+. . . . . . . 
+. . O . . . . 
+. . X O . . . 
+. . X X X . . 
+. . X O X . . 
+. O O X O . . 
+
+2021-03-18 11:36:15,725 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,726 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:36:15,726 - Connect4Logger - INFO - 
+. . . . . . . 
+. . O . . . . 
+. . X O O . . 
+. . X X X . . 
+. . X O X . . 
+. O O X O . . 
+
+2021-03-18 11:36:15,738 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,739 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:36:15,739 - Connect4Logger - INFO - 
+. . . . . . . 
+. . O . X . . 
+. . X O O . . 
+. . X X X . . 
+. . X O X . . 
+. O O X O . . 
+
+2021-03-18 11:36:15,750 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,751 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:36:15,751 - Connect4Logger - INFO - 
+. . . . . . . 
+. . O . X . . 
+. . X O O . . 
+. . X X X . . 
+. O X O X . . 
+. O O X O . . 
+
+2021-03-18 11:36:15,762 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,763 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:36:15,763 - Connect4Logger - INFO - 
+. . . . X . . 
+. . O . X . . 
+. . X O O . . 
+. . X X X . . 
+. O X O X . . 
+. O O X O . . 
+
+2021-03-18 11:36:15,773 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,774 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:36:15,774 - Connect4Logger - INFO - 
+. . . . X . . 
+. . O . X . . 
+. . X O O . . 
+. O X X X . . 
+. O X O X . . 
+. O O X O . . 
+
+2021-03-18 11:36:15,785 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,785 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:36:15,786 - Connect4Logger - INFO - 
+. . . . X . . 
+. . O . X . . 
+. X X O O . . 
+. O X X X . . 
+. O X O X . . 
+. O O X O . . 
+
+2021-03-18 11:36:15,796 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,797 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:36:15,798 - Connect4Logger - INFO - 
+. . . . X . . 
+. O O . X . . 
+. X X O O . . 
+. O X X X . . 
+. O X O X . . 
+. O O X O . . 
+
+2021-03-18 11:36:15,808 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,809 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:36:15,809 - Connect4Logger - INFO - 
+. X . . X . . 
+. O O . X . . 
+. X X O O . . 
+. O X X X . . 
+. O X O X . . 
+. O O X O . . 
+
+2021-03-18 11:36:15,820 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,820 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:36:15,821 - Connect4Logger - INFO - 
+. X . . X . . 
+. O O O X . . 
+. X X O O . . 
+. O X X X . . 
+. O X O X . . 
+. O O X O . . 
+
+2021-03-18 11:36:15,832 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,832 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:36:15,833 - Connect4Logger - INFO - 
+. X X . X . . 
+. O O O X . . 
+. X X O O . . 
+. O X X X . . 
+. O X O X . . 
+. O O X O . . 
+
+2021-03-18 11:36:15,843 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,844 - Connect4Logger - INFO - Player actions: {'player2': 5}
+2021-03-18 11:36:15,844 - Connect4Logger - INFO - 
+. X X . X . . 
+. O O O X . . 
+. X X O O . . 
+. O X X X . . 
+. O X O X . . 
+. O O X O O . 
+
+2021-03-18 11:36:15,855 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,855 - Connect4Logger - INFO - Player actions: {'player1': 6}
+2021-03-18 11:36:15,856 - Connect4Logger - INFO - 
+. X X . X . . 
+. O O O X . . 
+. X X O O . . 
+. O X X X . . 
+. O X O X . . 
+. O O X O O X 
+
+2021-03-18 11:36:15,866 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,867 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:36:15,868 - Connect4Logger - INFO - 
+. X X O X . . 
+. O O O X . . 
+. X X O O . . 
+. O X X X . . 
+. O X O X . . 
+. O O X O O X 
+
+2021-03-18 11:36:15,878 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,879 - Connect4Logger - INFO - Player actions: {'player1': 5}
+2021-03-18 11:36:15,879 - Connect4Logger - INFO - 
+. X X O X . . 
+. O O O X . . 
+. X X O O . . 
+. O X X X . . 
+. O X O X X . 
+. O O X O O X 
+
+2021-03-18 11:36:15,890 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,891 - Connect4Logger - INFO - Player actions: {'player2': 6}
+2021-03-18 11:36:15,891 - Connect4Logger - INFO - 
+. X X O X . . 
+. O O O X . . 
+. X X O O . . 
+. O X X X . . 
+. O X O X X O 
+. O O X O O X 
+
+2021-03-18 11:36:15,902 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,902 - Connect4Logger - INFO - Player actions: {'player1': 0}
+2021-03-18 11:36:15,903 - Connect4Logger - INFO - 
+. X X O X . . 
+. O O O X . . 
+. X X O O . . 
+. O X X X . . 
+. O X O X X O 
+X O O X O O X 
+
+2021-03-18 11:36:15,913 - Connect4Logger - INFO - GAME NUMBER 800
+2021-03-18 11:36:15,914 - Connect4Logger - INFO - Player actions: {'player2': 5}
+2021-03-18 11:36:15,914 - Connect4Logger - INFO - 
+. X X O X . . 
+. O O O X . . 
+. X X O O . . 
+. O X X X O . 
+. O X O X X O 
+X O O X O O X 
+
+2021-03-18 11:36:15,916 - Connect4Logger - INFO - PLAYER 1 WON!!!!
+2021-03-18 11:36:15,916 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 464 VS P2 = 328
+2021-03-18 11:36:15,917 - Connect4Logger - INFO - Player rewards: {'player1': -1.0, 'player2': 1.0}
+
+. X X O X . . 
+. O O O X . . 
+. X X O O . . 
+. O X X X O . 
+. O X O X X O 
+X O O X O O X 
+
+2021-03-18 11:36:41,285 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,285 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:36:41,286 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+
+2021-03-18 11:36:41,298 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,298 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:36:41,299 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . X . . . 
+
+2021-03-18 11:36:41,310 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,311 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:36:41,311 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . X X . . . 
+
+2021-03-18 11:36:41,322 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,322 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:36:41,323 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . O . . . 
+. . X X . . . 
+
+2021-03-18 11:36:41,333 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,334 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:36:41,334 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . X O . . . 
+. . X X . . . 
+
+2021-03-18 11:36:41,345 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,346 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:36:41,347 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . O . . . 
+. . X O . . . 
+. . X X . . . 
+
+2021-03-18 11:36:41,358 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,358 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:36:41,359 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . . O . . . 
+. . . O . . . 
+. . X O . . . 
+. . X X . . . 
+
+2021-03-18 11:36:41,370 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,370 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:36:41,370 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . . O . . . 
+. . O O . . . 
+. . X O . . . 
+. . X X . . . 
+
+2021-03-18 11:36:41,381 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,382 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:36:41,382 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . X O . . . 
+. . O O . . . 
+. . X O . . . 
+. . X X . . . 
+
+2021-03-18 11:36:41,393 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,394 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:36:41,394 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . X O . . . 
+. . O O . . . 
+. . X O . . . 
+. . X X O . . 
+
+2021-03-18 11:36:41,404 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,404 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:36:41,406 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . X O . . . 
+. . O O . . . 
+. . X O . . . 
+. X X X O . . 
+
+2021-03-18 11:36:41,415 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,415 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:36:41,416 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . X O . . . 
+. . O O . . . 
+. . X O O . . 
+. X X X O . . 
+
+2021-03-18 11:36:41,427 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,427 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:36:41,428 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . X O . . . 
+. . O O X . . 
+. . X O O . . 
+. X X X O . . 
+
+2021-03-18 11:36:41,437 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,439 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:36:41,439 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . X . . . 
+. . X O . . . 
+. . O O X . . 
+. O X O O . . 
+. X X X O . . 
+
+2021-03-18 11:36:41,448 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,450 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:36:41,450 - Connect4Logger - INFO - 
+. . . X . . . 
+. . . X . . . 
+. . X O . . . 
+. . O O X . . 
+. O X O O . . 
+. X X X O . . 
+
+2021-03-18 11:36:41,460 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,461 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:36:41,462 - Connect4Logger - INFO - 
+. . . X . . . 
+. . . X . . . 
+. . X O O . . 
+. . O O X . . 
+. O X O O . . 
+. X X X O . . 
+
+2021-03-18 11:36:41,475 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,476 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:36:41,477 - Connect4Logger - INFO - 
+. . . X . . . 
+. . . X . . . 
+. . X O O . . 
+. X O O X . . 
+. O X O O . . 
+. X X X O . . 
+
+2021-03-18 11:36:41,487 - Connect4Logger - INFO - GAME NUMBER 900
+2021-03-18 11:36:41,487 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:36:41,487 - Connect4Logger - INFO - 
+. . . X . . . 
+. . . X O . . 
+. . X O O . . 
+. X O O X . . 
+. O X O O . . 
+. X X X O . . 
+
+2021-03-18 11:36:41,489 - Connect4Logger - INFO - PLAYER 1 WON!!!!
+2021-03-18 11:36:41,490 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 21 VS P2 = 16
+2021-03-18 11:36:41,490 - Connect4Logger - INFO - Player rewards: {'player1': -1.0, 'player2': 1.0}
+
+. . . X . . . 
+. . . X O . . 
+. . X O O . . 
+. X O O X . . 
+. O X O O . . 
+. X X X O . . 
+
+2021-03-18 11:36:58,563 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,564 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:36:58,565 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+
+2021-03-18 11:36:58,574 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,575 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:36:58,576 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X O . . . 
+
+2021-03-18 11:36:58,587 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,587 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:36:58,588 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . X O . . . 
+
+2021-03-18 11:36:58,598 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,599 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:36:58,599 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . X O O . . 
+
+2021-03-18 11:36:58,610 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,611 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:36:58,611 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . X . . . 
+. . X O O . . 
+
+2021-03-18 11:36:58,621 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,622 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:36:58,622 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . O X . . . 
+. . X O O . . 
+
+2021-03-18 11:36:58,633 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,634 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:36:58,634 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X X . . . 
+. . O X . . . 
+. . X O O . . 
+
+2021-03-18 11:36:58,645 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,646 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:36:58,646 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X X . . . 
+. . O X . . . 
+. O X O O . . 
+
+2021-03-18 11:36:58,656 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,657 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:36:58,658 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X X . . . 
+. X O X . . . 
+. O X O O . . 
+
+2021-03-18 11:36:58,667 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,668 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:36:58,669 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. O X X . . . 
+. X O X . . . 
+. O X O O . . 
+
+2021-03-18 11:36:58,679 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,680 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:36:58,680 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. O X X . . . 
+. X O X . . . 
+. O X O O . . 
+
+2021-03-18 11:36:58,690 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,691 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:36:58,691 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. O X X . . . 
+. X O X O . . 
+. O X O O . . 
+
+2021-03-18 11:36:58,701 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,701 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:36:58,702 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. O X X X . . 
+. X O X O . . 
+. O X O O . . 
+
+2021-03-18 11:36:58,713 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,713 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:36:58,714 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X O . . . 
+. O X X X . . 
+. X O X O . . 
+. O X O O . . 
+
+2021-03-18 11:36:58,723 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,724 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:36:58,724 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X O X . . 
+. O X X X . . 
+. X O X O . . 
+. O X O O . . 
+
+2021-03-18 11:36:58,733 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,734 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:36:58,734 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. O X O X . . 
+. O X X X . . 
+. X O X O . . 
+. O X O O . . 
+
+2021-03-18 11:36:58,744 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,745 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:36:58,746 - Connect4Logger - INFO - 
+. . . . . . . 
+. X . . . . . 
+. O X O X . . 
+. O X X X . . 
+. X O X O . . 
+. O X O O . . 
+
+2021-03-18 11:36:58,756 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,756 - Connect4Logger - INFO - Player actions: {'player2': 5}
+2021-03-18 11:36:58,757 - Connect4Logger - INFO - 
+. . . . . . . 
+. X . . . . . 
+. O X O X . . 
+. O X X X . . 
+. X O X O . . 
+. O X O O O . 
+
+2021-03-18 11:36:58,766 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,766 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:36:58,767 - Connect4Logger - INFO - 
+. . . . . . . 
+. X X . . . . 
+. O X O X . . 
+. O X X X . . 
+. X O X O . . 
+. O X O O O . 
+
+2021-03-18 11:36:58,777 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,778 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:36:58,779 - Connect4Logger - INFO - 
+. . . . . . . 
+. X X . O . . 
+. O X O X . . 
+. O X X X . . 
+. X O X O . . 
+. O X O O O . 
+
+2021-03-18 11:36:58,789 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,789 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:36:58,790 - Connect4Logger - INFO - 
+. . . . X . . 
+. X X . O . . 
+. O X O X . . 
+. O X X X . . 
+. X O X O . . 
+. O X O O O . 
+
+2021-03-18 11:36:58,799 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,799 - Connect4Logger - INFO - Player actions: {'player2': 0}
+2021-03-18 11:36:58,800 - Connect4Logger - INFO - 
+. . . . X . . 
+. X X . O . . 
+. O X O X . . 
+. O X X X . . 
+. X O X O . . 
+O O X O O O . 
+
+2021-03-18 11:36:58,810 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,811 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:36:58,811 - Connect4Logger - INFO - 
+. X . . X . . 
+. X X . O . . 
+. O X O X . . 
+. O X X X . . 
+. X O X O . . 
+O O X O O O . 
+
+2021-03-18 11:36:58,822 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,823 - Connect4Logger - INFO - Player actions: {'player2': 0}
+2021-03-18 11:36:58,823 - Connect4Logger - INFO - 
+. X . . X . . 
+. X X . O . . 
+. O X O X . . 
+. O X X X . . 
+O X O X O . . 
+O O X O O O . 
+
+2021-03-18 11:36:58,833 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,834 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:36:58,834 - Connect4Logger - INFO - 
+. X . . X . . 
+. X X X O . . 
+. O X O X . . 
+. O X X X . . 
+O X O X O . . 
+O O X O O O . 
+
+2021-03-18 11:36:58,844 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,846 - Connect4Logger - INFO - Player actions: {'player2': 5}
+2021-03-18 11:36:58,846 - Connect4Logger - INFO - 
+. X . . X . . 
+. X X X O . . 
+. O X O X . . 
+. O X X X . . 
+O X O X O O . 
+O O X O O O . 
+
+2021-03-18 11:36:58,856 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,856 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:36:58,857 - Connect4Logger - INFO - 
+. X . X X . . 
+. X X X O . . 
+. O X O X . . 
+. O X X X . . 
+O X O X O O . 
+O O X O O O . 
+
+2021-03-18 11:36:58,867 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,867 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:36:58,868 - Connect4Logger - INFO - 
+. X O X X . . 
+. X X X O . . 
+. O X O X . . 
+. O X X X . . 
+O X O X O O . 
+O O X O O O . 
+
+2021-03-18 11:36:58,877 - Connect4Logger - INFO - GAME NUMBER 1000
+2021-03-18 11:36:58,878 - Connect4Logger - INFO - Player actions: {'player1': 5}
+2021-03-18 11:36:58,879 - Connect4Logger - INFO - 
+. X O X X . . 
+. X X X O . . 
+. O X O X . . 
+. O X X X X . 
+O X O X O O . 
+O O X O O O . 
+
+2021-03-18 11:36:58,880 - Connect4Logger - INFO - PLAYER 2 WON!!!!
+2021-03-18 11:36:58,881 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 76 VS P2 = 60
+2021-03-18 11:36:58,881 - Connect4Logger - INFO - Player rewards: {'player1': 1.0, 'player2': -1.0}
+
+. X O X X . . 
+. X X X O . . 
+. O X O X . . 
+. O X X X X . 
+O X O X O O . 
+O O X O O O . 
+
+2021-03-18 11:37:22,100 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,101 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:37:22,102 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+
+2021-03-18 11:37:22,111 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,112 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:37:22,113 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O X . . . 
+
+2021-03-18 11:37:22,122 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,123 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:37:22,123 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O X . . . 
+
+2021-03-18 11:37:22,132 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,133 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:37:22,133 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X O . . . 
+. . O X . . . 
+
+2021-03-18 11:37:22,143 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,144 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:37:22,144 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . X O . . . 
+. . O X . . . 
+
+2021-03-18 11:37:22,154 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,155 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:37:22,155 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . X . . . . 
+. . X O . . . 
+. . O X . . . 
+
+2021-03-18 11:37:22,165 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,165 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:37:22,166 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . . . . 
+. . O . . . . 
+. . X . . . . 
+. . X O . . . 
+. . O X . . . 
+
+2021-03-18 11:37:22,176 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,176 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:37:22,177 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . . . . 
+. . O . . . . 
+. . X . . . . 
+. . X O . . . 
+. . O X O . . 
+
+2021-03-18 11:37:22,187 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,188 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:37:22,189 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . . . . 
+. . O . . . . 
+. . X X . . . 
+. . X O . . . 
+. . O X O . . 
+
+2021-03-18 11:37:22,198 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,200 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:37:22,200 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . . . . 
+. . O . . . . 
+. . X X . . . 
+. . X O O . . 
+. . O X O . . 
+
+2021-03-18 11:37:22,209 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,209 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:37:22,210 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . . . . 
+. . O . . . . 
+. . X X . . . 
+. . X O O . . 
+. X O X O . . 
+
+2021-03-18 11:37:22,220 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,220 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:37:22,221 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . . . . 
+. . O O . . . 
+. . X X . . . 
+. . X O O . . 
+. X O X O . . 
+
+2021-03-18 11:37:22,231 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,232 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:37:22,232 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . . . . 
+. . O O . . . 
+. . X X X . . 
+. . X O O . . 
+. X O X O . . 
+
+2021-03-18 11:37:22,242 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,242 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:37:22,243 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . . . . 
+. . O O O . . 
+. . X X X . . 
+. . X O O . . 
+. X O X O . . 
+
+2021-03-18 11:37:22,252 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,253 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:37:22,253 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . . . . 
+. . O O O . . 
+. . X X X . . 
+. X X O O . . 
+. X O X O . . 
+
+2021-03-18 11:37:22,262 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,262 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:37:22,263 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . O . . 
+. . O O O . . 
+. . X X X . . 
+. X X O O . . 
+. X O X O . . 
+
+2021-03-18 11:37:22,273 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,274 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:37:22,274 - Connect4Logger - INFO - 
+. . . . X . . 
+. . X . O . . 
+. . O O O . . 
+. . X X X . . 
+. X X O O . . 
+. X O X O . . 
+
+2021-03-18 11:37:22,284 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,285 - Connect4Logger - INFO - Player actions: {'player2': 5}
+2021-03-18 11:37:22,286 - Connect4Logger - INFO - 
+. . . . X . . 
+. . X . O . . 
+. . O O O . . 
+. . X X X . . 
+. X X O O . . 
+. X O X O O . 
+
+2021-03-18 11:37:22,298 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,299 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:37:22,300 - Connect4Logger - INFO - 
+. . X . X . . 
+. . X . O . . 
+. . O O O . . 
+. . X X X . . 
+. X X O O . . 
+. X O X O O . 
+
+2021-03-18 11:37:22,313 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,314 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:37:22,314 - Connect4Logger - INFO - 
+. . X . X . . 
+. . X O O . . 
+. . O O O . . 
+. . X X X . . 
+. X X O O . . 
+. X O X O O . 
+
+2021-03-18 11:37:22,325 - Connect4Logger - INFO - GAME NUMBER 1100
+2021-03-18 11:37:22,326 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:37:22,326 - Connect4Logger - INFO - 
+. . X . X . . 
+. . X O O . . 
+. . O O O . . 
+. X X X X . . 
+. X X O O . . 
+. X O X O O . 
+
+2021-03-18 11:37:22,327 - Connect4Logger - INFO - PLAYER 2 WON!!!!
+2021-03-18 11:37:22,329 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 137 VS P2 = 99
+2021-03-18 11:37:22,329 - Connect4Logger - INFO - Player rewards: {'player1': 1.0, 'player2': -1.0}
+
+. . X . X . . 
+. . X O O . . 
+. . O O O . . 
+. X X X X . . 
+. X X O O . . 
+. X O X O O . 
+
+2021-03-18 11:37:39,052 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,053 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:37:39,053 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+
+2021-03-18 11:37:39,064 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,064 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:37:39,065 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . O . . 
+
+2021-03-18 11:37:39,075 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,076 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:37:39,076 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . X . O . . 
+
+2021-03-18 11:37:39,086 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,087 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:37:39,087 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . X . . . . 
+. . X . O . . 
+
+2021-03-18 11:37:39,097 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,098 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:37:39,098 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . X . X . . 
+. . X . O . . 
+
+2021-03-18 11:37:39,108 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,109 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:37:39,110 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . X . X . . 
+. . X O O . . 
+
+2021-03-18 11:37:39,120 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,121 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:37:39,121 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . X X X . . 
+. . X O O . . 
+
+2021-03-18 11:37:39,130 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,131 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:37:39,132 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . O . . . . 
+. . X X X . . 
+. . X O O . . 
+
+2021-03-18 11:37:39,141 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,142 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:37:39,142 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . O . X . . 
+. . X X X . . 
+. . X O O . . 
+
+2021-03-18 11:37:39,151 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,152 - Connect4Logger - INFO - Player actions: {'player2': 0}
+2021-03-18 11:37:39,152 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . O . X . . 
+. . X X X . . 
+O . X O O . . 
+
+2021-03-18 11:37:39,161 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,162 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:37:39,162 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O . X . . 
+. . O . X . . 
+. . X X X . . 
+O . X O O . . 
+
+2021-03-18 11:37:39,172 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,172 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:37:39,173 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O . X . . 
+. . O . X . . 
+. . X X X . . 
+O O X O O . . 
+
+2021-03-18 11:37:39,183 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,183 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:37:39,184 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . . . . 
+. . O . X . . 
+. . O . X . . 
+. . X X X . . 
+O O X O O . . 
+
+2021-03-18 11:37:39,192 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,193 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:37:39,194 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . O . . 
+. . O . X . . 
+. . O . X . . 
+. . X X X . . 
+O O X O O . . 
+
+2021-03-18 11:37:39,203 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,204 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:37:39,204 - Connect4Logger - INFO - 
+. . . . X . . 
+. . X . O . . 
+. . O . X . . 
+. . O . X . . 
+. . X X X . . 
+O O X O O . . 
+
+2021-03-18 11:37:39,214 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,215 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:37:39,216 - Connect4Logger - INFO - 
+. . . . X . . 
+. . X . O . . 
+. . O . X . . 
+. . O O X . . 
+. . X X X . . 
+O O X O O . . 
+
+2021-03-18 11:37:39,226 - Connect4Logger - INFO - GAME NUMBER 1200
+2021-03-18 11:37:39,227 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:37:39,227 - Connect4Logger - INFO - 
+. . . . X . . 
+. . X . O . . 
+. . O . X . . 
+. . O O X . . 
+. X X X X . . 
+O O X O O . . 
+
+2021-03-18 11:37:39,228 - Connect4Logger - INFO - PLAYER 2 WON!!!!
+2021-03-18 11:37:39,229 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 187 VS P2 = 147
+2021-03-18 11:37:39,229 - Connect4Logger - INFO - Player rewards: {'player1': 1.0, 'player2': -1.0}
+
+. . . . X . . 
+. . X . O . . 
+. . O . X . . 
+. . O O X . . 
+. X X X X . . 
+O O X O O . . 
+
+2021-03-18 11:38:02,437 - Connect4Logger - INFO - GAME NUMBER 1300
+2021-03-18 11:38:02,437 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:38:02,438 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+
+2021-03-18 11:38:02,447 - Connect4Logger - INFO - GAME NUMBER 1300
+2021-03-18 11:38:02,448 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:38:02,448 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . X . . . 
+
+2021-03-18 11:38:02,458 - Connect4Logger - INFO - GAME NUMBER 1300
+2021-03-18 11:38:02,459 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:38:02,459 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O . . . 
+. . . X . . . 
+
+2021-03-18 11:38:02,469 - Connect4Logger - INFO - GAME NUMBER 1300
+2021-03-18 11:38:02,469 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:38:02,470 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O . . . 
+. . O X . . . 
+
+2021-03-18 11:38:02,479 - Connect4Logger - INFO - GAME NUMBER 1300
+2021-03-18 11:38:02,480 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:38:02,480 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . X O . . . 
+. . O X . . . 
+
+2021-03-18 11:38:02,490 - Connect4Logger - INFO - GAME NUMBER 1300
+2021-03-18 11:38:02,491 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:38:02,491 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O X . . . 
+. . X O . . . 
+. . O X . . . 
+
+2021-03-18 11:38:02,501 - Connect4Logger - INFO - GAME NUMBER 1300
+2021-03-18 11:38:02,502 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:38:02,502 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O X . . . 
+. . X O . . . 
+. . O X X . . 
+
+2021-03-18 11:38:02,512 - Connect4Logger - INFO - GAME NUMBER 1300
+2021-03-18 11:38:02,512 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:38:02,513 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . O X . . . 
+. . X O . . . 
+. . O X X . . 
+
+2021-03-18 11:38:02,523 - Connect4Logger - INFO - GAME NUMBER 1300
+2021-03-18 11:38:02,523 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:38:02,524 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . O X . . . 
+. . X O X . . 
+. . O X X . . 
+
+2021-03-18 11:38:02,534 - Connect4Logger - INFO - GAME NUMBER 1300
+2021-03-18 11:38:02,534 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:38:02,535 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . O X . . . 
+. . X O X . . 
+. O O X X . . 
+
+2021-03-18 11:38:02,544 - Connect4Logger - INFO - GAME NUMBER 1300
+2021-03-18 11:38:02,545 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:38:02,545 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . O X X . . 
+. . X O X . . 
+. O O X X . . 
+
+2021-03-18 11:38:02,556 - Connect4Logger - INFO - GAME NUMBER 1300
+2021-03-18 11:38:02,557 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:38:02,557 - Connect4Logger - INFO - 
+. . . . . . . 
+. . O . . . . 
+. . O . . . . 
+. . O X X . . 
+. . X O X . . 
+. O O X X . . 
+
+2021-03-18 11:38:02,568 - Connect4Logger - INFO - GAME NUMBER 1300
+2021-03-18 11:38:02,569 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:38:02,569 - Connect4Logger - INFO - 
+. . . . . . . 
+. . O . . . . 
+. . O . X . . 
+. . O X X . . 
+. . X O X . . 
+. O O X X . . 
+
+2021-03-18 11:38:02,571 - Connect4Logger - INFO - PLAYER 2 WON!!!!
+2021-03-18 11:38:02,571 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 246 VS P2 = 188
+2021-03-18 11:38:02,572 - Connect4Logger - INFO - Player rewards: {'player1': 1.0, 'player2': -1.0}
+
+. . . . . . . 
+. . O . . . . 
+. . O . X . . 
+. . O X X . . 
+. . X O X . . 
+. O O X X . . 
+
+2021-03-18 11:38:19,050 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,051 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:38:19,051 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+
+2021-03-18 11:38:19,062 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,063 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:38:19,063 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X O . . 
+
+2021-03-18 11:38:19,074 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,075 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:38:19,075 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. X . X O . . 
+
+2021-03-18 11:38:19,085 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,086 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:38:19,086 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . O . . 
+. X . X O . . 
+
+2021-03-18 11:38:19,096 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,097 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:38:19,097 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X O . . 
+. X . X O . . 
+
+2021-03-18 11:38:19,107 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,108 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:38:19,108 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . X O . . 
+. X . X O . . 
+
+2021-03-18 11:38:19,117 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,118 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:38:19,119 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. X . X O . . 
+. X . X O . . 
+
+2021-03-18 11:38:19,129 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,130 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:38:19,130 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. O . O . . . 
+. X . X O . . 
+. X . X O . . 
+
+2021-03-18 11:38:19,141 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,141 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:38:19,142 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. O . O X . . 
+. X . X O . . 
+. X . X O . . 
+
+2021-03-18 11:38:19,152 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,153 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:38:19,154 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. O . . . . . 
+. O . O X . . 
+. X . X O . . 
+. X . X O . . 
+
+2021-03-18 11:38:19,164 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,165 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:38:19,166 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. O . X . . . 
+. O . O X . . 
+. X . X O . . 
+. X . X O . . 
+
+2021-03-18 11:38:19,176 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,176 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:38:19,177 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. O . X . . . 
+. O . O X . . 
+. X . X O . . 
+. X O X O . . 
+
+2021-03-18 11:38:19,187 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,188 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:38:19,188 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. O . X . . . 
+. O . O X . . 
+. X X X O . . 
+. X O X O . . 
+
+2021-03-18 11:38:19,198 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,199 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:38:19,199 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. O . X . . . 
+. O O O X . . 
+. X X X O . . 
+. X O X O . . 
+
+2021-03-18 11:38:19,208 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,209 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:38:19,209 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. O X X . . . 
+. O O O X . . 
+. X X X O . . 
+. X O X O . . 
+
+2021-03-18 11:38:19,219 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,220 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:38:19,220 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. O X X O . . 
+. O O O X . . 
+. X X X O . . 
+. X O X O . . 
+
+2021-03-18 11:38:19,233 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,233 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:38:19,234 - Connect4Logger - INFO - 
+. . . . . . . 
+. X . . . . . 
+. O X X O . . 
+. O O O X . . 
+. X X X O . . 
+. X O X O . . 
+
+2021-03-18 11:38:19,244 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,244 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:38:19,245 - Connect4Logger - INFO - 
+. . . . . . . 
+. X . . O . . 
+. O X X O . . 
+. O O O X . . 
+. X X X O . . 
+. X O X O . . 
+
+2021-03-18 11:38:19,255 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,255 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:38:19,256 - Connect4Logger - INFO - 
+. . . . X . . 
+. X . . O . . 
+. O X X O . . 
+. O O O X . . 
+. X X X O . . 
+. X O X O . . 
+
+2021-03-18 11:38:19,266 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,266 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:38:19,267 - Connect4Logger - INFO - 
+. . . . X . . 
+. X . O O . . 
+. O X X O . . 
+. O O O X . . 
+. X X X O . . 
+. X O X O . . 
+
+2021-03-18 11:38:19,277 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,278 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:38:19,279 - Connect4Logger - INFO - 
+. X . . X . . 
+. X . O O . . 
+. O X X O . . 
+. O O O X . . 
+. X X X O . . 
+. X O X O . . 
+
+2021-03-18 11:38:19,289 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,290 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:38:19,290 - Connect4Logger - INFO - 
+. X . . X . . 
+. X O O O . . 
+. O X X O . . 
+. O O O X . . 
+. X X X O . . 
+. X O X O . . 
+
+2021-03-18 11:38:19,301 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,301 - Connect4Logger - INFO - Player actions: {'player1': 5}
+2021-03-18 11:38:19,302 - Connect4Logger - INFO - 
+. X . . X . . 
+. X O O O . . 
+. O X X O . . 
+. O O O X . . 
+. X X X O . . 
+. X O X O X . 
+
+2021-03-18 11:38:19,311 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,312 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:38:19,312 - Connect4Logger - INFO - 
+. X O . X . . 
+. X O O O . . 
+. O X X O . . 
+. O O O X . . 
+. X X X O . . 
+. X O X O X . 
+
+2021-03-18 11:38:19,322 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,322 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:38:19,323 - Connect4Logger - INFO - 
+. X O X X . . 
+. X O O O . . 
+. O X X O . . 
+. O O O X . . 
+. X X X O . . 
+. X O X O X . 
+
+2021-03-18 11:38:19,333 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,334 - Connect4Logger - INFO - Player actions: {'player2': 5}
+2021-03-18 11:38:19,334 - Connect4Logger - INFO - 
+. X O X X . . 
+. X O O O . . 
+. O X X O . . 
+. O O O X . . 
+. X X X O O . 
+. X O X O X . 
+
+2021-03-18 11:38:19,344 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,345 - Connect4Logger - INFO - Player actions: {'player1': 5}
+2021-03-18 11:38:19,346 - Connect4Logger - INFO - 
+. X O X X . . 
+. X O O O . . 
+. O X X O . . 
+. O O O X X . 
+. X X X O O . 
+. X O X O X . 
+
+2021-03-18 11:38:19,356 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,357 - Connect4Logger - INFO - Player actions: {'player2': 0}
+2021-03-18 11:38:19,357 - Connect4Logger - INFO - 
+. X O X X . . 
+. X O O O . . 
+. O X X O . . 
+. O O O X X . 
+. X X X O O . 
+O X O X O X . 
+
+2021-03-18 11:38:19,367 - Connect4Logger - INFO - GAME NUMBER 1400
+2021-03-18 11:38:19,368 - Connect4Logger - INFO - Player actions: {'player1': 0}
+2021-03-18 11:38:19,369 - Connect4Logger - INFO - 
+. X O X X . . 
+. X O O O . . 
+. O X X O . . 
+. O O O X X . 
+X X X X O O . 
+O X O X O X . 
+
+2021-03-18 11:38:19,370 - Connect4Logger - INFO - PLAYER 2 WON!!!!
+2021-03-18 11:38:19,371 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 304 VS P2 = 230
+2021-03-18 11:38:19,371 - Connect4Logger - INFO - Player rewards: {'player1': 1.0, 'player2': -1.0}
+
+. X O X X . . 
+. X O O O . . 
+. O X X O . . 
+. O O O X X . 
+X X X X O O . 
+O X O X O X . 
+
+2021-03-18 11:38:36,196 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,196 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:38:36,197 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+
+2021-03-18 11:38:36,206 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,207 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:38:36,208 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . X . . . . 
+
+2021-03-18 11:38:36,217 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,218 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:38:36,218 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . X X . . . 
+
+2021-03-18 11:38:36,228 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,229 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:38:36,230 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O O . . . 
+. . X X . . . 
+
+2021-03-18 11:38:36,240 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,240 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:38:36,241 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O O . . . 
+. . X X . . . 
+
+2021-03-18 11:38:36,250 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,250 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:38:36,251 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O O . . . 
+. . X X O . . 
+
+2021-03-18 11:38:36,261 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,261 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:38:36,262 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X X . . . 
+. . O O . . . 
+. . X X O . . 
+
+2021-03-18 11:38:36,272 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,273 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:38:36,273 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X X . . . 
+. . O O O . . 
+. . X X O . . 
+
+2021-03-18 11:38:36,282 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,283 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:38:36,284 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . X X . . . 
+. . O O O . . 
+. . X X O . . 
+
+2021-03-18 11:38:36,294 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,294 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:38:36,295 - Connect4Logger - INFO - 
+. . . . . . . 
+. . O . . . . 
+. . X . . . . 
+. . X X . . . 
+. . O O O . . 
+. . X X O . . 
+
+2021-03-18 11:38:36,305 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,305 - Connect4Logger - INFO - Player actions: {'player1': 5}
+2021-03-18 11:38:36,306 - Connect4Logger - INFO - 
+. . . . . . . 
+. . O . . . . 
+. . X . . . . 
+. . X X . . . 
+. . O O O . . 
+. . X X O X . 
+
+2021-03-18 11:38:36,315 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,316 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:38:36,316 - Connect4Logger - INFO - 
+. . O . . . . 
+. . O . . . . 
+. . X . . . . 
+. . X X . . . 
+. . O O O . . 
+. . X X O X . 
+
+2021-03-18 11:38:36,326 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,327 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:38:36,327 - Connect4Logger - INFO - 
+. . O . . . . 
+. . O . . . . 
+. . X . . . . 
+. . X X X . . 
+. . O O O . . 
+. . X X O X . 
+
+2021-03-18 11:38:36,337 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,337 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:38:36,338 - Connect4Logger - INFO - 
+. . O . . . . 
+. . O . . . . 
+. . X . O . . 
+. . X X X . . 
+. . O O O . . 
+. . X X O X . 
+
+2021-03-18 11:38:36,348 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,348 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:38:36,349 - Connect4Logger - INFO - 
+. . O . . . . 
+. . O . . . . 
+. . X . O . . 
+. . X X X . . 
+. . O O O . . 
+. X X X O X . 
+
+2021-03-18 11:38:36,357 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,358 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:38:36,359 - Connect4Logger - INFO - 
+. . O . . . . 
+. . O . O . . 
+. . X . O . . 
+. . X X X . . 
+. . O O O . . 
+. X X X O X . 
+
+2021-03-18 11:38:36,368 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,369 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:38:36,369 - Connect4Logger - INFO - 
+. . O . X . . 
+. . O . O . . 
+. . X . O . . 
+. . X X X . . 
+. . O O O . . 
+. X X X O X . 
+
+2021-03-18 11:38:36,378 - Connect4Logger - INFO - GAME NUMBER 1500
+2021-03-18 11:38:36,379 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:38:36,379 - Connect4Logger - INFO - 
+. . O . X . . 
+. . O . O . . 
+. . X . O . . 
+. . X X X . . 
+. O O O O . . 
+. X X X O X . 
+
+2021-03-18 11:38:36,380 - Connect4Logger - INFO - PLAYER 1 WON!!!!
+2021-03-18 11:38:36,381 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 357 VS P2 = 277
+2021-03-18 11:38:36,381 - Connect4Logger - INFO - Player rewards: {'player1': -1.0, 'player2': 1.0}
+
+. . O . X . . 
+. . O . O . . 
+. . X . O . . 
+. . X X X . . 
+. O O O O . . 
+. X X X O X . 
+
+2021-03-18 11:38:59,765 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,765 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:38:59,766 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+
+2021-03-18 11:38:59,776 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,776 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:38:59,777 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O X . . . 
+
+2021-03-18 11:38:59,787 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,787 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:38:59,788 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . O X . . . 
+
+2021-03-18 11:38:59,799 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,799 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:38:59,800 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . X . . . 
+. . O X . . . 
+
+2021-03-18 11:38:59,810 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,811 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:38:59,812 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . X X . . . 
+. . O X . . . 
+
+2021-03-18 11:38:59,822 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,823 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:38:59,823 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . O . . . 
+. . X X . . . 
+. . O X . . . 
+
+2021-03-18 11:38:59,833 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,834 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:38:59,834 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . O . . . 
+. . X X . . . 
+. . O X X . . 
+
+2021-03-18 11:38:59,844 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,845 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:38:59,846 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . O . . . 
+. . . O . . . 
+. . . O . . . 
+. . X X . . . 
+. . O X X . . 
+
+2021-03-18 11:38:59,857 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,857 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:38:59,858 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . O . . . 
+. . . O . . . 
+. . . O . . . 
+. . X X X . . 
+. . O X X . . 
+
+2021-03-18 11:38:59,867 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,867 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:38:59,868 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . O . . . 
+. . . O . . . 
+. . O O . . . 
+. . X X X . . 
+. . O X X . . 
+
+2021-03-18 11:38:59,879 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,879 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:38:59,880 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . O . . . 
+. . X O . . . 
+. . O O . . . 
+. . X X X . . 
+. . O X X . . 
+
+2021-03-18 11:38:59,891 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,891 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:38:59,892 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . O . . . 
+. . X O . . . 
+. . O O . . . 
+. . X X X . . 
+. O O X X . . 
+
+2021-03-18 11:38:59,902 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,903 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:38:59,904 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . O . . . 
+. . X O . . . 
+. . O O X . . 
+. . X X X . . 
+. O O X X . . 
+
+2021-03-18 11:38:59,914 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,914 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:38:59,915 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . O . . . 
+. . X O O . . 
+. . O O X . . 
+. . X X X . . 
+. O O X X . . 
+
+2021-03-18 11:38:59,925 - Connect4Logger - INFO - GAME NUMBER 1600
+2021-03-18 11:38:59,926 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:38:59,926 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . O . . . 
+. . X O O . . 
+. . O O X . . 
+. X X X X . . 
+. O O X X . . 
+
+2021-03-18 11:38:59,928 - Connect4Logger - INFO - PLAYER 2 WON!!!!
+2021-03-18 11:38:59,928 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 415 VS P2 = 318
+2021-03-18 11:38:59,929 - Connect4Logger - INFO - Player rewards: {'player1': 1.0, 'player2': -1.0}
+
+. . . . . . . 
+. . . O . . . 
+. . X O O . . 
+. . O O X . . 
+. X X X X . . 
+. O O X X . . 
+
+2021-03-18 11:39:16,599 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,600 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:39:16,601 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+
+2021-03-18 11:39:16,611 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,612 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:39:16,612 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X O . . . 
+
+2021-03-18 11:39:16,622 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,623 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:39:16,623 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . X O . . . 
+
+2021-03-18 11:39:16,633 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,634 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:39:16,634 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X O . . . 
+. . X O . . . 
+
+2021-03-18 11:39:16,645 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,646 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:39:16,646 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . X O . . . 
+. . X O . . . 
+
+2021-03-18 11:39:16,657 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,657 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:39:16,658 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . X . . . 
+. . X O . . . 
+. . X O . . . 
+
+2021-03-18 11:39:16,668 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,668 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:39:16,669 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . X X . . . 
+. . X O . . . 
+. . X O . . . 
+
+2021-03-18 11:39:16,679 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,680 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:39:16,680 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O O . . . 
+. . X X . . . 
+. . X O . . . 
+. . X O . . . 
+
+2021-03-18 11:39:16,694 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,695 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:39:16,695 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O O . . . 
+. . X X . . . 
+. . X O . . . 
+. . X O X . . 
+
+2021-03-18 11:39:16,706 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,706 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:39:16,707 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O O . . . 
+. . X X . . . 
+. . X O O . . 
+. . X O X . . 
+
+2021-03-18 11:39:16,715 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,717 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:39:16,717 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O O . . . 
+. . X X . . . 
+. . X O O . . 
+. X X O X . . 
+
+2021-03-18 11:39:16,727 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,728 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:39:16,728 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O O . . . 
+. . X X . . . 
+. O X O O . . 
+. X X O X . . 
+
+2021-03-18 11:39:16,739 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,740 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:39:16,740 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O O . . . 
+. . X X X . . 
+. O X O O . . 
+. X X O X . . 
+
+2021-03-18 11:39:16,751 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,751 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:39:16,752 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . O . . . 
+. . O O . . . 
+. . X X X . . 
+. O X O O . . 
+. X X O X . . 
+
+2021-03-18 11:39:16,762 - Connect4Logger - INFO - GAME NUMBER 1700
+2021-03-18 11:39:16,763 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:39:16,763 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . O . . . 
+. . O O X . . 
+. . X X X . . 
+. O X O O . . 
+. X X O X . . 
+
+2021-03-18 11:39:16,765 - Connect4Logger - INFO - PLAYER 2 WON!!!!
+2021-03-18 11:39:16,766 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 471 VS P2 = 362
+2021-03-18 11:39:16,767 - Connect4Logger - INFO - Player rewards: {'player1': 1.0, 'player2': -1.0}
+
+. . . . . . . 
+. . . O . . . 
+. . O O X . . 
+. . X X X . . 
+. O X O O . . 
+. X X O X . . 
+
+2021-03-18 11:39:40,004 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,005 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:39:40,006 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+
+2021-03-18 11:39:40,016 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,016 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:39:40,017 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . . X . . . 
+
+2021-03-18 11:39:40,026 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,026 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:39:40,027 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O . . . 
+. . . X . . . 
+
+2021-03-18 11:39:40,036 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,037 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:39:40,037 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O . . . 
+. . . X O . . 
+
+2021-03-18 11:39:40,047 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,047 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:39:40,048 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O . . . 
+. . X X O . . 
+
+2021-03-18 11:39:40,058 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,058 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:39:40,059 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O O . . 
+. . X X O . . 
+
+2021-03-18 11:39:40,069 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,069 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:39:40,070 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O O . . 
+. X X X O . . 
+
+2021-03-18 11:39:40,083 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,083 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:39:40,084 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . O O O . . 
+. X X X O . . 
+
+2021-03-18 11:39:40,093 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,094 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:39:40,095 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X X . . 
+. . O O O . . 
+. X X X O . . 
+
+2021-03-18 11:39:40,104 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,105 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:39:40,105 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O X X . . 
+. . O O O . . 
+. X X X O . . 
+
+2021-03-18 11:39:40,115 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,116 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:39:40,116 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . X . . 
+. . O X X . . 
+. . O O O . . 
+. X X X O . . 
+
+2021-03-18 11:39:40,126 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,127 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:39:40,127 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . O . . 
+. . . . X . . 
+. . O X X . . 
+. . O O O . . 
+. X X X O . . 
+
+2021-03-18 11:39:40,137 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,138 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:39:40,139 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . O . . 
+. . . X X . . 
+. . O X X . . 
+. . O O O . . 
+. X X X O . . 
+
+2021-03-18 11:39:40,147 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,148 - Connect4Logger - INFO - Player actions: {'player2': 5}
+2021-03-18 11:39:40,148 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . O . . 
+. . . X X . . 
+. . O X X . . 
+. . O O O . . 
+. X X X O O . 
+
+2021-03-18 11:39:40,158 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,159 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:39:40,159 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . O . . 
+. . X X X . . 
+. . O X X . . 
+. . O O O . . 
+. X X X O O . 
+
+2021-03-18 11:39:40,169 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,170 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:39:40,170 - Connect4Logger - INFO - 
+. . . . O . . 
+. . . . O . . 
+. . X X X . . 
+. . O X X . . 
+. . O O O . . 
+. X X X O O . 
+
+2021-03-18 11:39:40,179 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,179 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:39:40,180 - Connect4Logger - INFO - 
+. . . . O . . 
+. . . . O . . 
+. . X X X . . 
+. . O X X . . 
+. X O O O . . 
+. X X X O O . 
+
+2021-03-18 11:39:40,190 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,191 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:39:40,191 - Connect4Logger - INFO - 
+. . . . O . . 
+. . . . O . . 
+. . X X X . . 
+. O O X X . . 
+. X O O O . . 
+. X X X O O . 
+
+2021-03-18 11:39:40,201 - Connect4Logger - INFO - GAME NUMBER 1800
+2021-03-18 11:39:40,202 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:39:40,203 - Connect4Logger - INFO - 
+. . . . O . . 
+. . . . O . . 
+. X X X X . . 
+. O O X X . . 
+. X O O O . . 
+. X X X O O . 
+
+2021-03-18 11:39:40,204 - Connect4Logger - INFO - PLAYER 2 WON!!!!
+2021-03-18 11:39:40,204 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 52 VS P2 = 33
+2021-03-18 11:39:40,205 - Connect4Logger - INFO - Player rewards: {'player1': 1.0, 'player2': -1.0}
+
+. . . . O . . 
+. . . . O . . 
+. X X X X . . 
+. O O X X . . 
+. X O O O . . 
+. X X X O O . 
+
+2021-03-18 11:39:55,275 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,276 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:39:55,277 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+
+2021-03-18 11:39:55,290 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,290 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:39:55,291 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O X . . . 
+
+2021-03-18 11:39:55,300 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,301 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:39:55,301 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O X . . . 
+
+2021-03-18 11:39:55,312 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,313 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:39:55,313 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . X . . . . 
+. . O X . . . 
+
+2021-03-18 11:39:55,324 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,324 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:39:55,325 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O . . . . 
+. . X X . . . 
+. . O X . . . 
+
+2021-03-18 11:39:55,334 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,335 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:39:55,335 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . O O . . . 
+. . X X . . . 
+. . O X . . . 
+
+2021-03-18 11:39:55,347 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,348 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:39:55,348 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O O . . . 
+. . X X . . . 
+. . O X . . . 
+
+2021-03-18 11:39:55,358 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,359 - Connect4Logger - INFO - Player actions: {'player2': 5}
+2021-03-18 11:39:55,359 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O O . . . 
+. . X X . . . 
+. . O X . O . 
+
+2021-03-18 11:39:55,370 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,371 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:39:55,371 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O O . . . 
+. . X X . . . 
+. . O X X O . 
+
+2021-03-18 11:39:55,381 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,382 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:39:55,383 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O O . . . 
+. . X X O . . 
+. . O X X O . 
+
+2021-03-18 11:39:55,393 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,394 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:39:55,394 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . O O . . . 
+. . X X O . . 
+. X O X X O . 
+
+2021-03-18 11:39:55,405 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,405 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:39:55,406 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X O . . . 
+. . O O . . . 
+. . X X O . . 
+. X O X X O . 
+
+2021-03-18 11:39:55,417 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,417 - Connect4Logger - INFO - Player actions: {'player1': 5}
+2021-03-18 11:39:55,418 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . X O . . . 
+. . O O . . . 
+. . X X O X . 
+. X O X X O . 
+
+2021-03-18 11:39:55,428 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,428 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:39:55,429 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . O . . . 
+. . X O . . . 
+. . O O . . . 
+. . X X O X . 
+. X O X X O . 
+
+2021-03-18 11:39:55,440 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,440 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:39:55,441 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . O . . . 
+. . X O . . . 
+. . O O X . . 
+. . X X O X . 
+. X O X X O . 
+
+2021-03-18 11:39:55,451 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,452 - Connect4Logger - INFO - Player actions: {'player2': 5}
+2021-03-18 11:39:55,453 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . O . . . 
+. . X O . . . 
+. . O O X O . 
+. . X X O X . 
+. X O X X O . 
+
+2021-03-18 11:39:55,465 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,465 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:39:55,466 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . O . . . 
+. . X O . . . 
+. . O O X O . 
+. X X X O X . 
+. X O X X O . 
+
+2021-03-18 11:39:55,476 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,477 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:39:55,478 - Connect4Logger - INFO - 
+. . . . . . . 
+. . O O . . . 
+. . X O . . . 
+. . O O X O . 
+. X X X O X . 
+. X O X X O . 
+
+2021-03-18 11:39:55,488 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,488 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:39:55,489 - Connect4Logger - INFO - 
+. . . X . . . 
+. . O O . . . 
+. . X O . . . 
+. . O O X O . 
+. X X X O X . 
+. X O X X O . 
+
+2021-03-18 11:39:55,500 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,500 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:39:55,501 - Connect4Logger - INFO - 
+. . . X . . . 
+. . O O . . . 
+. . X O O . . 
+. . O O X O . 
+. X X X O X . 
+. X O X X O . 
+
+2021-03-18 11:39:55,512 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,512 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:39:55,513 - Connect4Logger - INFO - 
+. . . X . . . 
+. . O O . . . 
+. . X O O . . 
+. X O O X O . 
+. X X X O X . 
+. X O X X O . 
+
+2021-03-18 11:39:55,523 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,523 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:39:55,524 - Connect4Logger - INFO - 
+. . . X . . . 
+. . O O O . . 
+. . X O O . . 
+. X O O X O . 
+. X X X O X . 
+. X O X X O . 
+
+2021-03-18 11:39:55,535 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,535 - Connect4Logger - INFO - Player actions: {'player1': 5}
+2021-03-18 11:39:55,536 - Connect4Logger - INFO - 
+. . . X . . . 
+. . O O O . . 
+. . X O O X . 
+. X O O X O . 
+. X X X O X . 
+. X O X X O . 
+
+2021-03-18 11:39:55,546 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,547 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:39:55,548 - Connect4Logger - INFO - 
+. . . X O . . 
+. . O O O . . 
+. . X O O X . 
+. X O O X O . 
+. X X X O X . 
+. X O X X O . 
+
+2021-03-18 11:39:55,559 - Connect4Logger - INFO - GAME NUMBER 1900
+2021-03-18 11:39:55,559 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:39:55,560 - Connect4Logger - INFO - 
+. . . X O . . 
+. . O O O . . 
+. X X O O X . 
+. X O O X O . 
+. X X X O X . 
+. X O X X O . 
+
+2021-03-18 11:39:55,561 - Connect4Logger - INFO - PLAYER 2 WON!!!!
+2021-03-18 11:39:55,561 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 104 VS P2 = 81
+2021-03-18 11:39:55,562 - Connect4Logger - INFO - Player rewards: {'player1': 1.0, 'player2': -1.0}
+
+. . . X O . . 
+. . O O O . . 
+. X X O O X . 
+. X O O X O . 
+. X X X O X . 
+. X O X X O . 
+
+2021-03-18 11:40:19,464 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,464 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:40:19,465 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+
+2021-03-18 11:40:19,474 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,475 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:40:19,476 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . O . . 
+
+2021-03-18 11:40:19,486 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,486 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:40:19,487 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . X . O . . 
+
+2021-03-18 11:40:19,498 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,498 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:40:19,499 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X . . . . 
+. . X O O . . 
+
+2021-03-18 11:40:19,508 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,509 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:40:19,509 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . X X . . . 
+. . X O O . . 
+
+2021-03-18 11:40:19,518 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,519 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:40:19,519 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . X X . . . 
+. . X O O . . 
+
+2021-03-18 11:40:19,529 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,530 - Connect4Logger - INFO - Player actions: {'player1': 4}
+2021-03-18 11:40:19,530 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O . . . 
+. . X X X . . 
+. . X O O . . 
+
+2021-03-18 11:40:19,540 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,540 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:40:19,541 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . . . . . 
+. . . O O . . 
+. . X X X . . 
+. . X O O . . 
+
+2021-03-18 11:40:19,551 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,551 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:40:19,552 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X . . . 
+. . . O O . . 
+. . X X X . . 
+. . X O O . . 
+
+2021-03-18 11:40:19,564 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,564 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:40:19,565 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X O . . 
+. . . O O . . 
+. . X X X . . 
+. . X O O . . 
+
+2021-03-18 11:40:19,575 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,575 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:40:19,576 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . . X O . . 
+. . X O O . . 
+. . X X X . . 
+. . X O O . . 
+
+2021-03-18 11:40:19,586 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,586 - Connect4Logger - INFO - Player actions: {'player2': 2}
+2021-03-18 11:40:19,587 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O X O . . 
+. . X O O . . 
+. . X X X . . 
+. . X O O . . 
+
+2021-03-18 11:40:19,596 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,596 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:40:19,597 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . . . . 
+. . O X O . . 
+. . X O O . . 
+. . X X X . . 
+. X X O O . . 
+
+2021-03-18 11:40:19,607 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,607 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:40:19,608 - Connect4Logger - INFO - 
+. . . . . . . 
+. . . . O . . 
+. . O X O . . 
+. . X O O . . 
+. . X X X . . 
+. X X O O . . 
+
+2021-03-18 11:40:19,616 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,617 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:40:19,617 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . O . . 
+. . O X O . . 
+. . X O O . . 
+. . X X X . . 
+. X X O O . . 
+
+2021-03-18 11:40:19,627 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,627 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:40:19,628 - Connect4Logger - INFO - 
+. . . . . . . 
+. . X . O . . 
+. . O X O . . 
+. . X O O . . 
+. O X X X . . 
+. X X O O . . 
+
+2021-03-18 11:40:19,638 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,639 - Connect4Logger - INFO - Player actions: {'player1': 2}
+2021-03-18 11:40:19,639 - Connect4Logger - INFO - 
+. . X . . . . 
+. . X . O . . 
+. . O X O . . 
+. . X O O . . 
+. O X X X . . 
+. X X O O . . 
+
+2021-03-18 11:40:19,650 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,650 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:40:19,651 - Connect4Logger - INFO - 
+. . X . . . . 
+. . X . O . . 
+. . O X O . . 
+. O X O O . . 
+. O X X X . . 
+. X X O O . . 
+
+2021-03-18 11:40:19,660 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,661 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:40:19,661 - Connect4Logger - INFO - 
+. . X . . . . 
+. . X . O . . 
+. X O X O . . 
+. O X O O . . 
+. O X X X . . 
+. X X O O . . 
+
+2021-03-18 11:40:19,671 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,672 - Connect4Logger - INFO - Player actions: {'player2': 1}
+2021-03-18 11:40:19,672 - Connect4Logger - INFO - 
+. . X . . . . 
+. O X . O . . 
+. X O X O . . 
+. O X O O . . 
+. O X X X . . 
+. X X O O . . 
+
+2021-03-18 11:40:19,682 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,683 - Connect4Logger - INFO - Player actions: {'player1': 1}
+2021-03-18 11:40:19,684 - Connect4Logger - INFO - 
+. X X . . . . 
+. O X . O . . 
+. X O X O . . 
+. O X O O . . 
+. O X X X . . 
+. X X O O . . 
+
+2021-03-18 11:40:19,693 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,694 - Connect4Logger - INFO - Player actions: {'player2': 3}
+2021-03-18 11:40:19,694 - Connect4Logger - INFO - 
+. X X . . . . 
+. O X O O . . 
+. X O X O . . 
+. O X O O . . 
+. O X X X . . 
+. X X O O . . 
+
+2021-03-18 11:40:19,705 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,705 - Connect4Logger - INFO - Player actions: {'player1': 3}
+2021-03-18 11:40:19,706 - Connect4Logger - INFO - 
+. X X X . . . 
+. O X O O . . 
+. X O X O . . 
+. O X O O . . 
+. O X X X . . 
+. X X O O . . 
+
+2021-03-18 11:40:19,716 - Connect4Logger - INFO - GAME NUMBER 2000
+2021-03-18 11:40:19,717 - Connect4Logger - INFO - Player actions: {'player2': 4}
+2021-03-18 11:40:19,717 - Connect4Logger - INFO - 
+. X X X O . . 
+. O X O O . . 
+. X O X O . . 
+. O X O O . . 
+. O X X X . . 
+. X X O O . . 
+
+2021-03-18 11:40:19,718 - Connect4Logger - INFO - PLAYER 1 WON!!!!
+2021-03-18 11:40:19,719 - Connect4Logger - INFO - ACTUAL SCORE: P1 = 161 VS P2 = 123
+2021-03-18 11:40:19,720 - Connect4Logger - INFO - Player rewards: {'player1': -1.0, 'player2': 1.0}
+
+. X X X O . . 
+. O X O O . . 
+. X O X O . . 
+. O X O O . . 
+. O X X X . . 
+. X X O O . . 
+

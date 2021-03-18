@@ -161,18 +161,18 @@ class Connect4Env(MultiAgentEnv):
         return obs, reward, done, info
 
     def check_for_episode_termination(self, movecol, row):
-        winner, reward_vector = self.winner, [0, 0]
+        winner, reward_vector = self.winner, [0.0, 0.0]
         if self.does_move_win(movecol, row):
             winner = self.current_player
             if winner == self.player1_ID:
-                reward_vector = [1, -1]
+                reward_vector = [1.0, -1.0]
                 self.score[self.player1] += 1
             elif winner == self.player2_ID:
-                reward_vector = [-1, 1]
+                reward_vector = [-1.0, 1.0]
                 self.score[self.player2] += 1
         elif self.get_moves(mask=False) == []:  # A draw has happened
             winner = -1
-            reward_vector = [0, 0]
+            reward_vector = [0.0, 0.0]
             self.num_draws += 1
         return winner, reward_vector
 

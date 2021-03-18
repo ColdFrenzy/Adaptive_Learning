@@ -1,13 +1,12 @@
 from models import custom_models
-from functools import reduce
-from ray.rllib.models.tf import TFModelV2
+from ray.rllib.agents.dqn.distributional_q_tf_model import DistributionalQTFModel
 from ray.rllib.utils.framework import try_import_tf
 from config.connect4_config import Connect4Config
 
 tf1, tf, tfv = try_import_tf()
 
 
-class Connect4ActionMaskModel(TFModelV2):
+class Connect4ActionMaskQModel(DistributionalQTFModel):
     """Parametric action model that handles the dot product and masking.
     """
 
@@ -25,13 +24,10 @@ class Connect4ActionMaskModel(TFModelV2):
         **kwargs
     ):
 
-        super(Connect4ActionMaskModel, self).__init__(
+        super(Connect4ActionMaskQModel, self).__init__(
             obs_space, action_space, num_outputs, model_config, name, *args, **kwargs
         )
 
-        # Obs_space has the wrong size. This is due to data dict preprocessor
-        # that automatically flatten the original observation space.
-        # retrieving the original observation space :
         print("preprocessed obs_space: ")
         print(obs_space)
         original_obs = obs_space.original_space.spaces["state"]
@@ -47,7 +43,7 @@ class Connect4ActionMaskModel(TFModelV2):
         # self.value_layer_out = tf.keras.layers.Dense(1, name="value", activation=None)(hidden_layer)
         # self.base_model = tf.keras.Model(inputs, [self.out_layer, self.value_layer_out], name=name)
     
-        self.base_model = custom_models.dense_model(
+        self.base_model = custom_models.dense_q_model(
             in_shape, 256, num_outputs, "action_mask"
         )
         
@@ -89,7 +85,7 @@ class Connect4ActionMaskModel(TFModelV2):
                 shape=(obs_state.shape[0], obs_state.shape[1] * obs_state.shape[2]),
             )
 
-        action_logits, self._value_out = self.base_model(obs_state)
+        action_logits = self.base_model(obs_state)
 
         # inf_mask return a 0 value if the action is valid and a big negative
         # value if it is invalid. Example:
@@ -103,6 +99,3 @@ class Connect4ActionMaskModel(TFModelV2):
 
         return new_action_logits, state
 
-    def value_function(self):
-        # return self.base_model.value_function()
-        return tf.reshape(self._value_out, [-1])

@@ -35,6 +35,18 @@ def res_net_block(in_shape, hidden_shape, num_outputs, name):
     return tf.keras.Model(inputs, [out_layer, value_layer], name=name)
 
 
+def dense_q_model(in_shape, hidden_shape, num_outputs, name):
+    inputs = tf.keras.layers.Input(shape=(in_shape,), name="observations")
+    hidden_layer = tf.keras.layers.Dense(
+        hidden_shape, name="layer1", activation=tf.nn.relu
+    )(inputs)
+    out_layer = tf.keras.layers.Dense(num_outputs, name="out", activation=None)(
+        hidden_layer
+    )
+    return tf.keras.Model(inputs, out_layer, name=name)
+
+
+
 if __name__ == "__main__":
     model = res_net_block(42, 256, 7, "res_block")
     # model.summary()

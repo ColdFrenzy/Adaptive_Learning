@@ -17,4 +17,4 @@ ray_results/*
 !ray_results/.gitkeep
 log/*
 !log/.gitkeep
-!log/match.log
+
