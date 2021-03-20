@@ -46,11 +46,11 @@ class Connect4ActionMaskModel(TFModelV2):
         # )
         # self.value_layer_out = tf.keras.layers.Dense(1, name="value", activation=None)(hidden_layer)
         # self.base_model = tf.keras.Model(inputs, [self.out_layer, self.value_layer_out], name=name)
-    
+
         self.base_model = custom_models.dense_model(
             in_shape, 256, num_outputs, "action_mask"
         )
-        
+
         if show_model == True:
             self.base_model.summary()
 

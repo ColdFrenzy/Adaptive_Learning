@@ -31,7 +31,6 @@ class Connect4TestCallbacks(DefaultCallbacks):
 
         pass
 
-
     def on_postprocess_traj(
         self,
         *,
@@ -96,12 +95,11 @@ class Connect4TestCallbacks(DefaultCallbacks):
             worker.env.reset_score()
         elif worker.env.num_draws > 0:
             worker.env.reset_score()
-        
-        # if the goal is reached it will return the new metric is created 
+
+        # if the goal is reached it will return the new metric is created
         if worker.env.score["player1"] >= 100:
             episode.custom_metrics["goal_reached"] = True
-                        
-        
+
         episode.custom_metrics["moves_per_game"] = worker.env.num_moves
 
     def on_train_result(self, *, trainer, result, **kwargs):

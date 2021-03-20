@@ -19,7 +19,6 @@ class TrainerConfig:
     OBS_SPACE = ENV.observation_space
     ACT_SPACE = ENV.action_space
 
-
     # PPO PARAMETERS TAKEN FROM RLLIB TUNED EXAMPLES
     # https://github.com/ray-project/ray/blob/master/rllib/tuned_examples/ppo/atari-ppo.yaml
     # + standard PPO Params
@@ -62,10 +61,9 @@ class TrainerConfig:
         # Target value for KL divergence.
         "kl_target": 0.01,
         # Whether to rollout "complete_episodes" or "truncate_episodes".
-        "batch_mode": "truncate_episodes",
+        "batch_mode": "complete_episodes",
         # Which observation filter to apply to the observation.
         "observation_filter": "NoFilter",
-        
         # === Settings for Rollout Worker processes ===
         "num_gpus": int(os.environ.get("RLLIB_NUM_GPUS", "0")),
         "evaluation_num_workers": Config.NUM_EVAL_WORKERS,
@@ -79,8 +77,9 @@ class TrainerConfig:
         "lr": Config.LEARNING_RATE[0],
         # === Settings for Multi-Agent Environments ===
         "multiagent": {
-            "policies_to_train": ["player1"],
+            "policies_to_train": Config.POLICIES_TO_TRAIN,
             "policies": {
+                # the last argument accept a policy config dict
                 "player1": (
                     PPOTFPolicy,
                     OBS_SPACE,
@@ -103,9 +102,9 @@ class TrainerConfig:
                         },
                     },
                 ),
+                "minimax": (MiniMaxPolicy, OBS_SPACE, ACT_SPACE, {},),
             },
             "policy_mapping_fn": select_policy,
-            
         },
         # === Evaluation Settings ===
         # Evaluate with every `evaluation_interval` training iterations.
@@ -125,52 +124,12 @@ class TrainerConfig:
         # will result in the evaluation workers not using this optimal policy!
         "evaluation_config": {
             "explore": False,
-            "multiagent": {
-                # None for all policies
-                "policies_to_train": ["player1"],
-                "policies": {
-                    "player1": (
-                        PPOTFPolicy,
-                        OBS_SPACE,
-                        ACT_SPACE,
-                        {
-                            "model": {
-                                "custom_model": "connect4_mask",
-                                "custom_model_config": {},
-                            },
-                        },
-                    ),
-                    "player2": (
-                        PPOTFPolicy,
-                        OBS_SPACE,
-                        ACT_SPACE,
-                        {
-                            "model": {
-                                "custom_model": "connect4_mask",
-                                "custom_model_config": {},
-                            },
-                        },
-                    ),
-                    "minimax": (
-                        MiniMaxPolicy,
-                        OBS_SPACE,
-                        ACT_SPACE,
-                        {
-                            "model": {
-                                "custom_model": "connect4_mask",
-                                "custom_model_config": {},
-                            },
-                        },
-                    ),
-                },
-                "policy_mapping_fn": select_evaluation_policy,
-            },
+            "multiagent": {"policy_mapping_fn": select_evaluation_policy,},
         },
         "custom_eval_function": Connect4Eval,
         "callbacks": Connect4Callbacks,
-        "framework": "tf2",       
+        "framework": "tf2",
     }
-
 
     PG_TRAINER = {
         # === Settings for Rollout Worker processes ===
@@ -310,7 +269,6 @@ class TrainerConfig:
         # "eager_tracing": True,
     }
 
-
     DQN_TEST = {
         # === Model ===
         # Number of atoms for representing the distribution of return. When
@@ -373,8 +331,7 @@ class TrainerConfig:
         # timesteps to sampled from an environment and stored in the replay buffer
         # timesteps. Otherwise, the replay will proceed at the native ratio
         # determined by (train_batch_size / rollout_fragment_length).
-        "training_intensity": None,    
-        
+        "training_intensity": None,
         # === Optimization ===
         # Learning rate schedule
         "lr_schedule": None,
@@ -388,8 +345,7 @@ class TrainerConfig:
         # Whether to compute priorities on workers.
         "worker_side_prioritization": False,
         # Prevent iterations from going lower than this time span
-        "min_iter_time_s": 1,        
-
+        "min_iter_time_s": 1,
         # === Settings for Rollout Worker processes ===
         "num_gpus": int(os.environ.get("RLLIB_NUM_GPUS", "0")),
         "evaluation_num_workers": Config.NUM_EVAL_WORKERS,
@@ -413,7 +369,6 @@ class TrainerConfig:
                         "model": {
                             "custom_model": "connect4_q_mask",
                             "custom_model_config": {},
-                            
                         },
                     },
                 ),
@@ -434,7 +389,6 @@ class TrainerConfig:
         "callbacks": Connect4TestCallbacks,
         "framework": "tf2",
     }
-    
 
     PPO_TEST = {
         # === PPO Specific Parameter ===
@@ -478,7 +432,6 @@ class TrainerConfig:
         "batch_mode": "truncate_episodes",
         # Which observation filter to apply to the observation.
         "observation_filter": "NoFilter",
-        
         # === Settings for Rollout Worker processes ===
         "num_gpus": int(os.environ.get("RLLIB_NUM_GPUS", "0")),
         "evaluation_num_workers": Config.NUM_EVAL_WORKERS,
@@ -518,7 +471,6 @@ class TrainerConfig:
                 ),
             },
             "policy_mapping_fn": select_policy,
-            
         },
         "callbacks": Connect4TestCallbacks,
         "framework": "tf2",

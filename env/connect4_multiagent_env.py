@@ -3,6 +3,7 @@
 # sys.path.insert(1, os.path.abspath(os.pardir))
 import numpy as np
 from colorama import Fore
+import random
 from gym.spaces import Box, Dict, Discrete
 from ray.rllib.env.multi_agent_env import MultiAgentEnv
 from config.connect4_config import Connect4Config
@@ -66,14 +67,25 @@ class Connect4Env(MultiAgentEnv):
         self.num_moves = 0
         self.reset()
 
-    def reset(self, starting_player=Connect4Config.PLAYER1_ID):
+    def reset(
+        self,
+        starting_player=Connect4Config.PLAYER1_ID,
+        randomize=Connect4Config.RANDOMIZE_START,
+    ):
+
         """
         Initialises the Connect 4 gameboard and return observations
+        :param starting_player: the first player to move, if randomize is True,
+            this option is ignored
+        :param randomize: randomly select the first player to move 
         """
         assert starting_player in [
             self.player1_ID,
             self.player2_ID,
         ], "starting player value is not valid"
+        if randomize:
+            starting_player = random.choice([self.player1_ID, self.player2_ID])
+
         self.board = np.full((self.width, self.height), -1, dtype=np.float32)
         # board seen from player 2 point of view
         self.board_p2 = np.full((self.width, self.height), -1, dtype=np.float32)

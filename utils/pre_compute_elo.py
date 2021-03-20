@@ -209,7 +209,9 @@ def minimax_vs_minimax_elo(depth1, depth2, number_of_games, logger=None):
     return elo_diff
 
 
-def model_vs_minimax(model, depth, number_of_games, checkpoint=None, logger=None):
+def model_vs_minimax(
+    model, depth, number_of_games, checkpoint=None, logger=None, randomize=True
+):
     """
     Use the inverse of the elo formula to compute the outcome of a match,
     given that we already know the result of a match.
@@ -236,12 +238,15 @@ def model_vs_minimax(model, depth, number_of_games, checkpoint=None, logger=None
             + str(depth)
             + "**********"
         )
-    for i in tqdm(range(number_of_games)):
+    print("Starting Evaluation")
+    for i in range(number_of_games):
         game_over = False
         actions = {}
-        starting_player = random.choice([player1_ID, player2_ID])
+        if randomize:
+            starting_player = random.choice([player1_ID, player2_ID])
+        else:
+            starting_player = player1_ID
         game.reset(starting_player=starting_player)
-        print("\nPlayer " + str(starting_player + 1) + " is starting")
         while not game_over:
             actual_player = game.current_player
             board = game.board
@@ -280,36 +285,34 @@ def model_vs_minimax(model, depth, number_of_games, checkpoint=None, logger=None
                 )
                 game_over = True
 
-    score = game.score[player1] / number_of_games + game.num_draws / (
-        2 * number_of_games
+    # score = game.score[player1] / number_of_games + game.num_draws / (
+    #     2 * number_of_games
+    # )
+    print("Evaluation Over")
+
+    elo_diff = compute_elo_difference(
+        game.score[player1], game.num_draws, number_of_games
     )
 
-    if score >= 10 / 11:
-        elo_diff = 400
-    elif score <= -10 / 11:
-        elo_diff = -400
-    else:
-        elo_diff = -400 * math.log((1 / score - 1), 10)
+    # print("\nplayer 1 score: " + str(game.score[player1]))
+    # print("player 2 score: " + str(game.score[player2]))
+    # print("number of draw: " + str(game.num_draws))
+    # print(
+    #     "elo difference computed over "
+    #     + str(number_of_games)
+    #     + " between the 2 algortithms is "
+    #     + str(elo_diff)
+    # )
 
-    print("\nplayer 1 score: " + str(game.score[player1]))
-    print("player 2 score: " + str(game.score[player2]))
-    print("number of draw: " + str(game.num_draws))
-    print(
-        "elo difference computed over "
-        + str(number_of_games)
-        + " between the 2 algortithms is "
-        + str(elo_diff)
-    )
-
-    return elo_diff
+    return elo_diff, game.score[player1], game.score[player2], game.num_draws
 
 
 def compute_elo_difference(player1_score, draws, number_of_games):
 
-    score = player1_score / number_of_games + draws / (2 * number_of_games)
+    score = (player1_score / number_of_games) + draws / (2 * number_of_games)
     if score >= 10 / 11:
         elo_diff = 400
-    elif score == 0 or score < 1 / 11:
+    elif score == 0 or score <= 1 / 11:
         elo_diff = -400
     else:
         elo_diff = -400 * math.log((1 / score - 1), 10)

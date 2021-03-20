@@ -23,10 +23,14 @@ class LogsWrapper(Connect4Env):
             env_context, width, height, n_actions, connect
         )
 
-    def reset(self):
+    def reset(
+        self,
+        current_player=Connect4Config.PLAYER1_ID,
+        randomize=Connect4Config.RANDOMIZE_START,
+    ):
         self.log_idx += 1
 
-        return super(LogsWrapper, self).reset()
+        return super(LogsWrapper, self).reset(current_player, randomize)
 
     @staticmethod
     def init_logger(file_path):

@@ -3,6 +3,7 @@ import random
 from config.custom_config import Config
 from config.connect4_config import Connect4Config
 import math
+import logging
 
 
 class MiniMaxPolicy(Policy):
@@ -11,6 +12,7 @@ class MiniMaxPolicy(Policy):
             observation_space, action_space, config, *args, **kwargs
         )
         self.depth = 1
+        self.logger = init_logger("log/evaluation.log")
 
     def compute_actions(
         self,
@@ -497,3 +499,24 @@ def get_open_row(board, x, height=Connect4Config.HEIGHT):
 
 def drop_piece(board, current_player, x, y):
     board[x][y] = current_player
+
+
+def init_logger(file_path):
+    logger = logging.getLogger("MinimaxLogger")
+
+    f_handler = logging.FileHandler(file_path, "w", "utf-8")
+    f_handler.setLevel(logging.DEBUG)
+    f_format = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    f_handler.setFormatter(f_format)
+
+    c_handler = logging.StreamHandler()
+    c_handler.setLevel(logging.WARN)
+    c_format = logging.Formatter("%(name)s - %(levelname)s - %(message)s")
+    c_handler.setFormatter(c_format)
+
+    logger.addHandler(f_handler)
+    logger.addHandler(c_handler)
+
+    logger.setLevel(logging.DEBUG)
+
+    return logger

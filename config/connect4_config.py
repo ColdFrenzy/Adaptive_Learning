@@ -13,4 +13,6 @@ class Connect4Config:
     PLAYER2_ID = 1
     DRAW_ID = -1
     EMPTY = -1
+    # decide randomly which player will start the game
+    RANDOMIZE_START = True
     PLAYER_DICT = {"player1": PLAYER1_ID, "player2": PLAYER2_ID}

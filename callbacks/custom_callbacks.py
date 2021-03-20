@@ -1,7 +1,27 @@
 from ray.rllib.agents.callbacks import DefaultCallbacks
+from ray.rllib.utils.deprecation import deprecation_warning
 
 
 class Connect4Callbacks(DefaultCallbacks):
+    def __init__(self, legacy_callbacks_dict=None):
+        if legacy_callbacks_dict:
+            deprecation_warning(
+                "callbacks dict interface",
+                "a class extending rllib.agents.callbacks.DefaultCallbacks",
+            )
+        self.legacy_callbacks = legacy_callbacks_dict or {}
+        # some values for tensorboard
+        self.player1_score = 0.0
+        self.player2_score = 0.0
+        self.num_draws = 0.0
+        self.score_diff = 0.0
+
+    def reset_values(self):
+        self.player1_score = 0.0
+        self.player2_score = 0.0
+        self.num_draws = 0.0
+        self.score_diff = 0.0
+
     def on_episode_start(
         self, *, worker, base_env, policies, episode, env_index, **kwargs
     ):
@@ -30,7 +50,6 @@ class Connect4Callbacks(DefaultCallbacks):
         # everytime the env.step() function is called
 
         pass
-
 
     def on_postprocess_traj(
         self,
@@ -102,16 +121,21 @@ class Connect4Callbacks(DefaultCallbacks):
         
         """
 
-        result["custom_metrics"]["score_difference"] = (
-            trainer.workers.local_worker().env.score["player1"]
-            - trainer.workers.local_worker().env.score["player2"]
-        )
-        result["custom_metrics"][
-            "number_of_draws"
-        ] = trainer.workers.local_worker().env.num_draws
-        result["custom_metrics"][
-            "player1_score"
-        ] = trainer.workers.local_worker().env.score["player1"]
-        result["custom_metrics"][
-            "player2_score"
-        ] = trainer.workers.local_worker().env.score["player2"]
+        # create dict_keys if not exists
+        # this got resetted_everytime
+        result["custom_metrics"].setdefault("score_difference", 0.0)
+        result["custom_metrics"].setdefault("number_of_draws", 0.0)
+        result["custom_metrics"].setdefault("player1_score", 0.0)
+        result["custom_metrics"].setdefault("player2_score", 0.0)
+
+        self.player1_score += result["hist_stats"]["policy_player1_reward"].count(1.0)
+        self.player2_score += result["hist_stats"]["policy_player2_reward"].count(1.0)
+        self.num_draws += result["hist_stats"]["policy_player1_reward"].count(0.0)
+        self.score_diff += result["hist_stats"]["policy_player1_reward"].count(
+            1.0
+        ) - result["hist_stats"]["policy_player2_reward"].count(1.0)
+
+        result["custom_metrics"]["score_difference"] = self.score_diff
+        result["custom_metrics"]["number_of_draws"] = self.num_draws
+        result["custom_metrics"]["player1_score"] = self.player1_score
+        result["custom_metrics"]["player2_score"] = self.player2_score

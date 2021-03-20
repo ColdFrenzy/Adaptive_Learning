@@ -2,7 +2,6 @@
 */__pycache__/*
 ray/
 /build_ray_from_source.txt
-/match.log
 policies/minimax_test.py
 /train_info.txt
 old_data/*
@@ -17,4 +16,6 @@ ray_results/*
 !ray_results/.gitkeep
 log/*
 !log/.gitkeep
+
+log/match.log
 

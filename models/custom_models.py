@@ -46,7 +46,6 @@ def dense_q_model(in_shape, hidden_shape, num_outputs, name):
     return tf.keras.Model(inputs, out_layer, name=name)
 
 
-
 if __name__ == "__main__":
     model = res_net_block(42, 256, 7, "res_block")
     # model.summary()

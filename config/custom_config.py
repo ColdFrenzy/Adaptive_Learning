@@ -11,7 +11,7 @@ class Config:
     # =============================================================================
     # ROLLOUT WORKERS
     # =============================================================================
-    NUM_WORKERS = 0
+    NUM_WORKERS = 2
     NUM_EVAL_WORKERS = 0
     NUM_ENVS_PER_WORKER = 1
     ROLLOUT_FRAGMENT_LENGTH = 200
@@ -20,18 +20,25 @@ class Config:
     # =============================================================================
     # TRAINING PARAMS
     # =============================================================================
-    EPOCHS = 100000
-    REWARD_DIFFERENCE = 100
+    EPOCHS = 10000
     WEIGHT_UPDATE_STEP = 10
-    AVAILABLE_POLICIES = ["RANDOM", "MINIMAX", "PG"]
-    EVALUATION_INTERVAL = 1000
-    EVALUATION_NUMBER_OF_EPISODES = 200
+    EVALUATION_INTERVAL = 10
+    EVALUATION_NUMBER_OF_EPISODES = 100
     ELO_DIFF_UPB = 100
     ELO_DIFF_LWB = -100
-
     CKPT_STEP = 100
     GAMMA = 0.9
     LEARNING_RATE = [0.0001, 0.001, 0.01]
+
+    # =============================================================================
+    # SELFPLAY
+    # =============================================================================
+    # if self_play is true, weights are regularly copied from the first to the
+    # second network
+    SELF_PLAY = False
+    REWARD_DIFFERENCE = 100
+    # self play is useless if both policies are already being trained
+    POLICIES_TO_TRAIN = ["player1", "player2"]
 
     # =============================================================================
     # MINIMAX PARAMS
