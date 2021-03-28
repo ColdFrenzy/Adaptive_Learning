@@ -3,11 +3,17 @@
 ray/
 /build_ray_from_source.txt
 policies/minimax_test.py
+/tensorboard_run.txt
+/Problems.txt
+/RLlib_Tips.txt
 /train_info.txt
 old_data/*
 important_checkpoints/*
 !important_checkpoints/.gitkeep
+tensorboard _run.txt
+custom_metrics.json
 
+/output_dir
 # exclude everything
 checkpoints/*
 # exception to the rule
@@ -17,5 +23,5 @@ ray_results/*
 log/*
 !log/.gitkeep
 
-log/match.log
+
 

@@ -9,7 +9,7 @@ from callbacks.custom_callbacks import Connect4Callbacks
 from callbacks.custom_test_callbacks import Connect4TestCallbacks
 
 from evaluation.custom_eval import Connect4Eval
-from utils.utils import select_policy, select_evaluation_policy
+from utils.utils import select_policy, select_evaluation_policy, select_multiagent_policy
 from env.LogWrapper import LogsWrapper
 from config.custom_config import Config
 
@@ -18,7 +18,11 @@ class TrainerConfig:
     ENV = LogsWrapper(None)
     OBS_SPACE = ENV.observation_space
     ACT_SPACE = ENV.action_space
-
+    
+    OPPONENT_POLICIES = {}
+    for opp in Config.OPPONENT_POLICIES:
+        OPPONENT_POLICIES[opp] = (None,OBS_SPACE,ACT_SPACE,{})
+        
     # PPO PARAMETERS TAKEN FROM RLLIB TUNED EXAMPLES
     # https://github.com/ray-project/ray/blob/master/rllib/tuned_examples/ppo/atari-ppo.yaml
     # + standard PPO Params
@@ -31,7 +35,7 @@ class TrainerConfig:
         # with a value function, see https://arxiv.org/pdf/1506.02438.pdf.
         "use_gae": True,
         # The GAE (lambda) parameter.
-        "lambda": 0.95,
+        "lambda": 1,
         # Initial coefficient for KL divergence.
         "kl_coeff": 0.5,
         # Total SGD batch size across all devices for SGD. This defines the
@@ -57,7 +61,7 @@ class TrainerConfig:
         # scale of the rewards. If your expected V is large, increase this.
         "vf_clip_param": 10.0,
         # If specified, clip the global norm of gradients by this amount.
-        "grad_clip": None,
+        "grad_clip": 5,
         # Target value for KL divergence.
         "kl_target": 0.01,
         # Whether to rollout "complete_episodes" or "truncate_episodes".
@@ -75,6 +79,15 @@ class TrainerConfig:
         "env": LogsWrapper,
         "gamma": Config.GAMMA,
         "lr": Config.LEARNING_RATE[0],
+        # === Model Settings ===
+        "model": {
+            "custom_model": "connect4_mask",
+            "custom_model_config": {
+                "hidden_layer_shapes" : Config.HIDDEN_LAYER_SHAPES,
+                "use_conv" : Config.USE_CONV
+                },
+        },
+    
         # === Settings for Multi-Agent Environments ===
         "multiagent": {
             "policies_to_train": Config.POLICIES_TO_TRAIN,
@@ -85,23 +98,10 @@ class TrainerConfig:
                     OBS_SPACE,
                     ACT_SPACE,
                     {
-                        "model": {
-                            "custom_model": "connect4_mask",
-                            "custom_model_config": {},
-                        },
                     },
                 ),
-                "player2": (
-                    PPOTFPolicy,
-                    OBS_SPACE,
-                    ACT_SPACE,
-                    {
-                        "model": {
-                            "custom_model": "connect4_mask",
-                            "custom_model_config": {},
-                        },
-                    },
-                ),
+                **OPPONENT_POLICIES,
+                
                 "minimax": (MiniMaxPolicy, OBS_SPACE, ACT_SPACE, {},),
             },
             "policy_mapping_fn": select_policy,
@@ -124,10 +124,11 @@ class TrainerConfig:
         # will result in the evaluation workers not using this optimal policy!
         "evaluation_config": {
             "explore": False,
-            "multiagent": {"policy_mapping_fn": select_evaluation_policy,},
+            "multiagent": {"policy_mapping_fn": select_multiagent_policy},
         },
         "custom_eval_function": Connect4Eval,
         "callbacks": Connect4Callbacks,
+        "output": Config.OUTPUT_DIR,
         "framework": "tf2",
     }
 

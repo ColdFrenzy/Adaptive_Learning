@@ -21,7 +21,18 @@ class Connect4Callbacks(DefaultCallbacks):
         self.player2_score = 0.0
         self.num_draws = 0.0
         self.score_diff = 0.0
-
+    
+    def load_values(self, previous_val):
+        """
+        This function is used to restore the values of a previous run, in order
+        to continue the training 
+        values: Dict
+        """
+        self.player1_score = previous_val["player1_score"]
+        self.player2_score = previous_val["player2_score"]
+        self.num_draws = previous_val["number_of_draws"]
+        self.score_diff = previous_val["score_difference"]
+        
     def on_episode_start(
         self, *, worker, base_env, policies, episode, env_index, **kwargs
     ):
@@ -51,6 +62,24 @@ class Connect4Callbacks(DefaultCallbacks):
 
         pass
 
+    def on_sample_end(
+            self,
+            *,
+            worker,
+            samples,
+            **kwargs):
+        """
+        worker: "RolloutWorker",
+        samples: SampleBatch,
+        **kwargs
+        """
+        # a player batches has a data dict with {action_dist,action_logp,actions,
+        # advantages,agent_index,eps_id,obs,unroll_id,value_target,vf_preds}
+        # p1_batches = samples.policy_batches["player1"]
+        # p2_batches = samples.policy_batches["player2"]
+        
+
+
     def on_postprocess_traj(
         self,
         *,
@@ -75,6 +104,7 @@ class Connect4Callbacks(DefaultCallbacks):
 
         """
 
+        
         # policy_obj = original_batches["pre_batch"][0]
         # sample_obj = original_batches["pre_batch"][1]
 

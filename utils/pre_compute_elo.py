@@ -252,7 +252,11 @@ def model_vs_minimax(
             board = game.board
             if actual_player == player1_ID:
                 input_dict = {"obs": {}}
-                reshaped_board = np.reshape(board, (1, board.shape[0] * board.shape[1]))
+                if model.use_conv:
+                    reshaped_board = np.expand_dims(board, axis=(0,-1))
+
+                else:
+                    reshaped_board = np.reshape(board, (1, board.shape[0] * board.shape[1]))
                 action_mask = game.get_moves(True)
                 input_dict["obs"]["state"] = reshaped_board
                 input_dict["obs"]["action_mask"] = action_mask

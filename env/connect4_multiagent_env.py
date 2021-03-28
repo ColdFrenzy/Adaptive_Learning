@@ -86,8 +86,10 @@ class Connect4Env(MultiAgentEnv):
         if randomize:
             starting_player = random.choice([self.player1_ID, self.player2_ID])
 
+
+        # board seen from player 1 Point of View
         self.board = np.full((self.width, self.height), -1, dtype=np.float32)
-        # board seen from player 2 point of view
+        # board seen from player 2 Point of View
         self.board_p2 = np.full((self.width, self.height), -1, dtype=np.float32)
 
         self.current_player = starting_player
@@ -125,7 +127,6 @@ class Connect4Env(MultiAgentEnv):
         specified by param movecol.
         :param movecol: column over which a chip will be dropped
         """
-        # self.reset_score()
         if self.current_player == self.player1_ID:
             act = action_dict[self.player1]
         else:
@@ -143,7 +144,10 @@ class Connect4Env(MultiAgentEnv):
 
         row += 1
 
+
+
         self.board[act][row] = self.current_player
+        # on board 2 we have inverted values
         self.board_p2[act][row] = 1 - self.current_player
 
         self.num_moves += 1
@@ -159,13 +163,14 @@ class Connect4Env(MultiAgentEnv):
             reward = {self.player1: reward_vector[0], self.player2: reward_vector[1]}
             info = {self.player1: single_info, self.player2: single_info}
 
+        # if the game is not over, the reward is always zero 
         elif self.current_player == self.player1_ID:
             obs = {self.player2: p2_obs}
-            reward = {self.player2: reward_vector[0]}
+            reward = {self.player2: 0.0}
             info = {self.player2: single_info}
         elif self.current_player == self.player2_ID:
             obs = {self.player1: p1_obs}
-            reward = {self.player1: reward_vector[1]}
+            reward = {self.player1: 0.0}
             info = {self.player1: single_info}
 
         self.current_player = 1 - self.current_player

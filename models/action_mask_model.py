@@ -26,31 +26,42 @@ class Connect4ActionMaskModel(TFModelV2):
     ):
 
         super(Connect4ActionMaskModel, self).__init__(
-            obs_space, action_space, num_outputs, model_config, name, *args, **kwargs
+            obs_space=obs_space, action_space=action_space, num_outputs=num_outputs,model_config=model_config, name=name# ,*args, **kwargs
         )
 
         # Obs_space has the wrong size. This is due to data dict preprocessor
         # that automatically flatten the original observation space.
         # retrieving the original observation space :
+        hidden_layer_shapes = kwargs["hidden_layer_shapes"]
+        self.use_conv = kwargs["use_conv"]
         print("preprocessed obs_space: ")
         print(obs_space)
         original_obs = obs_space.original_space.spaces["state"]
         print("The restored obs_space is: " + str(original_obs))
-        in_shape = original_obs.shape[0] * original_obs.shape[1]
-        # inputs = tf.keras.layers.Input(shape=(in_shape,), name="observations")
-        # hidden_layer = tf.keras.layers.Dense(256, name="layer1", activation=tf.nn.relu)(
-        #     inputs
-        # )
-        # self.out_layer = tf.keras.layers.Dense(num_outputs, name="out", activation=None)(
-        #     hidden_layer
-        # )
-        # self.value_layer_out = tf.keras.layers.Dense(1, name="value", activation=None)(hidden_layer)
-        # self.base_model = tf.keras.Model(inputs, [self.out_layer, self.value_layer_out], name=name)
-
-        self.base_model = custom_models.dense_model(
-            in_shape, 256, num_outputs, "action_mask"
-        )
-
+        
+        if self.use_conv:
+            in_shape = original_obs.shape
+            self.base_model = custom_models.conv_dense_model(
+                in_shape, num_outputs, "action_mask"
+            )
+            
+        else:
+            in_shape = original_obs.shape[0] * original_obs.shape[1]
+            # inputs = tf.keras.layers.Input(shape=(in_shape,), name="observations")
+            # hidden_layer = tf.keras.layers.Dense(256, name="layer1", activation=tf.nn.relu)(
+            #     inputs
+            # )
+            # self.out_layer = tf.keras.layers.Dense(num_outputs, name="out", activation=None)(
+            #     hidden_layer
+            # )
+            # self.value_layer_out = tf.keras.layers.Dense(1, name="value", activation=None)(hidden_layer)
+            # self.base_model = tf.keras.Model(inputs, [self.out_layer, self.value_layer_out], name=name)
+    
+            self.base_model = custom_models.dense_model(
+                in_shape, hidden_layer_shapes, num_outputs, "action_mask"
+            )
+            
+            
         if show_model == True:
             self.base_model.summary()
 
@@ -70,24 +81,29 @@ class Connect4ActionMaskModel(TFModelV2):
 
         obs_state = input_dict["obs"]["state"]
         action_mask = input_dict["obs"]["action_mask"]
-        # print("The actual action mask is: ")
-        # print(action_mask)
-        # print("obs_state shape inside the model: " + str(obs_state.shape))
-        # if a single example is passed
-        if len(obs_state.shape) < 3:
-            # print("obs_state tensor has rank: " + str(len(obs_state.shape)))
-            obs_state = tf.reshape(
-                obs_state, shape=(obs_state.shape[0] * obs_state.shape[1],)
-            )
-            # adding a dimension for the batch size if a single example is passed
-            obs_state = tf.expand_dims(obs_state, 0)
-        # if a batch is passed
+        
+        if self.use_conv:
+            if len(obs_state.shape) < 3:
+                obs_state = tf.expand_dims(obs_state,axis=(0,-1))
+            else:
+                obs_state = tf.expand_dims(obs_state, -1)
+            
         else:
-            # print("obs_state tensor has rank: " + str(len(obs_state.shape)))
-            obs_state = tf.reshape(
-                obs_state,
-                shape=(obs_state.shape[0], obs_state.shape[1] * obs_state.shape[2]),
-            )
+            # if a single example is passed
+            if len(obs_state.shape) < 3:
+                # print("obs_state tensor has rank: " + str(len(obs_state.shape)))
+                obs_state = tf.reshape(
+                    obs_state, shape=(obs_state.shape[0] * obs_state.shape[1],)
+                )
+                # adding a dimension for the batch size if a single example is passed
+                obs_state = tf.expand_dims(obs_state, 0)
+            # if a batch is passed
+            else:
+                # print("obs_state tensor has rank: " + str(len(obs_state.shape)))
+                obs_state = tf.reshape(
+                    obs_state,
+                    shape=(obs_state.shape[0], obs_state.shape[1] * obs_state.shape[2]),
+                )
 
         action_logits, self._value_out = self.base_model(obs_state)
 
