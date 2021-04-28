@@ -6,6 +6,7 @@ import os
 # os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 sys.path.insert(1, os.path.abspath(os.path.curdir))
 import shutil
+import logging
 
 import ray
 from tqdm import tqdm
@@ -17,17 +18,33 @@ from ray.rllib.agents.trainer import with_common_config
 # from ray.rllib.agents.trainer_template import build_trainer
 from ray.rllib.agents.ppo import PPOTrainer
 from models import Connect4ActionMaskModel
-from utils.utils import custom_log_creator, self_play, restore_training,save_checkpoint,multiagent_self_play
+from utils.utils import custom_log_creator, self_play, restore_training,\
+    save_checkpoint,multiagent_self_play,shift_policies,copy_weights
 from config.custom_config import Config
 from config.trainer_config import TrainerConfig
 
 
+# C:\\Users\\Francesco\\Anaconda3\\envs\\connect4\\lib\\site-packages\\numpy\\core\\_methods.py:160: RuntimeWarning: overflow encountered in reduce
+# ret = umr_sum(arr, axis, dtype, out, keepdims)
+
+
+
+# Due to this issue https://discuss.ray.io/t/agent-key-and-policy-id-mismatch-on-multiagent-ensemble-training/995  
+# I've modified file:
+# C:\Users\Francesco\Anaconda3\envs\connect4\lib\site-packages\ray\rllib\evaluation\collectors\simple_list_collector.py
+# as in https://github.com/ray-project/ray/pull/15020/files
+
+# RAY DASHBOARD DEBUG SESSION IN: 
+#     C:\Users\UserName\AppData\Local\Temp\ray\session_*actual_date*
+# Actually dashboard does not work on windows. For Windows know issues check:
+#    https://github.com/ray-project/ray/issues/9114
 
 
 if __name__ == "__main__":
     # You can set the object store size with the `object_store_memory`
     # parameter when starting Ray, and the max Redis size with `redis_max_memory`
-    ray.init(ignore_reinit_error=True)  # ,object_store_memory=3000 * 1024 * 1024) #3GB
+    # include_dashboard = False since it does not works now
+    ray.init(ignore_reinit_error=True,include_dashboard=False,logging_level=logging.DEBUG)  # ,object_store_memory=3000 * 1024 * 1024) #3GB
     # register model
     _ = Connect4ActionMaskModel
     
@@ -50,6 +67,11 @@ if __name__ == "__main__":
     restore_ckpt = False
     weight_update_step = Config.WEIGHT_UPDATE_STEP
     reward_diff = Config.REWARD_DIFFERENCE
+    policies_to_train = Config.POLICIES_TO_TRAIN
+    # store the history of different agents during training
+    policies_weights = {}
+    for p in policies_to_train:
+        policies_weights[p] = []
         
     # =============================================================================
     # STARTS
@@ -102,9 +124,15 @@ if __name__ == "__main__":
                     # try:
                     multiagent_self_play(trainer_obj)
                     # we also reset the score
+                    # shift_policies(trainer_obj, "player1", "player2", "player2_2", "player2_3","player2_4")
+                    # print("weights shifted")
+                    # weights = ray.put(trainer_obj.workers.local_worker().save())
+                    # trainer_obj.workers.foreach_worker(lambda w: w.restore(ray.get(weights)))
+                    # print("weights synced")
                     trainer_obj.callbacks.reset_values()
             else:
                 if epoch%weight_update_step==0 and epoch != 0:
                    multiagent_self_play(trainer_obj) 
+                   trainer_obj.callbacks.reset_values()
 
     ray.shutdown()

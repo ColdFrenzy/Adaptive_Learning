@@ -16,48 +16,50 @@ def Connect4Eval(trainer, eval_workers):
     # The functions Connect4Eval_2 gives some problem (wrong number of games
     # every eval iteration and bad minimax behaviour).
     # the idea here is to not use evaluation worker
+    metrics = {}
     print("Model Evaluation")
+    with open(Config.MINIMAX_DEPTH_PATH) as json_file:
+        data = json.load(json_file)
+        if data["minimax_depth"] == 5:
+            return metrics
+        
     number_of_games = Config.EVALUATION_NUMBER_OF_EPISODES
-    depth = trainer.get_policy("minimax").depth
+    depth = int(data["minimax_depth"])
     logger = trainer.get_policy("minimax").logger
     model = trainer.get_policy("player1").model
     elo_diff, p1_score, p2_score, draws = model_vs_minimax(
         model, depth, number_of_games, checkpoint=None, logger=logger
     )
 
-    metrics = {}
+
     metrics["player1_score"] = p1_score
     metrics["minimax_score"] = p2_score
     metrics["number_of_draws"] = draws
     metrics["elo_difference"] = elo_diff
     metrics["minimax_depth"] = depth
 
-    if Config.ELO_DIFF_LWB <= elo_diff <= Config.ELO_DIFF_UPB:
+    # if Config.ELO_DIFF_LWB <= elo_diff <= Config.ELO_DIFF_UPB:
+    # if the model wins more than half of the games 
+    if p1_score >= (number_of_games/2):
         trainer.save(Config.IMPORTANT_CKPT_PATH)
-        with open(Config.MINIMAX_DEPTH_PATH) as json_file:
-            data = json.load(json_file)
-            if data["minimax_depth"] == 5:
-                return metrics
-            data["minimax_depth"] += 1
+        data["minimax_depth"] += 1
 
-        metrics["MINIMAX_DEPTH"] = data["minimax_depth"]
         with open(Config.MINIMAX_DEPTH_PATH, "w") as json_file:
             json.dump(data, json_file)
             trainer.get_policy("minimax").depth = data["minimax_depth"]
     # if elo of our network is higher than elo upper bound, our network
     # is already stronger than this minimax stage, hence we skip this ckpt.
-    elif elo_diff > Config.ELO_DIFF_UPB:
-        with open(Config.MINIMAX_DEPTH_PATH) as json_file:
-            data = json.load(json_file)
-        if data["minimax_depth"] == 5:
-            return metrics
-            data["skipped_depth"].append(data["minimax_depth"])
-            data["minimax_depth"] += 1
+    # elif elo_diff > Config.ELO_DIFF_UPB:
+    #     with open(Config.MINIMAX_DEPTH_PATH) as json_file:
+    #         data = json.load(json_file)
+    #     if data["minimax_depth"] == 5:
+    #         return metrics
+    #         data["skipped_depth"].append(data["minimax_depth"])
+    #         data["minimax_depth"] += 1
 
-        metrics["MINIMAX_DEPTH"] = data["minimax_depth"]
-        with open(Config.MINIMAX_DEPTH_PATH, "w") as json_file:
-            json.dump(data, json_file)
-            trainer.get_policy("minimax").depth = data["minimax_depth"]
+    #     with open(Config.MINIMAX_DEPTH_PATH, "w") as json_file:
+    #         json.dump(data, json_file)
+    #         trainer.get_policy("minimax").depth = data["minimax_depth"]
 
     return metrics
 

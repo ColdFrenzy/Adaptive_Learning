@@ -8,10 +8,16 @@ policies/minimax_test.py
 /RLlib_Tips.txt
 /train_info.txt
 old_data/*
+test_board_config/
 important_checkpoints/*
 !important_checkpoints/.gitkeep
 tensorboard _run.txt
 custom_metrics.json
+Callbacks_test.txt
+Full_episode_iteration.txt
+Full_sample_collection.txt
+weights.npy
+
 
 /output_dir
 # exclude everything
@@ -20,7 +26,7 @@ checkpoints/*
 !checkpoints/.gitkeep 
 ray_results/*
 !ray_results/.gitkeep
-log/*
+log/
 !log/.gitkeep
 
 

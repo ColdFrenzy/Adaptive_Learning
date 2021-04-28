@@ -5,7 +5,7 @@ from ray.rllib.agents.dqn import DQNTFPolicy
 
 from policies.random_policy import RandomPolicy
 from policies.minimax_policy import MiniMaxPolicy
-from callbacks.custom_callbacks import Connect4Callbacks
+from callbacks.custom_callbacks import Connect4Callbacks,Connect4MiniMaxCallbacks
 from callbacks.custom_test_callbacks import Connect4TestCallbacks
 
 from evaluation.custom_eval import Connect4Eval
@@ -20,7 +20,7 @@ class TrainerConfig:
     ACT_SPACE = ENV.action_space
     
     OPPONENT_POLICIES = {}
-    for opp in Config.OPPONENT_POLICIES:
+    for opp in Config.OPPONENT_POLICIES_NOT_TRAINABLE:
         OPPONENT_POLICIES[opp] = (None,OBS_SPACE,ACT_SPACE,{})
         
     # PPO PARAMETERS TAKEN FROM RLLIB TUNED EXAMPLES
@@ -35,17 +35,17 @@ class TrainerConfig:
         # with a value function, see https://arxiv.org/pdf/1506.02438.pdf.
         "use_gae": True,
         # The GAE (lambda) parameter.
-        "lambda": 1,
+        "lambda": 0.95,
         # Initial coefficient for KL divergence.
         "kl_coeff": 0.5,
         # Total SGD batch size across all devices for SGD. This defines the
         # minibatch size within each epoch.
-        "sgd_minibatch_size": 128,
+        "sgd_minibatch_size": Config.SGD_MINIBATCH_SIZE,
         # Whether to shuffle sequences in the batch when training (recommended).
         "shuffle_sequences": True,
         # Number of SGD iterations in each outer loop (i.e., number of epochs to
         # execute per train batch).
-        "num_sgd_iter": 10,
+        "num_sgd_iter": Config.NUM_SGD_ITER,
         # Learning rate schedule.
         "lr_schedule": None,
         # Coefficient of the value function loss. IMPORTANT: you must tune this if
@@ -69,7 +69,113 @@ class TrainerConfig:
         # Which observation filter to apply to the observation.
         "observation_filter": "NoFilter",
         # === Settings for Rollout Worker processes ===
-        "num_gpus": int(os.environ.get("RLLIB_NUM_GPUS", "0")),
+        "num_gpus": Config.NUM_GPUS,#int(os.environ.get("RLLIB_NUM_GPUS", "0")),
+        "evaluation_num_workers": Config.NUM_EVAL_WORKERS,
+        "num_workers": Config.NUM_WORKERS,
+        "num_envs_per_worker": Config.NUM_ENVS_PER_WORKER,
+        "rollout_fragment_length": Config.ROLLOUT_FRAGMENT_LENGTH,
+        "train_batch_size": Config.TRAIN_BATCH_SIZE,
+        # === Environment Settings ===
+        "env": LogsWrapper,
+        "gamma": Config.GAMMA,
+        "lr": Config.LEARNING_RATE[0],
+        # === Model Settings ===
+        "model": {
+            "custom_model": "connect4_mask",
+            "custom_model_config": {
+                "hidden_layer_shapes" : Config.HIDDEN_LAYER_SHAPES,
+                "use_conv" : Config.USE_CONV
+                },
+        },
+    
+        # === Settings for Multi-Agent Environments ===
+        "multiagent": {
+            "policies_to_train": Config.POLICIES_TO_TRAIN,
+            "policies": {
+                # the last argument accept a policy config dict
+                "player1": (
+                    PPOTFPolicy,
+                    OBS_SPACE,
+                    ACT_SPACE,
+                    {
+                    },
+                ),
+                **OPPONENT_POLICIES,
+                
+                #"minimax": (MiniMaxPolicy, OBS_SPACE, ACT_SPACE, {},),
+            },
+            "policy_mapping_fn": select_policy, #select_multiagent_policy,
+        },
+        # === Evaluation Settings ===
+        # Evaluate with every `evaluation_interval` training iterations.
+        # The evaluation stats will be reported under the "evaluation" metric key.
+        # Note that evaluation is currently not parallelized, and that for Ape-X
+        # metrics are already only reported for the lowest epsilon workers.
+        "evaluation_interval": Config.EVALUATION_INTERVAL,
+        # Number of episodes to run per evaluation period. If using multiple
+        # evaluation workers, we will run at least this many episodes total.
+        "evaluation_num_episodes": Config.EVALUATION_NUMBER_OF_EPISODES,
+        # Internal flag that is set to True for evaluation workers.
+        "in_evaluation": False,
+        # Typical usage is to pass extra args to evaluation env creator
+        # and to disable exploration by computing deterministic actions.
+        # IMPORTANT NOTE: Policy gradient algorithms are able to find the optimal
+        # policy, even if this is a stochastic one. Setting "explore=False" here
+        # will result in the evaluation workers not using this optimal policy!
+        "evaluation_config": {
+            "explore": False,
+            # "multiagent": {"policy_mapping_fn": select_multiagent_policy},
+        },
+        #"custom_eval_function": Connect4Eval,
+        "callbacks": Connect4Callbacks,
+        "output": Config.OUTPUT_DIR,
+        "framework": "tf2",
+    }
+    
+    PPO_TRAINER_OPTIMIZED_SP = {
+        # === PPO Specific Parameter ===
+        # Should use a critic as a baseline (otherwise don't use value baseline;
+        # required for using GAE).
+        "use_critic": True,
+        # If true, use the Generalized Advantage Estimator (GAE)
+        # with a value function, see https://arxiv.org/pdf/1506.02438.pdf.
+        "use_gae": True,
+        # The GAE (lambda) parameter.
+        "lambda": 0.95,
+        # Initial coefficient for KL divergence.
+        "kl_coeff": 0.5,
+        # Total SGD batch size across all devices for SGD. This defines the
+        # minibatch size within each epoch.
+        "sgd_minibatch_size": Config.SGD_MINIBATCH_SIZE,
+        # Whether to shuffle sequences in the batch when training (recommended).
+        "shuffle_sequences": True,
+        # Number of SGD iterations in each outer loop (i.e., number of epochs to
+        # execute per train batch).
+        "num_sgd_iter": Config.NUM_SGD_ITER,
+        # Learning rate schedule.
+        "lr_schedule": None,
+        # Coefficient of the value function loss. IMPORTANT: you must tune this if
+        # you set vf_share_layers=True inside your model's config.
+        "vf_loss_coeff": 1.0,
+        # Coefficient of the entropy regularizer.
+        "entropy_coeff": 0.01,
+        # Decay schedule for the entropy regularizer.
+        "entropy_coeff_schedule": None,
+        # PPO clip parameter.
+        "clip_param": 0.1,
+        # Clip param for the value function. Note that this is sensitive to the
+        # scale of the rewards. If your expected V is large, increase this.
+        "vf_clip_param": 10.0,
+        # If specified, clip the global norm of gradients by this amount.
+        "grad_clip": 5,
+        # Target value for KL divergence.
+        "kl_target": 0.01,
+        # Whether to rollout "complete_episodes" or "truncate_episodes".
+        "batch_mode": "complete_episodes",
+        # Which observation filter to apply to the observation.
+        "observation_filter": "NoFilter",
+        # === Settings for Rollout Worker processes ===
+        "num_gpus": Config.NUM_GPUS,#int(os.environ.get("RLLIB_NUM_GPUS", "0")),
         "evaluation_num_workers": Config.NUM_EVAL_WORKERS,
         "num_workers": Config.NUM_WORKERS,
         "num_envs_per_worker": Config.NUM_ENVS_PER_WORKER,
@@ -104,7 +210,7 @@ class TrainerConfig:
                 
                 "minimax": (MiniMaxPolicy, OBS_SPACE, ACT_SPACE, {},),
             },
-            "policy_mapping_fn": select_policy,
+            "policy_mapping_fn": select_multiagent_policy,
         },
         # === Evaluation Settings ===
         # Evaluate with every `evaluation_interval` training iterations.
@@ -124,13 +230,101 @@ class TrainerConfig:
         # will result in the evaluation workers not using this optimal policy!
         "evaluation_config": {
             "explore": False,
-            "multiagent": {"policy_mapping_fn": select_multiagent_policy},
+            # "multiagent": {"policy_mapping_fn": select_multiagent_policy},
         },
         "custom_eval_function": Connect4Eval,
         "callbacks": Connect4Callbacks,
         "output": Config.OUTPUT_DIR,
         "framework": "tf2",
     }
+    
+    
+
+    PPO_TRAINER_VS_MINIMAX = {
+        # === PPO Specific Parameter ===
+        # Should use a critic as a baseline (otherwise don't use value baseline;
+        # required for using GAE).
+        "use_critic": True,
+        # If true, use the Generalized Advantage Estimator (GAE)
+        # with a value function, see https://arxiv.org/pdf/1506.02438.pdf.
+        "use_gae": True,
+        # The GAE (lambda) parameter.
+        "lambda": 0.95,
+        # Initial coefficient for KL divergence.
+        "kl_coeff": 0.5,
+        # Total SGD batch size across all devices for SGD. This defines the
+        # minibatch size within each epoch.
+        "sgd_minibatch_size": Config.SGD_MINIBATCH_SIZE,
+        # Whether to shuffle sequences in the batch when training (recommended).
+        "shuffle_sequences": True,
+        # Number of SGD iterations in each outer loop (i.e., number of epochs to
+        # execute per train batch).
+        "num_sgd_iter": Config.NUM_SGD_ITER,
+        # Learning rate schedule.
+        "lr_schedule": None,
+        # Coefficient of the value function loss. IMPORTANT: you must tune this if
+        # you set vf_share_layers=True inside your model's config.
+        "vf_loss_coeff": 1.0,
+        # Coefficient of the entropy regularizer.
+        "entropy_coeff": 0.01,
+        # Decay schedule for the entropy regularizer.
+        "entropy_coeff_schedule": None,
+        # PPO clip parameter.
+        "clip_param": 0.1,
+        # Clip param for the value function. Note that this is sensitive to the
+        # scale of the rewards. If your expected V is large, increase this.
+        "vf_clip_param": 10.0,
+        # If specified, clip the global norm of gradients by this amount.
+        "grad_clip": 5,
+        # Target value for KL divergence.
+        "kl_target": 0.01,
+        # Whether to rollout "complete_episodes" or "truncate_episodes".
+        "batch_mode": "complete_episodes",
+        # Which observation filter to apply to the observation.
+        "observation_filter": "NoFilter",
+        # === Settings for Rollout Worker processes ===
+        "num_gpus": Config.NUM_GPUS,#int(os.environ.get("RLLIB_NUM_GPUS", "0")),
+        "evaluation_num_workers": Config.NUM_EVAL_WORKERS,
+        "num_workers": Config.NUM_WORKERS,
+        "num_envs_per_worker": Config.NUM_ENVS_PER_WORKER,
+        "rollout_fragment_length": Config.ROLLOUT_FRAGMENT_LENGTH,
+        "train_batch_size": Config.TRAIN_BATCH_SIZE,
+        # === Environment Settings ===
+        "env": LogsWrapper,
+        "gamma": Config.GAMMA,
+        "lr": Config.LEARNING_RATE[0],
+        # === Model Settings ===
+        "model": {
+            "custom_model": "connect4_mask",
+            "custom_model_config": {
+                "hidden_layer_shapes" : Config.HIDDEN_LAYER_SHAPES,
+                "use_conv" : Config.USE_CONV
+                },
+        },
+    
+        # === Settings for Multi-Agent Environments ===
+        "multiagent": {
+            "policies_to_train": Config.POLICIES_TO_TRAIN,
+            "policies": {
+                # the last argument accept a policy config dict
+                "player1": (
+                    PPOTFPolicy,
+                    OBS_SPACE,
+                    ACT_SPACE,
+                    {
+                    },
+                ),                
+                "minimax": (MiniMaxPolicy, OBS_SPACE, ACT_SPACE, {},),
+            },
+            "policy_mapping_fn": select_evaluation_policy,
+        },
+        # === Evaluation Settings ===
+        # NO EVALUATION
+        "callbacks": Connect4MiniMaxCallbacks,
+        "output": Config.OUTPUT_DIR,
+        "framework": "tf2",
+    }
+
 
     PG_TRAINER = {
         # === Settings for Rollout Worker processes ===

@@ -4,7 +4,8 @@ FROM rayproject/ray-ml:1.2.0
 RUN pip install --upgrade pip 
 RUN pip install tensorflow==2.4.0 \
 	tqdm \
-	gym 
+	gym \
+	matplotlib
 
 RUN sudo git clone https://github.com/ColdFrenzy/Adaptive_Learning.git
 WORKDIR Adaptive_Learning

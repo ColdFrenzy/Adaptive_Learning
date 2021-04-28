@@ -84,10 +84,12 @@ class Connect4ActionMaskModel(TFModelV2):
         
         if self.use_conv:
             if len(obs_state.shape) < 3:
-                obs_state = tf.expand_dims(obs_state,axis=(0,-1))
-            else:
+                obs_state = tf.expand_dims(obs_state, axis =-1)
+                obs_state = tf.expand_dims(obs_state, axis = 0)
+            elif len(obs_state.shape) == 3:
                 obs_state = tf.expand_dims(obs_state, -1)
-            
+            else:
+                pass
         else:
             # if a single example is passed
             if len(obs_state.shape) < 3:

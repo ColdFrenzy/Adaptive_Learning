@@ -4,6 +4,7 @@ import os
 import json
 import shutil
 import numpy as np 
+import ray 
 from typing import Type
 from ray.tune.logger import UnifiedLogger
 from config.custom_config import Config
@@ -14,11 +15,10 @@ def select_policy(agent_id):
 
     if agent_id == "player1":
         return "player1"
-    # to avoid overfitting over a single strategy, we keep 3 networks trained
-    # independently
+
     else:
         return "player2"
-        # return random.choice(["player2_1","player2_2","player2_3"])
+
 
 
 def select_multiagent_policy(agent_id):
@@ -28,7 +28,7 @@ def select_multiagent_policy(agent_id):
     if agent_id == "player1":
         return "player1"
     else: 
-        return np.random.choice(Config.OPPONENT_POLICIES,1,
+        return np.random.choice(Config.OPPONENT_POLICIES_NOT_TRAINABLE,1,
                                 p=Config.OPPONENT_POLICIES_PROB)[0]
 
 def select_evaluation_policy(agent_id):
@@ -86,10 +86,74 @@ def multiagent_self_play(trainer: Type[Trainer]):
         trainer.get_policy(opp).set_weights(new_weights)
         new_weights = prev_weights
             
-    print("Weight succesfully updated")
     
+    # Syncs weights of remote workers with the local worker
+    # if there are no remote workers, it does nothing 
+    # https://github.com/ray-project/ray/blob/fe06642df0e4b88ac315028ba7de2855cd27a710/rllib/evaluation/worker_set.py#L27
+    trainer.workers.sync_weights()
+    # p2_weights = ray.put(trainer.get_policy("player2").get_weights())
+    # trainer.workers.remote_workers()[0].get_policy("player2").set_weights(ray.get_p2)
+    # push the changes to the workers
+    # weights = ray.put(trainer.workers.local_worker().get_weights())
+    # trainer.workers.foreach_worker(lambda w: w.set_weights(ray.get(weights)))
+
+    """
+    WARNING eager_tf_policy.py:587 -- Cannot restore an optimizer's state 
+    for tf eager! Keras is not able to save the v1.x optimizers 
+    (from tf.compat.v1.train) since they aren't compatible with checkpoints.
+    """  
+  
+    print("Weight succesfully updated")
 
 
+def copy_weights(to_policy, from_policy, trainer):
+    """copy weights from from_policy to to_policy without changing from_policy"""
+    temp_weights = {}  # temp storage with to_policy keys & from_policy values
+    for (k, v), (k2, v2) in zip(
+        trainer.get_policy(to_policy).get_weights(as_dict=True).items(),
+        trainer.get_policy(from_policy).get_weights(as_dict=True).items(),
+    ):
+        temp_weights[k] = v2
+
+    # set weights
+    trainer.set_weights(
+        {
+            to_policy: temp_weights,  # weights or values from from_policy with to_policy keys
+        }
+    )
+
+    # To check
+    for (k, v), (k2, v2) in zip(
+        trainer.get_policy(to_policy).get_weights(as_dict=True).items(),
+        trainer.get_policy(from_policy).get_weights(as_dict=True).items(),
+    ):
+        assert (v == v2).all()
+
+    print("{} == {}".format(to_policy, from_policy))
+
+def shift_policies(trainer, new, p2, p3, p4, p5):
+    copy_weights(p5, p4, trainer)
+    copy_weights(p4, p3, trainer)
+    copy_weights(p3, p2, trainer)
+    copy_weights(p2, new, trainer)
+
+
+
+
+def compute_best_policies(win_rate_matrix, num_of_policies_to_keep):
+    """
+        given a win_matrix NxN and an index num_of_policies_to_keep < N 
+        returns the policies that performed better in average
+    """
+    policies_average_values = []
+    for ind, elem in enumerate(win_rate_matrix):
+        # compute average over columns
+        policies_average_values.append(sum(elem) / len(elem))
+    
+    sorted_values = sorted(range(len(policies_average_values)), key=lambda k: policies_average_values[k],reverse=True)   
+    
+    return sorted_values[0:num_of_policies_to_keep]   
+    
 
 def restore_training(trainer_obj,ckpt_dir,metrics_file):
     """
@@ -156,5 +220,15 @@ def save_checkpoint(trainer_obj,ckpt_dir,metrics_file,custom_metrics,ckpt_to_kee
             if i > ckpt_to_keep-1:
                 dir_to_remove = os.path.join(ckpt_dir, elem)
                 shutil.rmtree(dir_to_remove)
+
+            
+            
+if __name__ == "__main__":
+    win_rate_matrix = np.random.rand(5,5)
+    for n1,elem in enumerate(win_rate_matrix):
+        for n2,p2 in enumerate(elem):
+            if n2 < n1:
+                val = 1 - win_rate_matrix[n2][n1]
+                win_rate_matrix[n1][n2] = val
                 
-        
+    

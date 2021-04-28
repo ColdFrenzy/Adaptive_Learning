@@ -96,14 +96,14 @@ class Connect4Env(MultiAgentEnv):
         self.num_moves = 0
         self.winner = None
         if self.current_player == self.player1_ID:
-            return {self.player1: self.get_player_observations(self.player1)}
-        else:
-            return {self.player2: self.get_player_observations(self.player2)}
+            return {self.player1: self.get_player_observations(self.player1_ID)}
+        elif self.current_player == self.player2_ID:
+            return {self.player2: self.get_player_observations(self.player2_ID)}
 
     def get_player_observations(self, player):
         if player == self.player1_ID:
             obs = {"state": self.board, "action_mask": self.get_moves()}
-        else:
+        elif player == self.player2_ID:
             obs = {"state": self.board_p2, "action_mask": self.get_moves()}
         return obs
 
@@ -129,8 +129,10 @@ class Connect4Env(MultiAgentEnv):
         """
         if self.current_player == self.player1_ID:
             act = action_dict[self.player1]
-        else:
+        elif self.current_player == self.player2_ID:
             act = action_dict[self.player2]
+        else:
+            raise ValueError("Player index is not valid, should be 0 or 1")
 
         if not (
             act >= 0 and act <= self.width and self.board[act][self.height - 1] == -1
@@ -155,8 +157,9 @@ class Connect4Env(MultiAgentEnv):
 
         single_info = {}
         done = {"__all__": self.winner is not None}
-        p1_obs = self.get_player_observations(self.player1)
-        p2_obs = self.get_player_observations(self.player2)
+        # CHANGED 
+        p1_obs = self.get_player_observations(self.player1_ID)
+        p2_obs = self.get_player_observations(self.player2_ID)
 
         if done["__all__"] == True:
             obs = {self.player1: p1_obs, self.player2: p2_obs}
@@ -274,6 +277,17 @@ class Connect4Env(MultiAgentEnv):
                 s += " "
             s += "\n"
         return s
+    
+    def print_config(self,board_config):
+        s = ""
+        s += "\n"
+        for x in range(self.height - 1, -1, -1):
+            for y in range(self.width):
+                s += {-1: ".", 0: "X", 1: "O",}[board_config[y][x]]
+                s += " "
+            s += "\n"
+        print(s)
+    
 
     def render(self, mode="classic", screen_width=600, screen_height=400):
 
