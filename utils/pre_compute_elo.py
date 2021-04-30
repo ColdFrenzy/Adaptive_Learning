@@ -176,13 +176,14 @@ def minimax_vs_minimax_elo(depth1, depth2, number_of_games, logger=None):
                 logger.info(board_print(board))
 
             if done["__all__"]:
-                logger.info("PLAYER " + str(game.winner + 1) + " WON...")
-                logger.info(
-                    "CURRENT SCORE: "
-                    + str(game.score[player1])
-                    + " VS "
-                    + str(game.score[player2])
-                )
+                if logger:
+                    logger.info("PLAYER " + str(game.winner + 1) + " WON...")
+                    logger.info(
+                        "CURRENT SCORE: "
+                        + str(game.score[player1])
+                        + " VS "
+                        + str(game.score[player2])
+                    )
                 game_over = True
 
     if game.score[player1] > game.score[player2]:
@@ -207,7 +208,7 @@ def minimax_vs_minimax_elo(depth1, depth2, number_of_games, logger=None):
     print(
         "elo difference computed over "
         + str(number_of_games)
-        + " between the 2 algortithms is "
+        + " games between the 2 minimax of depth " + str(depth1) + " " + str(depth2) + " is "
         + str(elo_diff)
     )
 
@@ -684,8 +685,8 @@ if __name__ == "__main__":
     # we cap the maximum difference in elo between 2 player as 400 and we compute
     minimax_logger = init_logger("../log/minimax_vs_minimax.log")
     random_logger = init_logger("../log/minimax_vs_random.log")
-    number_of_games = 50
+    number_of_games = 100
     depth = 1
 
     # elo = minimax_vs_random_elo(2, number_of_games, random_logger)
-    elo = minimax_vs_minimax_elo(4, 2, number_of_games, minimax_logger)
+    elo = minimax_vs_minimax_elo(3, 4, number_of_games)# minimax_logger)

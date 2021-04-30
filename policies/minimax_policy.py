@@ -32,6 +32,10 @@ class MiniMaxPolicy(Policy):
         # first n elements of a single observation is the action mask
         actions = []
         width, height = Connect4Config.WIDTH, Connect4Config.HEIGHT
+        #TODO 
+        # need to return always the real board observation as the one seen 
+        # by player 1, otherwise we can get the player 2 pov and the algorithm
+        # won't work properly
         for obs in obs_batch:
             # first n elements are the action mask.
             board = obs[action_space_len:]
@@ -93,7 +97,8 @@ def minimax(
         if not maximize:
             return (None, score_position(board, opponent_player))
         else:
-            return (None, -score_position(board, opponent_player))
+            # return (None, -score_position(board, opponent_player))
+            return (None, score_position(board, current_player))
 
     random.shuffle(valid_actions)
     if maximize:
@@ -186,8 +191,9 @@ def score_position(
     connect=Connect4Config.CONNECT,
 ):
     """
+    THE HEURISITIC IS ONLY COMPUTED FOR THE LEAF VALUE
     compute the heuristic of a given board configuration. The score is based
-    on the number of open lines and forks from both players 
+    on the number of open lines and forks from both players .
     """
     score = 0
     # BLOCKING THE OPPONENT MOVES IS MORE VALUABLE THAN MAKE A GOOD MOVE
@@ -220,6 +226,37 @@ def score_position(
     elif score <= -1000:
         score = -999
     return score
+
+
+
+
+def score_position_v2(
+    board,
+    player,
+    width=Connect4Config.WIDTH,
+    height=Connect4Config.HEIGHT,
+    connect=Connect4Config.CONNECT,
+):
+    
+    """
+    compute the heuristic of a given board configuration. The score is based
+    on the number of open lines and forks just from 1 player. By doing this, 
+    a depth one is only able to win or lose, while a depth 2 is also able to 
+    block an enemy moves.
+    """
+    open_line_score = 5 # easy to block
+    fork_2_score = 10 # easy to block but better than open_line
+    fork_3_score = 50 # hard to block 
+    fork_2, fork_3 = check_forks(board, player)
+    open_lines = check_open_line(board, player)
+    score = (
+        fork_2 * fork_2_score
+        + fork_3 * fork_3_score
+        + open_lines * open_line_score
+    )
+    return score
+    
+   
 
 
 def check_forks(
