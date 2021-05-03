@@ -56,6 +56,19 @@ def conv_dense_model(in_shape, num_outputs, name):
     return tf.keras.Model(inputs, [out_layer, value_layer], name=name)  
 
 
+def conv_dense_model_connect3(in_shape,num_outputs,name):
+    if len(in_shape) == 2:
+        in_shape = in_shape + (1,)
+    inputs = tf.keras.Input(shape=in_shape , name="observations")
+
+    x = tf.keras.layers.Conv2D(64, 3, name="conv_1")(inputs)
+    x = tf.keras.layers.Conv2D(64, 2, name="conv_2")(x)
+    x = tf.keras.layers.Flatten()(x)
+    x = tf.keras.layers.Dense(64, name="dense_1",activation=tf.nn.relu)(x)
+    out_layer = tf.keras.layers.Dense(num_outputs, name="out", activation=None)(x)
+    value_layer = tf.keras.layers.Dense(1, name="value", activation=None)(x)
+    return tf.keras.Model(inputs, [out_layer, value_layer], name=name)  
+
 def dense_q_model(in_shape, hidden_shape, num_outputs, name):
     inputs = tf.keras.layers.Input(shape=(in_shape,), name="observations")
     hidden_layer = tf.keras.layers.Dense(

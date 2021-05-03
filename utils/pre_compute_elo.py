@@ -9,12 +9,14 @@ sys.path.insert(1, os.path.abspath(os.pardir))
 
 from tqdm import tqdm
 from config.custom_config import Config
-from config.connect4_config import Connect4Config
+from config.connect4_config import Connect4Config,Connect3Config
 import copy
 
 # from policies.random_policy import iniMax
 from policies.minimax_policy import minimax
+from policies.minimax_connect3 import minimax_connect3
 from env.connect4_multiagent_env import Connect4Env
+from env.LogWrapper import LogsWrapper_Connect3
 
 player1 = Connect4Config.PLAYER1
 player2 = Connect4Config.PLAYER2
@@ -215,6 +217,99 @@ def minimax_vs_minimax_elo(depth1, depth2, number_of_games, logger=None):
     return elo_diff
 
 
+def minimax_vs_minimax_connect3_elo(depth1, depth2, number_of_games, logger=None):
+    """
+    Use the inverse of the elo formula to compute the outcome of a match,
+    given that we already know the result of a match.
+    It tests the relative elo between minimax algorithm and a minimax algorithm
+    
+    Elo formula:
+        expected_score = 1/(1+10^((elo_diff)/400)) 
+    Inverse formula: 
+        elo_diff = -400*log(1/expected_score - 1)
+    """
+    game = Connect4Env(None,width=Connect3Config.WIDTH,
+        height=Connect3Config.HEIGHT,
+        n_actions=Connect3Config.N_ACTIONS,
+        connect=Connect3Config.CONNECT,
+    )
+    if logger:
+        logger.info(
+            "**********MINIMAX_depth_"
+            + str(depth1)
+            + "_(X) VS (O)_MINIMAX_depth_"
+            + str(depth2)
+            + "**********"
+        )
+    for i in tqdm(range(number_of_games)):
+        game_over = False
+        actions = {}
+        starting_player = random.choice([player1_ID, player2_ID])
+        game.reset(starting_player=starting_player)
+        print("\nPlayer " + str(starting_player + 1) + " is starting")
+        while not game_over:
+            actual_player = game.current_player
+            board = game.board
+            if actual_player == player1_ID:
+                act, _ = minimax_connect3(board, player1_ID, True, depth=depth1)
+                actions[player1] = act
+                _, _, done, _ = game.step(actions)
+            elif actual_player == player2_ID:
+                act, _ = minimax_connect3(board, player2_ID, True, depth=depth2)
+                actions[player2] = act
+                _, _, done, _ = game.step(actions)
+            else:
+                raise ValueError("Player index is not valid, should be 0 or 1")
+            if logger:
+                logger.info("Game number " + str(i) + "/" + str(number_of_games))
+                logger.info(
+                    "Player " + str(actual_player + 1) + " actions: " + str(act)
+                )
+                logger.info("\n" + repr(board))
+                logger.info(board_print(board,Connect3Config.HEIGHT,Connect3Config.WIDTH))
+
+            if done["__all__"]:
+                if logger:
+                    logger.info("PLAYER " + str(game.winner + 1) + " WON...")
+                    logger.info(
+                        "CURRENT SCORE: "
+                        + str(game.score[player1])
+                        + " VS "
+                        + str(game.score[player2])
+                    )
+                game_over = True
+
+    if game.score[player1] > game.score[player2]:
+        score = game.score[player1] / number_of_games + game.num_draws / (
+            2 * number_of_games
+        )
+    elif game.score[player1] < game.score[player2]:
+        score = game.score[player2] / number_of_games + game.num_draws / (
+            2 * number_of_games
+        )
+    elif game.score[player1] == game.score[player2]:
+        return 0
+
+    if score >= 10 / 11:
+        elo_diff = 400
+    else:
+        elo_diff = -400 * math.log((1 / score - 1), 10)
+
+    print("\nplayer 1 score: " + str(game.score[player1]))
+    print("player 2 score: " + str(game.score[player2]))
+    print("number of draw: " + str(game.num_draws))
+    print(
+        "elo difference computed over "
+        + str(number_of_games)
+        + " games between the 2 minimax of depth " + str(depth1) + " " + str(depth2) + " is "
+        + str(elo_diff)
+    )
+
+    return elo_diff
+
+
+
+
 def model_vs_minimax(
     model, depth, number_of_games, checkpoint=None, logger=None, randomize=True
 ):
@@ -258,19 +353,11 @@ def model_vs_minimax(
             board = game.board
             if actual_player == player1_ID:
                 input_dict = {"obs": {}}
-                # if model.use_conv:
-                #     reshaped_board = np.expand_dims(board, axis=(0,-1))
-
-                # else:
-                #     reshaped_board = np.reshape(board, (1, board.shape[0] * board.shape[1]))
                 action_mask = game.get_moves(True)
                 input_dict["obs"]["state"] = board #reshaped_board
                 input_dict["obs"]["action_mask"] = action_mask
                 action_logits, _ = model.forward(input_dict, None, None)
-                # max_act = max(action_logits[0])
                 act = np.argmax(action_logits[0])
-                # act = [i for i, j in enumerate(action_logits[0]) if j == max_act]
-                # act = random.choice(act)
                 actions[player1] = act
                 _, _, done, _ = game.step(actions)
             elif actual_player == player2_ID:
@@ -296,26 +383,11 @@ def model_vs_minimax(
                     + str(game.score[player2])
                 )
                 game_over = True
-
-    # score = game.score[player1] / number_of_games + game.num_draws / (
-    #     2 * number_of_games
-    # )
     print("Evaluation Over")
 
     elo_diff = compute_elo_difference(
         game.score[player1], game.num_draws, number_of_games
     )
-
-    # print("\nplayer 1 score: " + str(game.score[player1]))
-    # print("player 2 score: " + str(game.score[player2]))
-    # print("number of draw: " + str(game.num_draws))
-    # print(
-    #     "elo difference computed over "
-    #     + str(number_of_games)
-    #     + " between the 2 algortithms is "
-    #     + str(elo_diff)
-    # )
-
     return elo_diff, game.score[player1], game.score[player2], game.num_draws
 
 
@@ -353,19 +425,12 @@ def model_vs_minimax_stochastic(
             board = game.board
             if actual_player == player1_ID:
                 input_dict = {"obs": {}}
-                # if model.use_conv:
-                #     reshaped_board = np.expand_dims(board, axis=(0,-1))
-
-                # else:
-                #     reshaped_board = np.reshape(board, (1, board.shape[0] * board.shape[1]))
                 action_mask = game.get_moves(True)
                 input_dict["obs"]["state"] = board #reshaped_board
                 input_dict["obs"]["action_mask"] = action_mask
                 action_logits, _ = model.forward(input_dict, None, None)
-                # max_act = max(action_logits[0])
-                act = np.argmax(action_logits[0])
-                # act = [i for i, j in enumerate(action_logits[0]) if j == max_act]
-                # act = random.choice(act)
+                action_prob = [np.exp(single_log)/sum(np.exp(action_logits[0])) for single_log in action_logits[0]]
+                act = np.random.choice([0,1,2,3,4,5,6],1,p=action_prob)[0]
                 actions[player1] = act
                 _, _, done, _ = game.step(actions)
             elif actual_player == player2_ID:
@@ -381,6 +446,167 @@ def model_vs_minimax_stochastic(
                 )
                 logger.info("\n" + repr(board))
                 logger.info(board_print(board))
+
+            if done["__all__"]:
+                if logger:
+                    logger.info("PLAYER " + str(game.winner + 1) + " WON...")
+                    logger.info(
+                        "CURRENT SCORE: "
+                        + str(game.score[player1])
+                        + " VS "
+                        + str(game.score[player2])
+                    )
+                game_over = True
+    print("Evaluation Over")
+
+    elo_diff = compute_elo_difference(
+        game.score[player1], game.num_draws, number_of_games
+    )
+    return elo_diff, game.score[player1], game.score[player2], game.num_draws
+
+
+def model_vs_minimax_connect3(
+    model, depth, number_of_games, checkpoint=None, logger=None, randomize=True
+):
+    """
+        used to evaluate the model against the minimax algorithm.
+        The action chosen by the model is picked following the distribution
+        of the action probabilities. 
+    
+    """
+
+    game = Connect4Env(None,width=Connect3Config.WIDTH,
+        height=Connect3Config.HEIGHT,
+        n_actions=Connect3Config.N_ACTIONS,
+        connect=Connect3Config.CONNECT,
+    )
+    model_name = model.name
+    if logger:
+        logger.info(
+            "**********"
+            + str(model_name)
+            + "_(X) VS (O)_MINIMAX_depth_"
+            + str(depth)
+            + "**********"
+        )
+    print("Starting Evaluation")
+    for i in range(number_of_games):
+        game_over = False
+        actions = {}
+        if randomize:
+            starting_player = random.choice([player1_ID, player2_ID])
+        else:
+            starting_player = player1_ID
+        game.reset(starting_player=starting_player, randomize = False)
+        while not game_over:
+            actual_player = game.current_player
+            board = game.board
+            if actual_player == player1_ID:
+                input_dict = {"obs": {}}
+                action_mask = game.get_moves(True)
+                input_dict["obs"]["state"] = board #reshaped_board
+                input_dict["obs"]["action_mask"] = action_mask
+                action_logits, _ = model.forward(input_dict, None, None)
+                act = np.argmax(action_logits[0])
+                actions[player1] = act
+                _, _, done, _ = game.step(actions)
+            elif actual_player == player2_ID:
+                act, _ = minimax_connect3(board, player2_ID, True, depth=depth)
+                actions[player2] = act
+                _, _, done, _ = game.step(actions)
+            else:
+                raise ValueError("Player index is not valid, should be 0 or 1")
+            if logger:
+                logger.info("Game number " + str(i) + "/" + str(number_of_games))
+                logger.info(
+                    "Player " + str(actual_player + 1) + " actions: " + str(act)
+                )
+                logger.info("\n" + repr(board))
+                logger.info(board_print(board,Connect3Config.HEIGHT,Connect3Config.WIDTH))
+
+            if done["__all__"]:
+                if logger:
+                    logger.info("PLAYER " + str(game.winner + 1) + " WON...")
+                    logger.info(
+                        "CURRENT SCORE: "
+                        + str(game.score[player1])
+                        + " VS "
+                        + str(game.score[player2])
+                    )
+                game_over = True
+
+    print("Evaluation Over")
+
+    elo_diff = compute_elo_difference(
+        game.score[player1], game.num_draws, number_of_games
+    )
+    return elo_diff, game.score[player1], game.score[player2], game.num_draws
+
+
+def model_vs_minimax_connect3_stochastic(
+    model, depth, number_of_games, checkpoint=None, logger=None, randomize=True
+):
+    """
+        used to evaluate the model against the minimax algorithm.
+        The action chosen by the model is picked following the distribution
+        of the action probabilities. 
+    
+    """
+
+    game = Connect4Env(None,width=Connect3Config.WIDTH,
+        height=Connect3Config.HEIGHT,
+        n_actions=Connect3Config.N_ACTIONS,
+        connect=Connect3Config.CONNECT,
+    )
+    model_name = model.name
+    if logger:
+        logger.info(
+            "**********"
+            + str(model_name)
+            + "_(X) VS (O)_MINIMAX_depth_"
+            + str(depth)
+            + "**********"
+        )
+    print("Starting Evaluation")
+    for i in range(number_of_games):
+        game_over = False
+        actions = {}
+        if randomize:
+            starting_player = random.choice([player1_ID, player2_ID])
+        else:
+            starting_player = player1_ID
+        game.reset(starting_player=starting_player, randomize = False)
+        while not game_over:
+            actual_player = game.current_player
+            board = game.board
+            if actual_player == player1_ID:
+                input_dict = {"obs": {}}
+                # if model.use_conv:
+                #     reshaped_board = np.expand_dims(board, axis=(0,-1))
+
+                # else:
+                #     reshaped_board = np.reshape(board, (1, board.shape[0] * board.shape[1]))
+                action_mask = game.get_moves(True)
+                input_dict["obs"]["state"] = board #reshaped_board
+                input_dict["obs"]["action_mask"] = action_mask
+                action_logits, _ = model.forward(input_dict, None, None)
+                action_prob = [np.exp(single_log)/sum(np.exp(action_logits[0])) for single_log in action_logits[0]]
+                act = np.random.choice([0,1,2,3,4],1,p=action_prob)[0]
+                actions[player1] = act
+                _, _, done, _ = game.step(actions)
+            elif actual_player == player2_ID:
+                act, _ = minimax_connect3(board, player2_ID, True, depth=depth)
+                actions[player2] = act
+                _, _, done, _ = game.step(actions)
+            else:
+                raise ValueError("Player index is not valid, should be 0 or 1")
+            if logger:
+                logger.info("Game number " + str(i) + "/" + str(number_of_games))
+                logger.info(
+                    "Player " + str(actual_player + 1) + " actions: " + str(act)
+                )
+                logger.info("\n" + repr(board))
+                logger.info(board_print(board,Connect3Config.HEIGHT,Connect3Config.WIDTH))
 
             if done["__all__"]:
                 if logger:
@@ -413,7 +639,6 @@ def model_vs_minimax_stochastic(
     # )
 
     return elo_diff, game.score[player1], game.score[player2], game.num_draws
-
 
 
 def model_vs_model(model1,model2, number_of_games,discount_rate,randomize=True):
@@ -597,6 +822,100 @@ def model_vs_model_stochastic(model1,model2, number_of_games,discount_rate,rando
         
     return final_value, p1_win_rate 
 
+
+def model_vs_model_connect3_stochastic(model1,model2, number_of_games,discount_rate,randomize=True):
+    """
+    Compute the results of different games between 2 models. Instead of picking
+    the best action, we pick an action with probability equals to the action 
+    probability
+
+    Parameters
+    ----------
+    model1 : Neural Network model
+    model2 : Neural Network model
+    number_of_games : int
+        number of games to play 
+    discount_rate : float
+        scale the final reward 
+    randomize : Bool
+        decide if the first player to move is decided randomly
+
+    Returns
+    -------
+    """
+    game = Connect4Env(None,width=Connect3Config.WIDTH,
+        height=Connect3Config.HEIGHT,
+        n_actions=Connect3Config.N_ACTIONS,
+        connect=Connect3Config.CONNECT,
+    )
+    # how long a game last 
+    final_value = 0
+    p1_win = 0 
+    for i in range(number_of_games):
+        timestep = 0
+        reward = 0
+        game_over = False
+        actions = {}
+        if randomize:
+            starting_player = random.choice([player1_ID, player2_ID])
+        else:
+            starting_player = player1_ID
+        game.reset(starting_player=starting_player)
+        while not game_over:
+            timestep += 1
+            actual_player = game.current_player
+            board = game.board
+            board_p2 = game.board_p2
+            if actual_player == player1_ID:
+                input_dict = {"obs": {}}
+                # if model1.use_conv:
+                #     reshaped_board = np.expand_dims(board, axis=(0,-1))
+
+                # else:
+                #     reshaped_board = np.reshape(board, (1, board.shape[0] * board.shape[1]))
+                action_mask = game.get_moves(True)
+                input_dict["obs"]["state"] = board #reshaped_board
+                input_dict["obs"]["action_mask"] = action_mask
+                action_logits, _ = model1.forward(input_dict, None, None)
+                action_prob = [np.exp(single_log)/sum(np.exp(action_logits[0])) for single_log in action_logits[0]]
+                act = np.random.choice([0,1,2,3,4],1,p=action_prob)[0]
+                #act = np.argmax(action_logits[0])
+
+                actions[player1] = act
+                _, rew, done, _ = game.step(actions)
+            elif actual_player == player2_ID:
+                input_dict = {"obs": {}}
+                # if model2.use_conv:
+                #     reshaped_board = np.expand_dims(board_p2, axis=(0,-1))
+
+                # else:
+                #     reshaped_board = np.reshape(board_p2, (1, board_p2.shape[0] * board_p2.shape[1]))
+                action_mask = game.get_moves(True)
+                input_dict["obs"]["state"] = board_p2 #reshaped_board
+                input_dict["obs"]["action_mask"] = action_mask
+                action_logits, _ = model2.forward(input_dict, None, None)
+                action_prob = [np.exp(single_log)/sum(np.exp(action_logits[0])) for single_log in action_logits[0]]
+                act = np.random.choice([0,1,2,3,4],1,p=action_prob)[0]
+                actions[player2] = act
+                _, rew, done, _ = game.step(actions)
+            else:
+                raise ValueError("Player index is not valid, should be 0 or 1")
+
+            if done["__all__"]:
+                game_over = True
+                reward = rew["player2"]
+                if rew["player1"] == 1.0:
+                    p1_win += 1.0
+
+                if discount_rate == 1:
+                    final_value += reward
+                else:
+                    final_value += (discount_rate**timestep)*reward
+                
+    final_value = final_value / number_of_games
+    p1_win_rate = p1_win/number_of_games
+        
+    return final_value, p1_win_rate 
    
 
                 
@@ -615,6 +934,27 @@ def compute_win_rate_matrix(weights, model1,model2 ):
                 continue
             model2.base_model.set_weights(p2)
             _, p1_win_rate = model_vs_model_stochastic(model1,model2, 50 , 1,randomize=True)
+            win_rate_matrix[n1].append(p1_win_rate)
+            
+    model1.base_model.set_weights(w1_to_restore)
+    model2.base_model.set_weights(w2_to_restore)
+    return win_rate_matrix 
+
+def compute_win_rate_matrix_connect3(weights, model1,model2 ):
+    win_rate_matrix = []
+    w1_to_restore = model1.base_model.get_weights()
+    w2_to_restore = model2.base_model.get_weights()
+    # the win rate matrix is antisymmetric
+    for n1,p1 in enumerate(weights):
+        win_rate_matrix.append([])
+        model1.base_model.set_weights(p1)
+        for n2,p2 in enumerate(weights):
+            if n2 < n1:
+                val = 1 - win_rate_matrix[n2][n1]
+                win_rate_matrix[n1].append(val)
+                continue
+            model2.base_model.set_weights(p2)
+            _, p1_win_rate = model_vs_model_connect3_stochastic(model1,model2, 50 , 1,randomize=True)
             win_rate_matrix[n1].append(p1_win_rate)
             
     model1.base_model.set_weights(w1_to_restore)
@@ -689,4 +1029,5 @@ if __name__ == "__main__":
     depth = 1
 
     # elo = minimax_vs_random_elo(2, number_of_games, random_logger)
-    elo = minimax_vs_minimax_elo(3, 4, number_of_games)# minimax_logger)
+    # elo = minimax_vs_minimax_elo(3, 4, number_of_games)# minimax_logger)
+    elo = minimax_vs_minimax_connect3_elo(4,1,number_of_games)

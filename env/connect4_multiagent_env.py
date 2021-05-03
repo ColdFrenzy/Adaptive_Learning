@@ -216,7 +216,7 @@ class Connect4Env(MultiAgentEnv):
         # return an array of 0 if the action is invalid and 1 if it's valid
         if mask == True:
             if self.winner is not None:
-                return [0.0] * 7
+                return [0.0] * self.width
             act_mask = []
             for col in range(self.width):
                 if self.board[col][self.height - 1] == -1:

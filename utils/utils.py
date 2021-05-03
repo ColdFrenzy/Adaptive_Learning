@@ -150,12 +150,12 @@ def compute_best_policies(win_rate_matrix, num_of_policies_to_keep):
         # compute average over columns
         policies_average_values.append(sum(elem) / len(elem))
     
-    sorted_values = sorted(range(len(policies_average_values)), key=lambda k: policies_average_values[k],reverse=True)   
+    sorted_values = sorted(range(len(policies_average_values)), key=lambda k: policies_average_values[k])#reverse=True)   
     
-    return sorted_values[0:num_of_policies_to_keep]   
+    return sorted_values[-num_of_policies_to_keep:]   
     
 
-def restore_training(trainer_obj,ckpt_dir,metrics_file):
+def restore_training(trainer_obj,ckpt_dir,metrics_file=None):
     """
     Restore the latest checkpoint and the latest metrics
     trainer_obj: Trainable
