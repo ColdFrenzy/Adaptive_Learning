@@ -150,7 +150,7 @@ class TrainerConfig:
         # required for using GAE).
         "use_critic": True,
         # If true, use the Generalized Advantage Estimator (GAE)
-        # with a value function, see https://arxiv.org/pdf/1506.02438.pdf.
+        # with a value function, see https://arxiv.org/pdf/1506.02438.pdf
         "use_gae": True,
         # The GAE (lambda) parameter.
         "lambda": 0.95,
@@ -168,9 +168,9 @@ class TrainerConfig:
         "lr_schedule": None,
         # Coefficient of the value function loss. IMPORTANT: you must tune this if
         # you set vf_share_layers=True inside your model's config.
-        "vf_loss_coeff": 1.0,
+        "vf_loss_coeff": 0.01, # CHANGED 1
         # Coefficient of the entropy regularizer.
-        "entropy_coeff": 0.01,
+        "entropy_coeff": 0.1, # CHANGED 0.01
         # Decay schedule for the entropy regularizer.
         "entropy_coeff_schedule": None,
         # PPO clip parameter.

@@ -13,6 +13,7 @@ important_checkpoints/*
 !important_checkpoints/.gitkeep
 tensorboard _run.txt
 custom_metrics.json
+Training Experiments.txt
 Callbacks_test.txt
 Full_episode_iteration.txt
 Full_sample_collection.txt
@@ -27,6 +28,8 @@ checkpoints/*
 ray_results/*
 !ray_results/.gitkeep
 log/
+!log/.gitkeep
+data/
 !log/.gitkeep
 
 

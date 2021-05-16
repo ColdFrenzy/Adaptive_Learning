@@ -732,6 +732,179 @@ def model_vs_model(model1,model2, number_of_games,discount_rate,randomize=True):
         
     return final_value, p1_win_rate 
 
+def model_vs_model_connect3(model1,model2, number_of_games,discount_rate,randomize=True,number_of_stochastic_moves=0):
+
+    game = Connect4Env(None,width=Connect3Config.WIDTH,
+        height=Connect3Config.HEIGHT,
+        n_actions=Connect3Config.N_ACTIONS,
+        connect=Connect3Config.CONNECT,
+    )
+    # how long a game last 
+    final_value = 0
+    p1_win = 0 
+    for i in range(number_of_games):
+        timestep = 0
+        reward = 0
+        game_over = False
+        actions = {}
+        if randomize:
+            starting_player = random.choice([player1_ID, player2_ID])
+        else:
+            starting_player = player1_ID
+        game.reset(starting_player=starting_player)
+        while not game_over:
+            timestep += 1
+            actual_player = game.current_player
+            board = game.board
+            board_p2 = game.board_p2
+            if actual_player == player1_ID:
+                input_dict = {"obs": {}}
+                action_mask = game.get_moves(True)
+                input_dict["obs"]["state"] = board
+                input_dict["obs"]["action_mask"] = action_mask
+                action_logits, _ = model1.forward(input_dict, None, None)
+                if timestep > number_of_stochastic_moves:
+                    act = np.argmax(action_logits[0])
+                elif timestep <= number_of_stochastic_moves:
+                    action_prob = [np.exp(single_log)/sum(np.exp(action_logits[0])) for single_log in action_logits[0]]
+                    act = np.random.choice([0,1,2,3,4],1,p=action_prob)[0]  
+                actions[player1] = act                
+                _, rew, done, _ = game.step(actions)
+            elif actual_player == player2_ID:
+                input_dict = {"obs": {}}
+                action_mask = game.get_moves(True)
+                input_dict["obs"]["state"] = board_p2 #reshaped_board
+                input_dict["obs"]["action_mask"] = action_mask
+                action_logits, _ = model2.forward(input_dict, None, None)
+                if timestep > number_of_stochastic_moves:
+                    act = np.argmax(action_logits[0])
+                elif timestep <= number_of_stochastic_moves:
+                    action_prob = [np.exp(single_log)/sum(np.exp(action_logits[0])) for single_log in action_logits[0]]
+                    act = np.random.choice([0,1,2,3,4],1,p=action_prob)[0]  
+                actions[player2] = act
+                _, rew, done, _ = game.step(actions)
+                
+            else:
+                raise ValueError("Player index is not valid, should be 0 or 1")
+            if done["__all__"]:
+                game_over = True
+                reward = rew["player2"]
+                if rew["player1"] == 1.0:
+                    p1_win += 1.0
+
+                if discount_rate == 1:
+                    final_value += reward
+                else:
+                    final_value += (discount_rate**timestep)*reward
+                
+    final_value = final_value / number_of_games
+    p1_win_rate = p1_win/number_of_games
+        
+    return final_value, p1_win_rate 
+
+
+def model_vs_model_connect3_generate_data(model1,model2, number_of_games,discount_rate,randomize=True,number_of_stochastic_moves=0):
+    """ 
+    generates game data from games with the board seen by model1 pov
+
+    """
+    game = Connect4Env(None,width=Connect3Config.WIDTH,
+        height=Connect3Config.HEIGHT,
+        n_actions=Connect3Config.N_ACTIONS,
+        connect=Connect3Config.CONNECT,
+    )
+    # how long a game last 
+    final_value = 0
+    p1_win = 0 
+    # game encoded as a string 
+    games_list = []
+    number_of_equal_games = 0
+    
+    for i in range(number_of_games):
+        timestep = 0
+        reward = 0
+        game_over = False
+        actions = {}
+        encoded_game = []
+        if randomize:
+            starting_player = random.choice([player1_ID, player2_ID])
+            if starting_player == player1_ID:
+                encoded_game.append("p1_")
+            elif starting_player == player2_ID:
+                encoded_game.append("p2_")
+        else:
+            starting_player = player1_ID
+            encoded_game.append("p1_")
+        game.reset(starting_player=starting_player,randomize=False)
+        while not game_over:
+            timestep += 1
+            actual_player = game.current_player
+            board = game.board
+            board_p2 = game.board_p2
+            
+            
+            if actual_player == player1_ID:
+                input_dict = {"obs": {}}
+                action_mask = game.get_moves(True)
+                input_dict["obs"]["state"] = board
+                input_dict["obs"]["action_mask"] = action_mask
+                action_logits, _ = model1.forward(input_dict, None, None)
+                if timestep > number_of_stochastic_moves:
+                    act = np.argmax(action_logits[0])
+                elif timestep <= number_of_stochastic_moves:
+                    action_prob = [np.exp(single_log)/sum(np.exp(action_logits[0])) for single_log in action_logits[0]]
+                    act = np.random.choice([0,1,2,3,4],1,p=action_prob)[0]  
+                
+                encoded_game.append(str(act))
+                actions[player1] = act                
+                _, rew, done, _ = game.step(actions)
+                
+                
+                
+            elif actual_player == player2_ID:
+                input_dict = {"obs": {}}
+                action_mask = game.get_moves(True)
+                input_dict["obs"]["state"] = board_p2 #reshaped_board
+                input_dict["obs"]["action_mask"] = action_mask
+                action_logits, _ = model2.forward(input_dict, None, None)
+                if timestep > number_of_stochastic_moves:
+                    act = np.argmax(action_logits[0])
+                elif timestep <= number_of_stochastic_moves:
+                    action_prob = [np.exp(single_log)/sum(np.exp(action_logits[0])) for single_log in action_logits[0]]
+                    act = np.random.choice([0,1,2,3,4],1,p=action_prob)[0]  
+                    
+                encoded_game.append(str(act))
+                actions[player2] = act
+                _, rew, done, _ = game.step(actions)
+                
+            else:
+                raise ValueError("Player index is not valid, should be 0 or 1")
+                
+            if done["__all__"]:
+                game_over = True
+                game_str = ''.join(encoded_game)
+                # ADD ENCODED GAME TO THE LISt
+                if game_str in games_list:
+                    number_of_equal_games += 1
+                elif game_str not in games_list:
+                    games_list.append(game_str)
+                    
+                    
+                reward = rew["player2"]
+                if rew["player1"] == 1.0:
+                    p1_win += 1.0
+
+                if discount_rate == 1:
+                    final_value += reward
+                else:
+                    final_value += (discount_rate**timestep)*reward
+    print("The number of equal games is: " + str(number_of_equal_games))
+    final_value = final_value / number_of_games
+    p1_win_rate = p1_win/number_of_games
+        
+    return final_value, p1_win_rate , games_list
+
+
 def model_vs_model_stochastic(model1,model2, number_of_games,discount_rate,randomize=True):
     """
     Compute the results of different games between 2 models. Instead of picking
@@ -940,7 +1113,7 @@ def compute_win_rate_matrix(weights, model1,model2 ):
     model2.base_model.set_weights(w2_to_restore)
     return win_rate_matrix 
 
-def compute_win_rate_matrix_connect3(weights, model1,model2 ):
+def compute_win_rate_matrix_connect3(weights, model1,model2,number_of_stochastic_moves=0):
     win_rate_matrix = []
     w1_to_restore = model1.base_model.get_weights()
     w2_to_restore = model2.base_model.get_weights()
@@ -954,7 +1127,8 @@ def compute_win_rate_matrix_connect3(weights, model1,model2 ):
                 win_rate_matrix[n1].append(val)
                 continue
             model2.base_model.set_weights(p2)
-            _, p1_win_rate = model_vs_model_connect3_stochastic(model1,model2, 50 , 1,randomize=True)
+            #_, p1_win_rate = model_vs_model_connect3_stochastic(model1,model2, 50 , 1,randomize=True)
+            _, p1_win_rate = model_vs_model_connect3(model1,model2, 50 , 1,randomize=True,number_of_stochastic_moves=number_of_stochastic_moves)
             win_rate_matrix[n1].append(p1_win_rate)
             
     model1.base_model.set_weights(w1_to_restore)
@@ -963,8 +1137,6 @@ def compute_win_rate_matrix_connect3(weights, model1,model2 ):
 
 
         
-
-
              
 def compute_elo_difference(player1_score, draws, number_of_games):
 

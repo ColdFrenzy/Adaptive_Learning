@@ -61,17 +61,17 @@ class Config:
     # difference in score to reach before updating the opponent policies weights
     REWARD_DIFFERENCE = 100
     # 0.6 is a good value in order to avoid overtraining
-    WIN_RATE = 0.6
+    WIN_RATE = 0.55 #0.6
     # use REWARD_DIFFERENCE as metrics to copy weights, otherwise use 
     # WEIGHT_UPDATE_STEP or WIN_RATE 
     USE_SCORE = True
     # number of games against minimax
     GAMES_VS_MINIMAX = 100
     # number of previous weights to keep before computing the win-rate matrix
-    HISTORY_LEN = 20 #20
+    HISTORY_LEN = 8 #20
     # number of most recent weights to keep after reaching HISTORY_LEN 
     # weights
-    WEIGHTS_TO_KEEP = 10
+    WEIGHTS_TO_KEEP = 4
 
     # self play is useless if both policies are already being trained
     POLICIES_TO_TRAIN = ["player1"]
@@ -90,7 +90,7 @@ class Config:
     # MINIMAX PARAMS
     # =============================================================================
     SEARCH_DEPTH = 1
-    MAX_DEPTH = 4
+    MAX_DEPTH = 6
 
     # =============================================================================
     # CUSTOM METRICS
@@ -148,6 +148,11 @@ class Config:
     if not os.path.exists(WEIGHTS_FILE):
         with open(WEIGHTS_FILE, "w") as json_file:
             pass
+        
+    DATA_DIR = os.path.join(ROOT_DIR,"data")
+    if not os.path.exists(DATA_DIR):
+        os.mkdir(DATA_DIR)
+        
             
         
    # directory for tensorboard data      

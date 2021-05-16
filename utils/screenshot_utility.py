@@ -11,6 +11,7 @@ import numpy as np
 
 sys.path.insert(1, os.path.abspath(os.pardir))
 from env.connect4_multiagent_env import Connect4Env
+from config.connect4_config import Connect4Config,Connect3Config
 
 
 def make_screenshot(env, board, out_file):
@@ -27,7 +28,37 @@ def make_screenshot(env, board, out_file):
 
 
 if __name__ == "__main__":
+    
     env = Connect4Env(None)
+    game = Connect4Env(None,width=Connect3Config.WIDTH,
+        height=Connect3Config.HEIGHT,
+        n_actions=Connect3Config.N_ACTIONS,
+        connect=Connect3Config.CONNECT,
+    )
+    board = game.board
+    # empty_board_connect3 = np.array([
+    #     [ -1., -1., -1., -1.],
+    #     [ -1., -1., -1., -1.],
+    #     [ -1., -1., -1., -1.],
+    #     [ -1., -1., -1., -1.],
+    #     [ -1., -1., -1., -1.]])
+    
+    # board_connect3 = np.array([
+    #     [ 0., 1., -1., -1.],
+    #     [ 1., 0., 0., -1.],
+    #     [ 1., 0., -1., -1.],
+    #     [ 0., 1., -1., -1.],
+    #     [ -1., -1., -1., -1.]])
+    open_line_vertical = np.array([
+        [ -1., -1., -1., -1., -1., -1.],
+        [ -1., -1., -1., -1., -1., -1.],
+        [ 1., 1., -1., -1., -1., -1.],
+        [ 0., 0., 0., -1., -1., -1.],
+        [ 1., -1., -1., -1., -1., -1.],
+        [ -1., -1., -1., -1., -1., -1.],
+        [ -1., -1., -1., -1., -1., -1.]])
+    
+    
     # empty_board = np.array([[ -1., -1., -1., -1., -1., -1.],
     #     [ -1., -1., -1., -1., -1., -1.],
     #     [ -1., -1., -1., -1., -1., -1.],
@@ -35,17 +66,17 @@ if __name__ == "__main__":
     #     [ -1., -1., -1., -1., -1., -1.],
     #     [ -1., -1., -1., -1., -1., -1.],
     #     [ -1., -1., -1., -1., -1., -1.]])
-    board = np.array(
-        [
-            [1.0, 0.0, 1.0, 1.0, 0.0, 0.0],
-            [1.0, 1.0, 0.0, 0.0, 1.0, 0.0],
-            [1.0, 0.0, 1.0, 1.0, 0.0, 0.0],
-            [0.0, 1.0, 1.0, 0.0, 0.0, 1.0],
-            [1.0, 0.0, 1.0, 1.0, 0.0, 0.0],
-            [1.0, 1.0, 0.0, 0.0, 1.0, 0.0],
-            [1.0, 0.0, 1.0, 1.0, 0.0, 0.0],
-        ]
-    )
+    # board = np.array(
+    #     [
+    #         [1.0, 0.0, 1.0, 1.0, 0.0, 0.0],
+    #         [1.0, 1.0, 0.0, 0.0, 1.0, 0.0],
+    #         [1.0, 0.0, 1.0, 1.0, 0.0, 0.0],
+    #         [0.0, 1.0, 1.0, 0.0, 0.0, 1.0],
+    #         [1.0, 0.0, 1.0, 1.0, 0.0, 0.0],
+    #         [1.0, 1.0, 0.0, 0.0, 1.0, 0.0],
+    #         [1.0, 0.0, 1.0, 1.0, 0.0, 0.0],
+    #     ]
+    # )
     # p1_board = np.array(
     #     [
     #         [ -1., -1., -1., -1., -1., -1.],
@@ -65,4 +96,4 @@ if __name__ == "__main__":
     #    [ 1.,  0., -1., -1., -1., -1.]])
 
     # board = env.board
-    make_screenshot(env, board, "test.png")
+    make_screenshot(env, open_line_vertical, "test.png")

@@ -20,21 +20,16 @@ import io
 import itertools
 import ray
 
-# from env.LogWrapper import LogsWrapper
-from ray.rllib.agents.trainer import with_common_config
-
 # from ray.rllib.agents.trainer_template import build_trainer
 from ray.rllib.agents.ppo import PPOTrainer
 from models import Connect4ActionMaskModel
-from utils.utils import custom_log_creator, self_play, restore_training,\
-    save_checkpoint,multiagent_self_play,shift_policies,copy_weights,\
-    compute_best_policies
+from utils.utils import custom_log_creator, restore_training,\
+    save_checkpoint,multiagent_self_play, compute_best_policies
    
-from utils.pre_compute_elo import compute_win_rate_matrix,compute_win_rate_matrix_connect3,\
-    model_vs_minimax_connect3,model_vs_minimax_connect3_stochastic
+from utils.pre_compute_elo import compute_win_rate_matrix_connect3,\
+    model_vs_minimax_connect3
 from config.custom_config import Config
 from config.trainer_config import TrainerConfig
-from utils.board_config_test import board_config_test
 
 def plot_matrix(wm, class_names):
   """
@@ -120,13 +115,13 @@ if __name__ == "__main__":
     history_len = Config.HISTORY_LEN
     weights_to_keep = Config.WEIGHTS_TO_KEEP
     games_vs_minimax = Config.GAMES_VS_MINIMAX
-    max_depth = Config.MAX_DEPTH
+    max_depth = 8 #Config.MAX_DEPTH
     
     # =============================================================================
     # STARTS
     # =============================================================================
     p1_trainer_name = "Connect3_PPO_Conv_Net"
-    p2_trainer_name = "PPO_Conv_Net"
+    p2_trainer_name = "No_GAE"
     obs_space = TrainerConfig.OBS_SPACE_CONNECT3
     print("The observation space is: ")
     print(obs_space)
@@ -147,10 +142,10 @@ if __name__ == "__main__":
     if restore_ckpt:
         # restoring checkpoints require ray
         ray.init()
-        best_ckpt=restore_training(trainer_obj, ckpt_dir,custom_metrics_file)
+        # best_ckpt=restore_training(trainer_obj, ckpt_dir,custom_metrics_file)
         with open(Config.MINIMAX_DEPTH_PATH) as json_file:
             data = json.load(json_file)
-            minimax_depth = data["minimax_depth"]
+            minimax_depth = 3#data["minimax_depth"]
             
         # restore weights from a previous run 
         restored_weights = []
@@ -160,7 +155,8 @@ if __name__ == "__main__":
             restored_weights.append(weights[()][name])
             trainer_obj.callbacks.add_weights(restored_weights[-1])
         # give player 1 the best weights
-        trainer_obj.get_policy("player1").set_weights(restored_weights[0])
+        trainer_obj.get_policy("player1").set_weights(restored_weights[-1])
+            
         ray.shutdown()
             
     else:
@@ -172,10 +168,15 @@ if __name__ == "__main__":
     # the log_creator    
     import tensorflow as tf 
     
+    
+    number_of_stochastic_moves = 5
+    
+    
     logdir = str(trainer_obj._logdir)
     additional_metrics = {"additional_metrics":{}}
     file_writer = tf.summary.create_file_writer(logdir)
     file_writer.set_as_default()
+    
     for epoch in tqdm(range(best_ckpt + 1, epochs)):
         print("Epoch " + str(epoch))
         # when we call the train() methods we are updating the weights but the
@@ -210,6 +211,9 @@ if __name__ == "__main__":
 
         print("Actual player1 win rate: " + str(player1_win_rate))
         
+        
+
+        
         if player1_win_rate >= win_rate:
             # =============================================================================
             # UPDATE WEIGHTS FOR SELF-PLAY
@@ -222,7 +226,7 @@ if __name__ == "__main__":
             if len(trainer_obj.callbacks.weights_history) == history_len:
                 model1 = trainer_obj.get_policy("player1").model
                 model2 = trainer_obj.get_policy("player2").model
-                win_matrix = compute_win_rate_matrix_connect3(trainer_obj.callbacks.weights_history, model1,model2)
+                win_matrix = compute_win_rate_matrix_connect3(trainer_obj.callbacks.weights_history, model1,model2,number_of_stochastic_moves)
                 # we removes all the weights (i.e. policies) which 
                 # on average performed worse
                 best_weights_indexes = compute_best_policies(win_matrix,weights_to_keep)
