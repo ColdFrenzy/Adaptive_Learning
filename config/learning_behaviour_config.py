@@ -10,7 +10,7 @@ class Config:
     LSTM_TIMESTEPS = 3
     FEATURES_LEN = 21 # Connect 3 Width X Heigh + 1(action) 
     FEATURES_LEN_2 = 22 # Connect3 Width X Heigh + 1 action + 1 outcome
-    OUTPUT_LEN = 2 #depth 1, depth 6 # 3 #depth1, depth 4, detph 6
+    OUTPUT_LEN = 3  # 3 #depth1, depth 4, detph 6
     OUTCOME_AS_FEATURE = False
     
     # =============================================================================
@@ -20,4 +20,4 @@ class Config:
     # how many games the player should play before we can evaluate it
     NUMBER_OF_GAMES_TO_TEST = [1,2,3]#,4,5] 
     # minimax depth that we are going to consider as class output 
-    DEPTH_LIST = [1,4]#[1,4,6]
+    DEPTH_LIST = [1,4,6]#[1,4,6]

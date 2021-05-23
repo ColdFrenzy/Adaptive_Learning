@@ -5,7 +5,8 @@ RUN pip install --upgrade pip
 RUN pip install tensorflow==2.4.0 \
 	tqdm \
 	gym \
-	matplotlib
+	matplotlib\
+	pygame
 
 RUN sudo git clone https://github.com/ColdFrenzy/Adaptive_Learning.git
 WORKDIR Adaptive_Learning
